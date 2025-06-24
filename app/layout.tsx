@@ -30,6 +30,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+    {/*<meta name="apple-mobile-web-app-title" content="MyWebSite" />*/}
       <body
         className={`${inter.className} ${montserrat.className} font-sans antialiased h-screen`}
       >
