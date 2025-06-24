@@ -1,7 +1,7 @@
 "use server";
 
 import { loginSchema } from "@/utils/zodSchemas";
-import {cookiesClient} from "@/lib/supabase-clients/cookiesClient";
+// import {cookiesClient} from "@/lib/supabase-clients/cookiesClient";
 
 
 export type LoginState = {
@@ -33,11 +33,6 @@ export const loginAction = async (prevState: LoginState, formData: FormData) => 
             }
         };
     }
-
-
-    const supabase = await cookiesClient();
-    const bucket = supabase.storage.listBuckets();
-    console.log(bucket)
 
 
     return {}
