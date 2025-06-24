@@ -1,13 +1,20 @@
 'use client'
 
 import Image from "next/image";
-import { useState, useEffect } from "react";
-
-
+import {useState, useEffect, JSX} from "react";
 import { CarouselItems } from "@/utils/carousel_data";
 
 
-export default function Carousel(){
+/**
+ * Carousel
+ *
+ * A rotating showcase of features/images that auto-advances every 5 seconds
+ * and allows manual navigation via indicator dots.
+ *
+ * @returns {JSX.Element}
+ */
+export default function Carousel(): JSX.Element{
+    // Index of the currently displayed feature
   const [currentFeature, setCurrentFeature] = useState(0);
 
    // Auto-loop every 5 seconds
@@ -16,7 +23,8 @@ export default function Carousel(){
       setCurrentFeature((prev) => (prev + 1) % CarouselItems.length);
     }, 5000);
 
-    return () => clearInterval(interval); // cleanup
+      // Cleanup interval on unmount
+    return () => clearInterval(interval);
   }, []);
 
   return (

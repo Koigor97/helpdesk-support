@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react';
+import React, {JSX} from 'react';
 import {RiSunFill, RiMoonFill} from '@remixicon/react';
 import {useTheme}  from "next-themes";
 
@@ -13,7 +13,20 @@ import {
     DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
 
-function ThemeToggle() {
+
+/**
+ * ThemeToggle
+ *
+ * Presents a dropdown allowing the user to switch between light, dark,
+ * and system theme modes. Visually toggles icon states to reflect current
+ * theme, and calls `setTheme` from `next-themes` to apply the selection.
+ *
+ * @component
+ * @returns {JSX.Element}
+ */
+function ThemeToggle(): JSX.Element {
+
+    // grab the setter to change theme
     const { setTheme } = useTheme()
 
     return (

@@ -14,6 +14,11 @@ import { Label } from "@/components/ui/label";
 
 import {OAuthIconProvider} from "@/components/common/OAuth-Icons";
 
+
+/**
+ * Initial “shape” of the action’s return data.
+ * @type {LoginState}
+ */
 const initialState: LoginState = {
     error: {
         email: [],
@@ -21,15 +26,43 @@ const initialState: LoginState = {
     }
 }
 
+
+/**
+ * LoginForm
+ *
+ * Renders the email/password login form.
+ * Uses `useActionState` to tie into our server action,
+ * and mirrors any returned errors into local state so
+ * we can trigger our shake animation and inline error messages.
+ */
 const LoginForm = () => {
+
+    // ──────────────────────────────────────────────────────────────────────────
+    // Controlled inputs
+    // ──────────────────────────────────────────────────────────────────────────
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
+    // ──────────────────────────────────────────────────────────────────────────
+    // Local mirror of server errors for instant UX feedback + shake
+    // ──────────────────────────────────────────────────────────────────────────
+
     const [fieldErrors, setFieldErrors] = useState<{email: string[], password: string[]}>({email: [], password: []});
 
+    // ──────────────────────────────────────────────────────────────────────────
+    // tie into our action
+    // ──────────────────────────────────────────────────────────────────────────
+
+    // state holds the last return value of loginAction
+    // formAction is the `<form action={...}>` handler
+    // pending tells us if the action is in flight
     // @ts-ignore
     const [state, formAction, pending] = useActionState<LoginState>(loginAction, initialState);
+
+    // ──────────────────────────────────────────────────────────────────────────
+    // sync server ↔ local error state
+    // ──────────────────────────────────────────────────────────────────────────
 
     useEffect(() => {
         if (state.error) {
@@ -40,6 +73,14 @@ const LoginForm = () => {
         }
     }, [state.error]);
 
+    // ──────────────────────────────────────────────────────────────────────────
+    // clear a single field’s error on change
+    // ──────────────────────────────────────────────────────────────────────────
+
+    /**
+     * Handle typing in email input.
+     * Clears any existing email errors to re-enable the form.
+     */
     const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setEmail(e.target.value);
         if (fieldErrors.email.length) {
@@ -47,6 +88,10 @@ const LoginForm = () => {
         }
     }
 
+    /**
+     * Handle typing in password input.
+     * Clears any existing password errors to re-enable the form.
+     */
     const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setPassword(e.target.value);
         if (fieldErrors.password.length) {
@@ -54,19 +99,27 @@ const LoginForm = () => {
         }
     }
 
+    // ──────────────────────────────────────────────────────────────────────────
+    // Render
+    // ──────────────────────────────────────────────────────────────────────────
+
     return (
         <div className="flex items-center justify-center py-12">
         <div className="mx-auto grid w-[350px] gap-6">
+            {/* header */}
           <div className="grid gap-2 text-center">
             <h1 className="h1-bold">Welcome back 👋</h1>
             <p className="w-sm body-regular">
               Sign in to manage support tickets, collaborate with your team, and help customers faster.
             </p>
           </div>
+
+            {/* form */}
           <form
               action={formAction}
               className="grid gap-4"
           >
+              {/** ─── EMAIL FIELD ─────────────────────────────────────────── */}
             <div className="grid gap-2">
                 <Label htmlFor="email">Email</Label>
                 <motion.div
@@ -95,6 +148,8 @@ const LoginForm = () => {
                     </p>
                 )}
             </div>
+
+              {/** ─── PASSWORD FIELD ────────────────────────────────────── */}
             <div className="grid gap-2">
               <div className="flex items-center">
                 <Label htmlFor="password">Password</Label>
@@ -129,13 +184,16 @@ const LoginForm = () => {
                     </p>
                 )}
             </div>
+
+              {/** ─── SUBMIT BUTTON ─────────────────────────────────────── */}
             <Button type="submit" className="w-full cursor-pointer h-10">
               Continue
             </Button>
             <div className=" flex justify-center text-xs">
                 <span>or login with</span>
             </div>
-                   
+
+              {/** ─── SOCIAL BUTTONS ───────────────────────────────────── */}
             <div className='flex gap-4 '>
                 <Button variant={'outline'} size={'lg'} className='border-gray-500 border-1 flex-1 cursor-pointer hover:bg-accent hover:text-accent-foreground'>
                     <OAuthIconProvider type='google'/>
@@ -148,6 +206,8 @@ const LoginForm = () => {
                 </Button>
             </div>
           </form>
+
+            {/** ─── SIGNUP LINK ───────────────────────────────────────── */}
           <div className="mt-4 text-center text-sm">
             Don&apos;t have an account?{" "}
             <Link href="#" className="underline">
