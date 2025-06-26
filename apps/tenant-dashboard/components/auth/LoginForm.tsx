@@ -34,7 +34,7 @@ const initialState: LoginState = {
  * and mirrors any returned errors into local state so
  * we can trigger our shake animation and inline error messages.
  */
-const LoginForm = () => {
+const LoginForm = ({wantsPasswordLogin} : {wantsPasswordLogin : Boolean}) => {
 
     // ──────────────────────────────────────────────────────────────────────────
     // Controlled inputs
@@ -149,59 +149,82 @@ const LoginForm = () => {
             </div>
 
               {/** ─── PASSWORD FIELD ────────────────────────────────────── */}
-            <div className="grid gap-2">
-              <div className="flex items-center">
-                <Label htmlFor="password">Password</Label>
-                <Link
-                  href="/"
-                  className="ml-auto inline-block text-sm underline"
-                >
-                  Forgot your password?
-                </Link>
-              </div>
-                <motion.div
-                    className="w-full"
-                    animate={fieldErrors.password.length > 0 ? {x: [0, -8, 8, -8, 8, 0]}: {x: 0}}
-                    transition={{ duration: 0.4 }}
-                >
-                    <Input
-                        id="password"
-                        type="password"
-                        // required
-                        name="password"
-                        value={password}
-                        onChange={handlePasswordChange}
-                        disabled={pending}
-                        aria-describedby="passwordHelp"
-                        aria-invalid={fieldErrors.password.length > 0}
-                        className="h-10"
-                    />
-                </motion.div>
-                {fieldErrors.password.length > 0 && (
-                    <p id="passwordHelp" className="text-red-500 small-regular mt-1">
-                        {fieldErrors.password.join(', ')}
-                    </p>
-                )}
-            </div>
+              {wantsPasswordLogin && (<div className="grid gap-2">
+                  <div className="flex items-center">
+                      <Label htmlFor="password">Password</Label>
+                      <Link
+                          href="/"
+                          className="ml-auto inline-block text-sm underline"
+                      >
+                          Forgot your password?
+                      </Link>
+                  </div>
+                  <motion.div
+                      className="w-full"
+                      animate={fieldErrors.password.length > 0 ? {x: [0, -8, 8, -8, 8, 0]} : {x: 0}}
+                      transition={{duration: 0.4}}
+                  >
+                      <Input
+                          id="password"
+                          type="password"
+                          // required
+                          name="password"
+                          value={password}
+                          onChange={handlePasswordChange}
+                          disabled={pending}
+                          aria-describedby="passwordHelp"
+                          aria-invalid={fieldErrors.password.length > 0}
+                          className="h-10"
+                      />
+                  </motion.div>
+                  {fieldErrors.password.length > 0 && (
+                      <p id="passwordHelp" className="text-red-500 small-regular mt-1">
+                          {fieldErrors.password.join(', ')}
+                      </p>
+                  )}
+              </div>)}
 
               {/** ─── SUBMIT BUTTON ─────────────────────────────────────── */}
-            <Button type="submit" className="w-full cursor-pointer h-10">
-              Continue
-            </Button>
+              {wantsPasswordLogin ?
+                  (<Button type="submit" className="w-full cursor-pointer h-10">Sign in</Button>) :
+                  (
+                      <Button asChild className="w-full cursor-pointer h-10">
+                          <Link href="/verifyotp">Continue</Link>
+                      </Button>
+                  )
+              }
+
+              {/* Toggle Password login or MagicLink*/}
+              <p className="body-regular underline hover:text-chart-2">
+                  {wantsPasswordLogin ? (
+                      <Link href={{
+                          pathname: "/",
+                          query: {magicLink: "yes"}
+                      }} className="flex items-center gap-1">
+                          Use MagicLink Login
+                          <span>
+                              <WandSparkles className="text-primary" fill="green" size={18} />
+                          </span>
+                      </Link>
+                  ) : (
+                      <Link href={{
+                          pathname: "/",
+                          query: {magicLink: "no"}
+                      }}>
+                          Use Password Login
+                      </Link>
+                  )}
+              </p>
+
             <div className=" flex justify-center text-xs">
                 <span>or login with</span>
             </div>
 
               {/** ─── SOCIAL BUTTONS ───────────────────────────────────── */}
-            <div className='flex gap-4 '>
-                <Button variant={'outline'} size={'lg'} className='border-gray-500 border-1 flex-1 cursor-pointer hover:bg-accent hover:text-accent-foreground'>
+            <div className=' '>
+                <Button variant={'outline'} size={'lg'} className='border-gray-500 border-1 flex-1 cursor-pointer hover:bg-accent hover:text-accent-foreground w-full'>
                     <OAuthIconProvider type='google'/>
                     <span className=''>Google</span>
-                </Button>
-
-                <Button variant={'outline'} size={'lg'} className='border-gray-500 border-1  flex-1 cursor-pointer hover:bg-accent hover:text-accent-foreground'>
-                    <WandSparkles className="text-primary" fill="green"/>
-                    <span className=''>Magic Link</span>
                 </Button>
             </div>
           </form>
