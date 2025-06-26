@@ -1,6 +1,7 @@
 "use server";
 
 import { loginSchema } from "@/utils/zodSchemas";
+import {verifyotp} from "@/utils/zodSchemas";
 // import {cookiesClient} from "@/lib/supabase-clients/cookiesClient";
 
 
@@ -8,6 +9,12 @@ export type LoginState = {
     error?: {
         email?: string[];
         password?: string[];
+    }
+}
+
+export type VerifyState = {
+    error?: {
+        otp?: string[]
     }
 }
 
@@ -36,4 +43,22 @@ export const loginAction = async (prevState: LoginState, formData: FormData) => 
 
 
     return {}
+}
+
+export const verifyotpcode = async (prevState: VerifyState, formData: FormData) => {
+    const rawOTP = formData.get("otpCode");
+    console.log("VerifyState", rawOTP );
+
+    const otp = typeof rawOTP === "string" ? rawOTP : "";
+    const result = verifyotp.safeParse({otp})
+
+    if (!result.success) {
+        const error = result.error.flatten();
+        return {
+            ...prevState,
+            error: {
+                otp: error.fieldErrors.otp || [],
+            }
+        }
+    }
 }
