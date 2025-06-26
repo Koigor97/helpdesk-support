@@ -15,3 +15,7 @@ export const loginSchema = z.object({
   password: z.string().min(8, { message: "Password must be at least 8 characters" })
     .max(100, { message: "Password must be less than 100 characters" }),
 });
+
+export const verifyotp = z.object({
+  otp: z.number().min(6, {message: "Otp must be 6 digits"}).max(6, {message: "Otp must be 6 digits"}),
+})
