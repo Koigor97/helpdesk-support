@@ -31,7 +31,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
     {/*<meta name="apple-mobile-web-app-title" content="MyWebSite" />*/}
       <body
         className={`${inter.className} ${montserrat.className} font-sans antialiased h-screen`}
