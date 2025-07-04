@@ -10,8 +10,9 @@ import {InputOTP, InputOTPSlot, InputOTPSeparator, InputOTPGroup} from "@/compon
 import {AlertTitle, Alert, AlertDescription} from "@/components/ui/alert";
 import {RiErrorWarningFill} from "@remixicon/react";
 
+// Commenting for UI creation
 import {verifyOTPAction, resendOTPAction} from "@/lib/actions/verify-otp";
-import {type VerifyOTPState, type ResendOTPState} from "@/schemas/auth";
+import {type VerifyOTPState, type ResendOTPState} from "@/utils/types";
 
 
 const initialVerifyState: VerifyOTPState = {
@@ -43,12 +44,13 @@ const VerifyOTP = ({email: propEmail} : VerifyOTPProps) => {
     // Get email from props, search params, or default
     const email = propEmail || searchParams.get("email") || ""
 
+    // Commenting for UI creation
     // Redirect to login if no email provided
-    useEffect(() => {
-        if (!email) {
-            router.push("/?magicLink=yes")
-        }
-    }, [email, router])
+    // useEffect(() => {
+    //     if (!email) {
+    //         router.push("/?magicLink=yes")
+    //     }
+    // }, [email, router])
 
 
     // Controlled inputs
@@ -88,16 +90,17 @@ const VerifyOTP = ({email: propEmail} : VerifyOTPProps) => {
     }, [verifyState.errors])
 
 
+    // Commenting for UI creation
     // Handle successful verification
-    useEffect(() => {
-        if (verifyState.success) {
-            // Show success message briefly before redirect
-            const timer = setTimeout(() => {
-                router.push("/dashboard")
-            }, 1500)
-            return () => clearTimeout(timer)
-        }
-    }, [verifyState.success, router])
+    // useEffect(() => {
+    //     if (verifyState.success) {
+    //         // Show success message briefly before redirect
+    //         const timer = setTimeout(() => {
+    //             router.push("/dashboard")
+    //         }, 1500)
+    //         return () => clearTimeout(timer)
+    //     }
+    // }, [verifyState.success, router])
 
 
     // Enhanced resend cooldown with proper timer management
@@ -158,7 +161,7 @@ const VerifyOTP = ({email: propEmail} : VerifyOTPProps) => {
                 <div className="grid gap-2 text-center">
                     <h1 className="h2-bold">Enter the Verification Code</h1>
                     <p className="w-sm body-regular">
-                        We sent a verification code to <address className="body-semibold">{email}</address>
+                        We sent a verification code to <span className="body-semibold">{email || "dummy@email.com"}</span>
                     </p>
                 </div>
 
@@ -269,7 +272,7 @@ const VerifyOTP = ({email: propEmail} : VerifyOTPProps) => {
                             )}
                         </Button>
                     </div>
-                    <div className="text-center text-sm -mt-3">
+                    <div className="text-center text-sm mt-2">
                         Wrong email? {" "}
                         <Link href="/?magicLink=yes" className='underline hover:'>Change email</Link>
                     </div>
