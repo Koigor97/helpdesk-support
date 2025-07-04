@@ -5,7 +5,7 @@ import React, {useActionState, useState, useEffect} from "react";
 import {motion} from "framer-motion";
 
 import {loginAction} from "@/lib/actions/login";
-import { type LoginState} from "@/schemas/auth";
+import { type LoginState} from "@/utils/types";
 
 import {WandSparkles} from "lucide-react"
 import { Button } from "@/components/ui/button";
@@ -14,7 +14,7 @@ import { Label } from "@/components/ui/label";
 import {Alert, AlertDescription, AlertTitle} from "@/components/ui/alert";
 
 import {OAuthIconProvider} from "@/components/common/OAuth-Icons";
-import {RiErrorWarningFill} from "@remixicon/react";
+import {RiErrorWarningFill, RiEyeFill, RiEyeOffFill} from "@remixicon/react";
 
 
 /**
@@ -48,6 +48,7 @@ const LoginForm = ({wantsPasswordLogin} : LoginFormProps) => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
 
     // ──────────────────────────────────────────────────────────────────────────
     // Local mirror of server errors for instant UX feedback + shake
@@ -117,6 +118,7 @@ const LoginForm = ({wantsPasswordLogin} : LoginFormProps) => {
     // Render
     // ──────────────────────────────────────────────────────────────────────────
 
+    // @ts-ignore
     return (
         <div className="flex items-center justify-center py-12">
         <div className="mx-auto grid w-[350px] gap-6">
@@ -138,10 +140,10 @@ const LoginForm = ({wantsPasswordLogin} : LoginFormProps) => {
             )}
 
             {fieldErrors._form.length > 0 && (
-                <Alert variant="destructive">
-                    <RiErrorWarningFill />
+                <Alert className="border-2 border-red-400 text-red-400">
+                    <RiErrorWarningFill color="red" />
                     <AlertTitle>Authentication Error</AlertTitle>
-                    <AlertDescription>
+                    <AlertDescription className="text-red-400">
                         {fieldErrors._form.join(", ")}
                     </AlertDescription>
                 </Alert>
@@ -194,13 +196,13 @@ const LoginForm = ({wantsPasswordLogin} : LoginFormProps) => {
                       </Link>
                   </div>
                   <motion.div
-                      className="w-full"
+                      className="w-full relative"
                       animate={fieldErrors.password.length > 0 ? {x: [0, -8, 8, -8, 8, 0]} : {x: 0}}
                       transition={{duration: 0.4}}
                   >
                       <Input
                           id="password"
-                          type="password"
+                          type={showPassword ? "text" : "password"}
                           // required
                           name="password"
                           value={password}
@@ -208,8 +210,16 @@ const LoginForm = ({wantsPasswordLogin} : LoginFormProps) => {
                           disabled={pending}
                           aria-describedby="passwordHelp"
                           aria-invalid={fieldErrors.password.length > 0}
-                          className="h-10"
+                          className="h-10 pr-10"
                       />
+                      <button
+                          type="button"
+                          onClick={() => setShowPassword(!showPassword)}
+                          className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                          disabled={pending}
+                      >
+                          {showPassword ? <RiEyeOffFill className="h-4 w-4" /> : <RiEyeFill className="h-4 w-4" />}
+                      </button>
                   </motion.div>
                   {fieldErrors.password.length > 0 && (
                       <p id="passwordHelp" className="text-red-500 small-regular mt-1">
