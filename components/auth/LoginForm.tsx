@@ -4,14 +4,17 @@ import Link from "next/link";
 import React, {useActionState, useState, useEffect} from "react";
 import {motion} from "framer-motion";
 
-import {WandSparkles} from "lucide-react"
-import {loginAction, LoginState} from "@/lib/actions/login";
+import {loginAction} from "@/lib/actions/login";
+import { type LoginState} from "@/schemas/auth";
 
+import {WandSparkles} from "lucide-react"
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import {Alert, AlertDescription, AlertTitle} from "@/components/ui/alert";
 
 import {OAuthIconProvider} from "@/components/common/OAuth-Icons";
+import {RiErrorWarningFill} from "@remixicon/react";
 
 
 /**
@@ -19,12 +22,15 @@ import {OAuthIconProvider} from "@/components/common/OAuth-Icons";
  * @type {LoginState}
  */
 const initialState: LoginState = {
-    error: {
+    errors: {
         email: [],
         password: []
     }
 }
 
+interface LoginFormProps {
+    wantsPasswordLogin: boolean
+}
 
 /**
  * LoginForm
@@ -34,7 +40,7 @@ const initialState: LoginState = {
  * and mirrors any returned errors into local state so
  * we can trigger our shake animation and inline error messages.
  */
-const LoginForm = ({wantsPasswordLogin} : {wantsPasswordLogin : Boolean}) => {
+const LoginForm = ({wantsPasswordLogin} : LoginFormProps) => {
 
     // ──────────────────────────────────────────────────────────────────────────
     // Controlled inputs
@@ -47,7 +53,15 @@ const LoginForm = ({wantsPasswordLogin} : {wantsPasswordLogin : Boolean}) => {
     // Local mirror of server errors for instant UX feedback + shake
     // ──────────────────────────────────────────────────────────────────────────
 
-    const [fieldErrors, setFieldErrors] = useState<{email: string[], password: string[]}>({email: [], password: []});
+    const [fieldErrors, setFieldErrors] = useState<{
+        email: string[],
+        password: string[],
+        _form: string[]
+    }>({
+        email: [],
+        password: [],
+        _form: []
+    });
 
     // ──────────────────────────────────────────────────────────────────────────
     // tie into our action
@@ -64,13 +78,14 @@ const LoginForm = ({wantsPasswordLogin} : {wantsPasswordLogin : Boolean}) => {
     // ──────────────────────────────────────────────────────────────────────────
 
     useEffect(() => {
-        if (state.error) {
+        if (state.errors) {
             setFieldErrors({
-                email: state.error.email || [],
-                password: state.error.password || []
+                email: state.errors.email || [],
+                password: state.errors.password || [],
+                _form: state.errors._form || []
             })
         }
-    }, [state.error]);
+    }, [state.errors]);
 
     // ──────────────────────────────────────────────────────────────────────────
     // clear a single field’s error on change
@@ -112,6 +127,25 @@ const LoginForm = ({wantsPasswordLogin} : {wantsPasswordLogin : Boolean}) => {
               Sign in to manage support tickets, collaborate with your team, and help customers faster.
             </p>
           </div>
+
+            {/*Success or Error Message*/}
+            {state.success && (
+                <Alert className="border-green-200 bg-green-50">
+                    <AlertDescription className='text-green-800'>
+                        {state.message}
+                    </AlertDescription>
+                </Alert>
+            )}
+
+            {fieldErrors._form.length > 0 && (
+                <Alert variant="destructive">
+                    <RiErrorWarningFill />
+                    <AlertTitle>Authentication Error</AlertTitle>
+                    <AlertDescription>
+                        {fieldErrors._form.join(", ")}
+                    </AlertDescription>
+                </Alert>
+            )}
 
             {/* form */}
           <form
@@ -185,32 +219,22 @@ const LoginForm = ({wantsPasswordLogin} : {wantsPasswordLogin : Boolean}) => {
               </div>)}
 
               {/** ─── SUBMIT BUTTON ─────────────────────────────────────── */}
-              {wantsPasswordLogin ?
-                  (<Button type="submit" className="w-full cursor-pointer h-10">Sign in</Button>) :
-                  (
-                      <Button asChild className="w-full cursor-pointer h-10">
-                          <Link href="/verifyotp">Continue</Link>
-                      </Button>
-                  )
-              }
+              <Button type="submit" disabled={pending} className="w-full cursor-pointer h-10">
+                  {pending ? "Signing in..." : wantsPasswordLogin ? "Sign in" : "Send Magic Link"}
+              </Button>
+
 
               {/* Toggle Password login or MagicLink*/}
               <p className="body-regular underline hover:text-chart-2">
                   {wantsPasswordLogin ? (
-                      <Link href={{
-                          pathname: "/",
-                          query: {magicLink: "yes"}
-                      }} className="flex items-center gap-1">
+                      <Link href="/?magicLink=yes" className="flex items-center gap-1">
                           Use MagicLink Login
                           <span>
                               <WandSparkles className="text-primary" fill="green" size={18} />
                           </span>
                       </Link>
                   ) : (
-                      <Link href={{
-                          pathname: "/",
-                          query: {magicLink: "no"}
-                      }}>
+                      <Link href="/?magicLink=no">
                           Use Password Login
                       </Link>
                   )}
@@ -243,4 +267,3 @@ const LoginForm = ({wantsPasswordLogin} : {wantsPasswordLogin : Boolean}) => {
 
 
 export default LoginForm;
-
