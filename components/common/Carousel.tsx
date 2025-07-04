@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import {useState, useEffect, JSX} from "react";
-import { CarouselItems } from "@/utils/carousel_data";
+import { CarouselItems } from "@/utils/dummyData/carousel_data";
 
 
 /**
