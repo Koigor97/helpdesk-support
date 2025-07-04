@@ -3,7 +3,7 @@ import {type SupabaseClient} from "@supabase/supabase-js";
 import {cookies} from "next/headers";
 
 import {assertEnvVar} from "@/utils/helpers";
-import { ExternalServiceError } from "@/utils/errors";
+import { ExternalServiceError } from "@/utils/errors/errors";
 
 
 
