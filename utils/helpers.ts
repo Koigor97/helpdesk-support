@@ -1,4 +1,4 @@
-import {MissingEnvVarError} from "@/utils/errors";
+import {MissingEnvVarError} from "@/utils/errors/errors";
 
 /**
  * Retrieve an environment variable, throwing a MissingEnvVarError if it’s not set.
