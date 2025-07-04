@@ -54,34 +54,3 @@ export type LoginFormData = z.infer<typeof LoginFormSchema>;
 export type MagicLinkData = z.infer<typeof MagicLinkSchema>
 export type VerifyOTPData = z.infer<typeof VerifyOTPSchema>;
 export type ResendOTPData = z.infer<typeof ResendOTPSchema>;
-
-export type LoginState = {
-  errors?: {
-    email?: string[]
-    password?: string[]
-    _form?: string[]
-  }
-  message?: string
-  success?: boolean
-  redirectTo?: string
-}
-
-export type VerifyOTPState = {
-  errors?: {
-    otpCode?: string[]
-    email?: string[]
-    _form?: string[]
-  }
-  message?: string
-  success?: boolean
-  email?: string
-}
-
-export type ResendOTPState = {
-  errors?: {
-    email?: string[]
-    _form?: string[]
-  }
-  message?: string
-  success?: boolean
-}
