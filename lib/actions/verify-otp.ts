@@ -1,6 +1,7 @@
 "use server"
-import { cookies } from "next/headers"
-import { VerifyOTPSchema, ResendOTPSchema, type VerifyOTPState, type ResendOTPState } from "@/schemas/auth"
+import { cookies } from "next/headers";
+import { VerifyOTPSchema, ResendOTPSchema} from "@/schemas/authSchema";
+import {type VerifyOTPState, type ResendOTPState} from "@/utils/types"
 import {cookiesClient} from "@/lib/supabase-clients/cookiesClient";
 
 export async function verifyOTPAction(prevState: VerifyOTPState, formData: FormData): Promise<VerifyOTPState> {
