@@ -18,3 +18,9 @@ const AssignTicketSchema = z.object({
 const DeleteTicketSchema = z.object({
     ticketId: z.string().min(1, "Ticket ID is required"),
 })
+
+export {
+    EditTicketSchema,
+    AssignTicketSchema,
+    DeleteTicketSchema
+}
