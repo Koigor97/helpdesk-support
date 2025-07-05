@@ -44,3 +44,11 @@ const SecuritySettingsSchema = z
         message: "Passwords don't match",
         path: ["confirmPassword"],
     })
+
+export {
+    ProfileSettingsSchema,
+    UserPreferencesSchema,
+    OrganizationSettingsSchema,
+    OrgSettingsSchema,
+    SecuritySettingsSchema,
+}
