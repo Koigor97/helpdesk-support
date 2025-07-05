@@ -11,7 +11,7 @@ import {AlertTitle, Alert, AlertDescription} from "@/components/ui/alert";
 import {RiErrorWarningFill} from "@remixicon/react";
 
 // Commenting for UI creation
-import {verifyOTPAction, resendOTPAction} from "@/lib/actions/verify-otp";
+import {verifyOTPAction, resendOTPAction} from "@/lib/actions/verifyOtpAction";
 import {type VerifyOTPState, type ResendOTPState} from "@/utils/types";
 
 
