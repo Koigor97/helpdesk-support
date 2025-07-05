@@ -13,3 +13,8 @@ const CreateCommentSchema = z.object({
     ticketId: z.string().min(1, "Ticket ID is required"),
     content: z.string().min(1, "Comment content is required"),
 })
+
+export {
+    CreateCommentSchema,
+    CreateTicketSchema
+}
