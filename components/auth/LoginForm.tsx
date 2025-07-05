@@ -4,7 +4,7 @@ import Link from "next/link";
 import React, {useActionState, useState, useEffect} from "react";
 import {motion} from "framer-motion";
 
-import {loginAction} from "@/lib/actions/login";
+import {loginAction} from "@/lib/actions/loginAction";
 import { type LoginState} from "@/utils/types";
 
 import {WandSparkles} from "lucide-react"
