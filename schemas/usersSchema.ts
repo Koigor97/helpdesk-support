@@ -8,3 +8,5 @@ const InviteUserSchema = z.object({
     }),
     department: z.string().min(1, "Department is required"),
 })
+
+export {InviteUserSchema};
