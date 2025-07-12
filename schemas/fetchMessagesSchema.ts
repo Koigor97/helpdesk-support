@@ -26,3 +26,8 @@ const fetchMessagesSchema = z.object({
 })
 
 export type Message = z.infer<typeof messageSchema>
+
+export {
+    messageSchema,
+    fetchMessagesSchema,
+}
