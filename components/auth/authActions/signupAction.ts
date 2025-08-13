@@ -1,7 +1,7 @@
 "use server"
 
-import {SignupFormSchema} from "@/schemas/signupSchema";
-import {SignupState} from "@/utils/types";
+import {SignupFormSchema} from "@/components/auth/authSchema/authSchema";
+import {SignupState} from "@/components/auth/authType/authTypes";
 import {cookiesClient} from "@/lib/supabase-clients/cookiesClient";
 
 
