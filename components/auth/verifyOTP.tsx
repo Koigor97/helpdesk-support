@@ -11,8 +11,8 @@ import {AlertTitle, Alert, AlertDescription} from "@/components/ui/alert";
 import {RiErrorWarningFill} from "@remixicon/react";
 
 // Commenting for UI creation
-import {verifyOTPAction, resendOTPAction} from "@/lib/actions/verifyOtpAction";
-import {type VerifyOTPState, type ResendOTPState} from "@/utils/types";
+import {verifyOTPAction, resendOTPAction} from "@/components/auth/authActions/verifyOtpAction";
+import {type VerifyOTPState, type ResendOTPState} from "@/components/auth/authType/authTypes";
 
 
 const initialVerifyState: VerifyOTPState = {
@@ -156,11 +156,11 @@ const VerifyOTP = ({email: propEmail} : VerifyOTPProps) => {
 
     return (
         <div className="flex items-center justify-center py-12">
-            <div className="mx-auto grid w-[350px] gap-6">
+            <div className="mx-auto grid w-[350px] gap-6 px-2">
                 {/* header */}
                 <div className="grid gap-2 text-center">
-                    <h1 className="h2-bold">Enter the Verification Code</h1>
-                    <p className="w-sm body-regular">
+                    <h1 className="h3-bold lg:h2-bold">Enter the Verification Code</h1>
+                    <p className="lg:w-sm body-regular">
                         We sent a verification code to <span className="body-semibold">{email || "dummy@email.com"}</span>
                     </p>
                 </div>
@@ -199,7 +199,7 @@ const VerifyOTP = ({email: propEmail} : VerifyOTPProps) => {
                 {/* form */}
                 <form
                     action={verifyAction}
-                    className="grid gap-4 justify-center"
+                    className="grid gap-4 justify-center px-2 lg:px-0"
                 >
 
                     {/*Hidden email field*/}
@@ -221,7 +221,7 @@ const VerifyOTP = ({email: propEmail} : VerifyOTPProps) => {
                                 disabled={verifyPending}
                                 aria-describedby="one-time-password-code"
                                 aria-invalid={fieldErrors.otpCode.length > 0}
-                                className="h-10 font-bold"
+                                className="h-9 lg:h-10 font-bold"
                             >
                                 <InputOTPGroup className="font-bold">
                                     <InputOTPSlot index={0} />
@@ -245,7 +245,7 @@ const VerifyOTP = ({email: propEmail} : VerifyOTPProps) => {
                     </div>
 
                     {/** ─── SUBMIT BUTTON ─────────────────────────────────────── */}
-                    <Button type="submit" className="w-full cursor-pointer h-10" disabled={
+                    <Button type="submit" className="w-full cursor-pointer h-9 lg:h-10" disabled={
                         verifyPending || otp.length !== 6}>
                         {verifyPending ? "Verifying..." : "Verify"}
                     </Button>
