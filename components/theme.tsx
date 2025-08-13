@@ -1,7 +1,7 @@
 "use client"
 
 /**
- * Theme.tsx
+ * theme.tsx
  *
  * Wraps your entire app in next-themes’ ThemeProvider,
  * enabling light / dark / system preference toggling.
