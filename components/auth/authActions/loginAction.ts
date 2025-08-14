@@ -1,7 +1,7 @@
 "use server";
 
-import { LoginFormSchema, MagicLinkSchema } from "@/schemas/authSchema";
-import {type LoginState} from "@/utils/types";
+import { LoginFormSchema, MagicLinkSchema } from "@/components/auth/authSchema/authSchema";
+import {type LoginState} from "@/components/auth/authType/authTypes";
 import {cookiesClient} from "@/lib/supabase-clients/cookiesClient";
 import {redirect} from "next/navigation";
 
