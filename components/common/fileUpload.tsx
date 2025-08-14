@@ -16,7 +16,7 @@ import {
 import {
   formatBytes,
   useFileUpload,
-} from "@/hooks/use-file-upload"
+} from "@/hooks/useFileUpload"
 import { Button } from "@/components/ui/button"
 
 // Create some dummy initial files
