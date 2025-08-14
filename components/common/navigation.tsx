@@ -17,38 +17,39 @@ import {
 import {cn} from "@/lib/utils";
 import Logo from "@/components/common/logo";
 import ThemeToggle from "@/components/common/themeToggle";
+import {usePathname} from "next/navigation";
 
 
 const navigationItems = [
-    {id: "overview", name: "Overview", icon: RiHome5Fill},
-    {id: "tickets", name: "Tickets", icon: RiTicket2Fill},
-    {id: "users", name: "Users", icon: RiGroupFill},
-    {id: "messages", name: "Messages", icon: RiMailFill},
-    {id: "analytics", name: "Analytics", icon: RiLineChartFill},
-    {id: "settings", name: "Settings", icon: RiSettings2Fill},
+    {id: "/dashboard", name: "Overview", icon: RiHome5Fill},
+    {id: "/dashboard/tickets", name: "Tickets", icon: RiTicket2Fill},
+    {id: "/dashboard/users", name: "Users", icon: RiGroupFill},
+    {id: "/dashboard/messages", name: "Messages", icon: RiMailFill},
+    {id: "/dashboard/analytics", name: "Analytics", icon: RiLineChartFill},
+    {id: "/dashboard/settings", name: "Settings", icon: RiSettings2Fill},
 ]
 
 
 export default function Navigation() {
 
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-    const [activeTab, setActiveTab] = useState("overview");
+    const pathname = usePathname();
+    const normalise = (p: string) => (p === "/" ? "/" : p.replace(/\/+$/, ""))
 
     const NavItems = ()  => {
+        const path = normalise(pathname);
+
         return (
             <>
                 {navigationItems.map((item) => {
                     const Icon = item.icon;
-                    const isActive = activeTab === item.id;
+                    const id = normalise(item.id)
+                    const isActive = id === "/dashboard" ? path === id : (path === id || path.startsWith(id + "/"));
 
                     return (
                         <Button
                             asChild
                             key={item.id}
-                            onClick={() => {
-                                setActiveTab(item.id);
-                                setMobileMenuOpen(false);
-                            }}
                             className={cn(
                                 "px-4 py-2 rounded-full" +
                                 "text-sm font-medium transition-all duration-200 bg-secondary/10",
@@ -56,7 +57,7 @@ export default function Navigation() {
                                     : "text-muted-foreground hover:text-foreground hover:bg-secondary/20"
                             )}
                         >
-                            <Link href={`/dashboard/${item.id}`}
+                            <Link href={item.id}
                                   className="flex items-center gap-2">
                                 <Icon className="h-4 w-4" />
                                 <span>{item.name}</span>
