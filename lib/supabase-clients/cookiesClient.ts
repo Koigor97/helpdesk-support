@@ -2,8 +2,8 @@ import {createServerClient} from "@supabase/ssr";
 import {type SupabaseClient} from "@supabase/supabase-js";
 import {cookies} from "next/headers";
 
-import {assertEnvVar} from "@/utils/helpers";
-import { ExternalServiceError } from "@/utils/errors/errors";
+import {assertEnvVar} from "@/lib/globalHelpers";
+import { ExternalServiceError } from "@/lib/errors";
 
 
 
