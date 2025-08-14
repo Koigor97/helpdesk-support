@@ -1,9 +1,9 @@
-import LoginForm from "@/components/auth/LoginForm"
+import LoginForm from "@/components/auth/loginForm"
 
 
 type LoginSearchParams = Promise<{magicLink?: "yes" | "no"}>
 
-async function Login({searchParams} : {searchParams : LoginSearchParams}) {
+export default async function Login({searchParams} : {searchParams : LoginSearchParams}) {
   const {magicLink} = await searchParams;
   const wantsMagicLink = magicLink === "no"
 
@@ -11,5 +11,3 @@ async function Login({searchParams} : {searchParams : LoginSearchParams}) {
     <LoginForm wantsPasswordLogin={wantsMagicLink}/>
   )
 }
-
-export default Login

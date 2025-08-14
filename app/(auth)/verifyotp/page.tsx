@@ -1,4 +1,4 @@
-import VerifyOTP from "@/components/auth/VerifyOTP";
+import VerifyOTP from "@/components/auth/verifyOTP";
 
 function VerifyOtpPage() {
     return (

@@ -3,7 +3,7 @@
 import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
 import { cva, VariantProps } from "class-variance-authority"
-import {AlignRight, ArrowLeftToLine, ArrowRightToLine, PanelLeftIcon} from "lucide-react"
+import {ArrowLeftToLine, ArrowRightToLine} from "lucide-react"
 
 import { useIsMobile } from "@/hooks/useMobile"
 import { cn } from "@/lib/utils"
