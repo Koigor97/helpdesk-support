@@ -2,8 +2,8 @@ import { createServerClient} from '@supabase/ssr';
 import {type SupabaseClient} from '@supabase/supabase-js';
 import { NextResponse, type NextRequest } from 'next/server';
 
-import {assertEnvVar} from "@/utils/helpers";
-import {CookieEntry} from "@/utils/types";
+import {assertEnvVar} from "@/lib/globalHelpers";
+import {CookieEntry} from "@/components/auth/authType/authTypes";
 
 /**
  * Read all cookies from a Next.js request.
