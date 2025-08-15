@@ -44,13 +44,13 @@ const VerifyOTP = ({email: propEmail} : VerifyOTPProps) => {
     // Get email from props, search params, or default
     const email = propEmail || searchParams.get("email") || ""
 
-    // Commenting for UI creation
+
     // Redirect to login if no email provided
-    // useEffect(() => {
-    //     if (!email) {
-    //         router.push("/?magicLink=yes")
-    //     }
-    // }, [email, router])
+    useEffect(() => {
+        if (!email) {
+            router.push("/?magicLink=yes")
+        }
+    }, [email, router])
 
 
     // Controlled inputs
@@ -90,17 +90,16 @@ const VerifyOTP = ({email: propEmail} : VerifyOTPProps) => {
     }, [verifyState.errors])
 
 
-    // Commenting for UI creation
     // Handle successful verification
-    // useEffect(() => {
-    //     if (verifyState.success) {
-    //         // Show success message briefly before redirect
-    //         const timer = setTimeout(() => {
-    //             router.push("/dashboard")
-    //         }, 1500)
-    //         return () => clearTimeout(timer)
-    //     }
-    // }, [verifyState.success, router])
+    useEffect(() => {
+        if (verifyState.success) {
+            // Show success message briefly before redirect
+            const timer = setTimeout(() => {
+                router.push("/tickets")
+            }, 1500)
+            return () => clearTimeout(timer)
+        }
+    }, [verifyState.success, router])
 
 
     // Enhanced resend cooldown with proper timer management
@@ -257,8 +256,8 @@ const VerifyOTP = ({email: propEmail} : VerifyOTPProps) => {
                         Didn&apos;t get the code?{" "}
                         <Button
                             variant="link"
-                            className={`p-0 h-auto font-normal underline ${
-                                !canResend || resendPending ? "opacity-50 cursor-not-allowed" : "hover:text-primary"
+                            className={`text-chart-2 dark:text-primary p-0 h-auto font-normal underline ${
+                                !canResend || resendPending ? "opacity-50 cursor-not-allowed" : "hover:text-secondary"
                             }`}
                             onClick={handleResend}
                             disabled={!canResend || resendPending}
