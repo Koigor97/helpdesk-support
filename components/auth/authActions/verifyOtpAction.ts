@@ -1,8 +1,13 @@
 "use server"
+
 import { cookies } from "next/headers";
 import { VerifyOTPSchema, ResendOTPSchema} from "@/components/auth/authSchema/authSchema";
 import {type VerifyOTPState, type ResendOTPState} from "@/components/auth/authType/authTypes"
 import {cookiesClient} from "@/lib/supabase-clients/cookiesClient";
+import {redirect} from "next/navigation";
+import {sbAdminClient} from "@/lib/supabase-clients/adminClient";
+import {buildOtpEmailHTML} from "@/templates/buildOtpEmailHtml";
+import nodemailer from "nodemailer";
 
 export async function verifyOTPAction(prevState: VerifyOTPState, formData: FormData): Promise<VerifyOTPState> {
     // Extract form data
@@ -11,11 +16,14 @@ export async function verifyOTPAction(prevState: VerifyOTPState, formData: FormD
         email: formData.get("email") || prevState.email,
     }
 
+    let redirectTo: string | null = null;
+
     const supabaseSSR = await cookiesClient()
 
     try {
         // Validate form data
-        const validatedFields = VerifyOTPSchema.safeParse(theFormData)
+        const validatedFields = VerifyOTPSchema.safeParse({...theFormData})
+        console.log(validatedFields)
 
         if (!validatedFields.success) {
             return {
@@ -104,6 +112,8 @@ export async function verifyOTPAction(prevState: VerifyOTPState, formData: FormD
             message: "Email verified successfully!",
             email,
         }
+
+        // redirectTo = "/tickets"
     } catch (error) {
         console.error("OTP verification error:", error)
         return {
@@ -114,6 +124,8 @@ export async function verifyOTPAction(prevState: VerifyOTPState, formData: FormD
             email: prevState.email,
         }
     }
+
+    // redirect(redirectTo)
 }
 
 export async function resendOTPAction(prevState: ResendOTPState, formData: FormData): Promise<ResendOTPState> {
@@ -122,7 +134,7 @@ export async function resendOTPAction(prevState: ResendOTPState, formData: FormD
         email: formData.get("email"),
     }
 
-    const supabaseSSR = await cookiesClient()
+    const supabaseAdmin = sbAdminClient()
 
     try {
         // Validate form data
@@ -135,34 +147,58 @@ export async function resendOTPAction(prevState: ResendOTPState, formData: FormD
             }
         }
 
-        const { email } = validatedFields.data
 
         // Resend OTP via Supabase
-        const { error } = await supabaseSSR.auth.signInWithOtp({
-            email,
-            options: {
-                emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback`,
-            },
+        const {data: linkData, error} = await supabaseAdmin.auth.admin.generateLink({
+            email: validatedFields.data.email,
+            type: "magiclink",
         })
 
         if (error) {
             // Handle rate limiting
             if (error.message.includes("rate limit")) {
                 return {
-                    errors: {
-                        _form: ["Too many requests. Please wait before requesting another code."],
-                    },
+                    errors: {_form: ["Too many requests. Please wait before requesting another code."],},
                     message: "Rate limited.",
                 }
             }
 
             return {
-                errors: {
-                    _form: [error.message],
-                },
+                errors: {_form: [error.message],},
                 message: "Failed to resend code.",
             }
         }
+
+        const {email_otp: otp, verification_type} = linkData?.properties
+
+        if (!otp) return {errors: {_form: ["OTP not generated. Please try again"]}, success: false};
+        if (verification_type === "signup") {
+            await supabaseAdmin.auth.admin.deleteUser(linkData.user?.id)
+            // @ts-ignore
+            return;
+        }
+
+        // render react email template
+        const html = buildOtpEmailHTML({
+            code: otp,
+            appName: "WetinHapin",
+            expiresInMinutes: 10,
+            logoUrl: "http://127.0.0.1/web-app-manifest-192x192.png"
+        })
+
+        const transporter = nodemailer.createTransport({
+            host: "127.0.0.1",
+            port: 54325,
+            secure: false,
+        })
+
+        console.log("Sending email......")
+        await transporter.sendMail({
+            from: "WetinHapin <no-reply@wetinhapin.local>",
+            to: validatedFields.data.email,
+            subject: "Magic Link Verification Code",
+            html: html,
+        })
 
         return {
             success: true,
