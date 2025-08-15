@@ -50,3 +50,7 @@ export const formatAssigneeName = (name: string) => {
     return name
 }
 
+export const truncateTitle = (title: string, maxLength = 50) => {
+    if (title.length <= maxLength) return title
+    return title.substring(0, maxLength) + "..."
+}
