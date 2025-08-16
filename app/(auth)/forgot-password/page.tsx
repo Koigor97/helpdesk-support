@@ -6,7 +6,7 @@ export default function ForgotPasswordPage() {
             className="min-h-screen grid  justify-center
             p-4"
         >
-            <div className="w-full max-w-md flex flex-col gap-10">
+            <div className="w-full max-w-md flex flex-col gap-10 text-center">
                 <div>
                     <h1 className="h2-bold mb-2">
                         Reset your password
