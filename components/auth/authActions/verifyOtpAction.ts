@@ -4,7 +4,6 @@ import { cookies } from "next/headers";
 import { VerifyOTPSchema, ResendOTPSchema} from "@/components/auth/authSchema/authSchema";
 import {type VerifyOTPState, type ResendOTPState} from "@/components/auth/authType/authTypes"
 import {cookiesClient} from "@/lib/supabase-clients/cookiesClient";
-import {redirect} from "next/navigation";
 import {sbAdminClient} from "@/lib/supabase-clients/adminClient";
 import {buildOtpEmailHTML} from "@/templates/buildOtpEmailHtml";
 import nodemailer from "nodemailer";
