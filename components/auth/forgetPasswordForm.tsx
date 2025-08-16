@@ -57,7 +57,7 @@ export function ForgotPasswordForm() {
                     </AlertDescription>
                 </Alert>
                 <div className="flex items-center justify-center">
-                    <Link href="/?magickLink=no" className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground">
+                    <Link href="/?magicLink=no" className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground">
                         <ArrowLeft className="w-4 h-4 mr-1" />
                         Back to login
                     </Link>
@@ -99,7 +99,7 @@ export function ForgotPasswordForm() {
             </Button>
 
             <div className="text-center">
-                <Link href="/?magickLink=no" className="text-sm text-muted-foreground hover:text-foreground">
+                <Link href="/?magicLink=no" className="text-sm text-muted-foreground hover:text-foreground">
                     Remember your password? Sign in
                 </Link>
             </div>
