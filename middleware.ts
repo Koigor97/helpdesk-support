@@ -10,16 +10,15 @@ export const config = {
 export async function middleware(req: NextRequest) {
 
     const { supabase, response } = await middlewareClient(req);
-    const {data: {user: sessionUser}} = await supabase.auth.getUser()
+    const {data: {session: sessionUser}} = await supabase.auth.getSession()
     const requestedPath = req.nextUrl.pathname;
 
-    if(requestedPath.startsWith("/tickets") ||
-        requestedPath.startsWith("/reset-password")){
-        if(!sessionUser){
+    if(requestedPath.startsWith("/tickets")){
+        if(!sessionUser?.user){
             return NextResponse.redirect(new URL("/", req.url));
         }
     } else if (requestedPath === "/") {
-        if(sessionUser) {
+        if(sessionUser?.user) {
             return NextResponse.redirect(new URL("/tickets", req.url));
         }
     }
