@@ -1,4 +1,5 @@
 "use client";
+
 import * as React from "react";
 import { Button } from "@/components/ui/button";
 
@@ -15,6 +16,10 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 import { LogOut } from "lucide-react";
+import {supabaseBrowserClient} from "@/lib/supabase-clients/browserClient";
+import {useEffect} from "react";
+import {formatAssigneeName} from "@/lib/globalHelpers";
+import {useRouter} from "next/navigation";
 
 interface AppHeaderProps {
     children?: React.ReactNode; // for sidebar trigger or any other element
@@ -24,19 +29,47 @@ interface AppHeaderProps {
  * Top header with mobile menu and user avatar.
  */
 export function AppHeader({children} : AppHeaderProps) {
-    const handleLogout = () => {
-        // Placeholder: replace with your auth sign-out call
-        window.location.assign("/logout");
+
+    const [userName, setUserName] = React.useState<string>("");
+    const router = useRouter();
+
+    const supabase = supabaseBrowserClient();
+
+    const handleLogout = async () => {
+        await supabase.auth.signOut();
     };
 
+
+    useEffect(() => {
+        const { data: {subscription} } = supabase.auth.onAuthStateChange((event, session) => {
+            if (event === "SIGNED_OUT") {
+                router.push("/");
+            }
+        })
+
+        return () => subscription.unsubscribe();
+    }, []);
+
+
+    useEffect(() => {
+        const getUserName = async () => {
+            const { data } = await supabase.auth.getSession()
+            if(!data) return;
+
+            const formatedName = formatAssigneeName(data.session?.user.email!)
+            setUserName(formatedName);
+        }
+
+        getUserName().then();
+    }, [])
+
+
     return (
-        <header className="sticky top-0 z-40 flex h-14 items-center gap-3 border-b bg-background/80 backdrop-blur px-3 md:px-6"><div>
-                {/* Left side content (e.g., sidebar trigger) */}
-                {children}
-
-                {/* Spacer */}
-            </div>
-
+        <header
+            className="sticky top-0 z-40 flex h-14 items-center
+            gap-3 border-b bg-background/80 backdrop-blur px-3 md:px-6 mb-10"
+        >
+            <div>{children}</div>
 
           <div className="flex-1" />
           <Separator orientation="vertical" className="hidden md:block h-6" />
@@ -49,7 +82,7 @@ export function AppHeader({children} : AppHeaderProps) {
                         aria-label="Open user menu"
                     >
                         <Avatar>
-                            <AvatarFallback>YK</AvatarFallback>
+                            <AvatarFallback>{userName || "user"}</AvatarFallback>
                         </Avatar>
                     </Button>
                 </DropdownMenuTrigger>
