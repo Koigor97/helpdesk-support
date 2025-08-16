@@ -37,12 +37,12 @@ interface VerifyOTPProps {
  * and mirrors any returned errors into local state so
  * we can trigger our shake animation and inline error messages.
  */
-const VerifyOTP = ({email: propEmail} : VerifyOTPProps) => {
+const VerifyOTP = () => {
     const router = useRouter()
     const searchParams = useSearchParams()
 
     // Get email from props, search params, or default
-    const email = propEmail || searchParams.get("email") || ""
+    const email = searchParams.get("email") || ""
 
 
     // Redirect to login if no email provided
