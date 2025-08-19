@@ -29,7 +29,8 @@ const initialState: LoginState = {
 }
 
 interface LoginFormProps {
-    wantsPasswordLogin: boolean
+    wantsPasswordLogin: boolean;
+    tenant: string | unknown;
 }
 
 /**
@@ -40,7 +41,7 @@ interface LoginFormProps {
  * and mirrors any returned errors into local state so
  * we can trigger our shake animation and inline error messages.
  */
-const LoginForm = ({wantsPasswordLogin} : LoginFormProps) => {
+const LoginForm = ({wantsPasswordLogin, tenant} : LoginFormProps) => {
 
     // ──────────────────────────────────────────────────────────────────────────
     // Controlled inputs
