@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
-import Login from '../app/(auth)/page'
+import Login from '@/app/[tenant]/(auth)/page'
  
 describe('Page', () => {
   it('renders a heading', () => {
