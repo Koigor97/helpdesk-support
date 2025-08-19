@@ -13,13 +13,20 @@ export async function middleware(req: NextRequest) {
     const {data: {session: sessionUser}} = await supabase.auth.getSession()
     const requestedPath = req.nextUrl.pathname;
 
-    if(requestedPath.startsWith("/tickets")){
+    const [tenant, ...restOfUrlPath] = requestedPath.substring(1).split("/")
+    const appPath  = "/" + restOfUrlPath.join("/");
+
+    if ( !/[a-z0-9-_]+/.test(tenant)){
+        return NextResponse.rewrite(new URL("/not-found", req.url));
+    }
+
+    if (appPath.startsWith("/tickets")){
         if(!sessionUser?.user){
-            return NextResponse.redirect(new URL("/", req.url));
+            return NextResponse.redirect(new URL(`/${tenant}`, req.url));
         }
-    } else if (requestedPath === "/") {
+    } else if (appPath === "/") {
         if(sessionUser?.user) {
-            return NextResponse.redirect(new URL("/tickets", req.url));
+            return NextResponse.redirect(new URL(`/${tenant}/tickets`, req.url));
         }
     }
 
