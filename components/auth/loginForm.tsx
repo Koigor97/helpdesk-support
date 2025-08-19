@@ -72,7 +72,7 @@ const LoginForm = ({wantsPasswordLogin} : LoginFormProps) => {
     // formAction is the `<form action={...}>` handler
     // pending tells us if the action is in flight
     // @ts-ignore
-    const [state, formAction, pending] = useActionState<LoginState>(loginAction, initialState);
+    const [state, formAction, isPending] = useActionState<LoginState>(loginAction, initialState);
 
     // ──────────────────────────────────────────────────────────────────────────
     // sync server ↔ local error state
@@ -166,11 +166,11 @@ const LoginForm = ({wantsPasswordLogin} : LoginFormProps) => {
                             id="email"
                             type="email"
                             placeholder="pineapple@example.com"
-                            // required
+                            required
                             name="email"
                             value={email}
                             onChange={handleEmailChange}
-                            disabled={pending}
+                            disabled={isPending}
                             aria-describedby="emailHelp"
                             aria-invalid={fieldErrors.email.length > 0}
                             className="h-9 lg:h-10"
@@ -189,7 +189,7 @@ const LoginForm = ({wantsPasswordLogin} : LoginFormProps) => {
                       <div className="flex items-center">
                           <Label htmlFor="password">Password</Label>
                           <Link
-                              href="/"
+                              href="/forgot-password"
                               className="ml-auto inline-block text-sm underline"
                           >
                               Forgot your password?
@@ -203,11 +203,11 @@ const LoginForm = ({wantsPasswordLogin} : LoginFormProps) => {
                           <Input
                               id="password"
                               type={showPassword ? "text" : "password"}
-                              // required
+                              required
                               name="password"
                               value={password}
                               onChange={handlePasswordChange}
-                              disabled={pending}
+                              disabled={isPending}
                               aria-describedby="passwordHelp"
                               aria-invalid={fieldErrors.password.length > 0}
                               className="h-9 pr-10 lg:h-10"
@@ -216,7 +216,7 @@ const LoginForm = ({wantsPasswordLogin} : LoginFormProps) => {
                               type="button"
                               onClick={() => setShowPassword(!showPassword)}
                               className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
-                              disabled={pending}
+                              disabled={isPending}
                           >
                               {showPassword ? <RiEyeOffFill className="h-4 w-4" /> : <RiEyeFill className="h-4 w-4" />}
                           </button>
@@ -229,8 +229,8 @@ const LoginForm = ({wantsPasswordLogin} : LoginFormProps) => {
                   </div>)}
 
                   {/** ─── SUBMIT BUTTON ─────────────────────────────────────── */}
-                  <Button type="submit" disabled={pending} className="w-full cursor-pointer h-9 lg:h-10">
-                      {pending ? "Signing in..." : wantsPasswordLogin ? "Sign in" : "Send Magic Link"}
+                  <Button type="submit" disabled={isPending} className="w-full cursor-pointer h-9 lg:h-10">
+                      {isPending ? "Signing in..." : wantsPasswordLogin ? "Sign in" : "Send Magic Link"}
                   </Button>
 
 

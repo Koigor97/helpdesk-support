@@ -4,104 +4,113 @@ import { LoginFormSchema, MagicLinkSchema } from "@/components/auth/authSchema/a
 import {type LoginState} from "@/components/auth/authType/authTypes";
 import {cookiesClient} from "@/lib/supabase-clients/cookiesClient";
 import {redirect} from "next/navigation";
+import {sbAdminClient} from "@/lib/supabase-clients/adminClient";
+import {buildOtpEmailHTML} from "@/templates/buildOtpEmailHtml";
+import nodemailer from "nodemailer";
 
 
+// @ts-ignore
 export const loginAction = async (prevState: LoginState, formData: FormData): Promise<LoginState> => {
 
+    let redirectTo: string | null = null;
+
     // Extract form data
-    const theFormData = {
-        email: formData.get("email"),
-        password: formData.get("password"),
-    }
+    const email =  formData.get("email")
+    const password = formData.get("password")
 
     // Determine if this is a magic link or password login
-    const isMagicLink = !theFormData.password
+    const isMagicLink = !password
 
-    const supabaseSSR = await cookiesClient()
 
     try {
         if (isMagicLink) {
+            const supabaseAdmin = sbAdminClient()
+
             // Validate magic link data
             const validatedFields = MagicLinkSchema.safeParse({
-                email: theFormData.email,
+                email: email,
             })
 
             if (!validatedFields.success) {
                 return {
                     errors: validatedFields.error.flatten().fieldErrors,
-                    message: "invalid form data"
+                    message: "invalid form data",
+                    success: false,
                 }
             }
 
-            const {email} = validatedFields.data;
-
-            // Check if user exists in database first
-            const {data: existingUser, error: userCheckError} = await supabaseSSR
-                .from("auth.users")
-                .select("id, email")
-                .eq("email", email)
-                .single()
-
-
-            // Alternative approach if direct auth.users access is restricted
-            // You can create a custom function in Supabase or use a profiles table
-            if (userCheckError && userCheckError.code === "PGRST116") {
-                // User not found
-                return {
-                    errors: {
-                        email: ["No account found with this email address. Please sign up first."],
-                    },
-                    message: "Account not found.",
-                }
-            }
-
-            if (userCheckError) {
-                console.error("User check error:", userCheckError)
-                return {
-                    errors: {
-                        _form: ["Unable to verify account. Please try again."],
-                    },
-                    message: "Verification failed.",
-                }
-            }
 
             // User exists, send magic link
-            const {error} = await supabaseSSR.auth.signInWithOtp({
+            const {data: linkData, error} = await supabaseAdmin.auth.admin.generateLink({
                 email: validatedFields.data.email,
-                options: {
-                    emailRedirectTo: `${process.env.NEXT_PUBLIC_SUPABASE_URL}/verify-otp?email=${encodeURIComponent(email)}`,
-                }
+                type: "magiclink",
             })
 
             if (error) {
-                return {
-                    errors: {
-                        _form: [error.message]
-                    },
-                    message: 'Failed to send magic link'
+                const msg = error.message?.toLowerCase() || "";
+                if (msg.includes("signups not allowed for otp") || msg.includes("user not found")) {
+                    return {
+                        errors: { email: ["No account found for this email. Please sign up first."] },
+                        message: "Account not found.",
+                        success: false,
+                    };
                 }
+                return { errors: { _form: [error.message] }, message: "Failed to send magic link", success: false };
             }
 
-            return {
-                success: true,
-                message: "Magic link sent! Check your email.",
-                redirectTo: `/verify-otp?email=${encodeURIComponent(email)}`
+            const {email_otp: otp, verification_type} = linkData?.properties
+
+            if (!otp) return {errors: {_form: ["OTP not generated. Please try again"]}, success: false};
+            if (verification_type === "signup") {
+                await supabaseAdmin.auth.admin.deleteUser(linkData.user?.id)
+                // @ts-ignore
+                return;
             }
-        } else {
-            // Validate password login data
-            const validatedFields = LoginFormSchema.safeParse({
-                theFormData
+
+            // render react email template
+            const html = buildOtpEmailHTML({
+                code: otp,
+                appName: "WetinHapin",
+                expiresInMinutes: 10,
+                logoUrl: "http://127.0.0.1/web-app-manifest-192x192.png"
             })
+
+            const transporter = nodemailer.createTransport({
+                host: "127.0.0.1",
+                port: 54325,
+                secure: false,
+            })
+
+            console.log("Sending email......")
+            await transporter.sendMail({
+                from: "WetinHapin <no-reply@wetinhapin.local>",
+                to: validatedFields.data.email,
+                subject: "Magic Link Verification Code",
+                html: html,
+            })
+
+            console.log("Email sent!")
+
+            // redirect user to verify-otp page
+            redirectTo = `/verifyotp?email=${encodeURIComponent(validatedFields.data.email)}`
+
+        } else {
+            const supabase = await cookiesClient()
+
+            // Validate password login data
+            const validatedFields = LoginFormSchema
+                .safeParse({email, password})
 
             if (!validatedFields.success) {
                 return {
                     errors: validatedFields.error.flatten().fieldErrors,
-                    message: "Invalid form data"
+                    message: "Invalid form data",
+                    success: false,
                 }
             }
 
             // Attempt password login
-            const {data, error} = await supabaseSSR.auth.signInWithPassword({
+            const {data, error} = await supabase.auth.signInWithPassword({
                 email: validatedFields.data.email,
                 password: validatedFields.data.password,
             })
@@ -109,55 +118,45 @@ export const loginAction = async (prevState: LoginState, formData: FormData): Pr
             if (error) {
                 // Handle specific auth errors
                 if (error.message.includes("Invalid login credentials")) {
-                    return {
-                        errors: {
-                            _form: ["Invalid email or password"]
-                        }
-                    }
+                    return {errors: {_form: ["Invalid email or password"]}}
                 }
 
                 if (error.message.includes("Email not confirmed")) {
                     return {
-                        errors: {
-                            _form: ["Please verify your email address before signing in."],
-                        },
+                        errors: {_form: ["Please verify your email address before signing in."],},
                         message: "Email verification required.",
+                        success: false,
                     }
                 }
 
                 return {
-                    errors: {
-                        _form: [error.message],
-                    },
+                    errors: {_form: [error.message]},
                     message: "Login failed.",
+                    success: false,
                 }
             }
 
             if (!data.user) {
                 return {
-                    errors: {
-                        _form: ["Login failed. Please try again."],
-                    },
+                    errors: {_form: ["Login failed. Please try again."]},
                     message: "Login failed.",
+                    success: false,
                 }
             }
 
-            // Success - redirect will happen after this return
-            return {
-                success: true,
-                message: "Login successfully",
-                redirectTo: `/tickets`
-            }
+            redirectTo = "/tickets";
         }
     } catch (error) {
         console.error("Login action error:", error)
         return {
-            errors: {
-                _form: ["An unexpected error occurred. Please try again."],
-            },
+            errors: {_form: ["An unexpected error occurred. Please try again."]},
             message: "Login failed.",
+            success: false,
         }
     }
+
+    // Success - redirect will happen after this return
+    if (redirectTo) redirect(redirectTo)
 }
 
 

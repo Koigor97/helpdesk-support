@@ -30,7 +30,7 @@ export default function RootLayout({
           <body
             className={`${inter.className} font-sans antialiased`}
           >
-            <main className="w-full">
+            <main className="w-full px-5">
               <Theme>
                   <main>
                       <AppHeader>

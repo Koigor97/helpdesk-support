@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { Badge } from "@/components/ui/badge";
 
 
 import {
@@ -26,7 +25,7 @@ import Logo from "@/components/common/logo";
 const links = [
   { href: "/tickets", label: "Ticket List", icon: ListChecks },
   { href: "/tickets/new", label: "New Ticket", icon: SquarePen },
-  { href: "/users", label: "Users", icon: Users },
+  { href: "/tickets/users", label: "Users", icon: Users },
 ] as const;
 
 export function AppSidebar() {
