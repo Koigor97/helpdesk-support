@@ -20,20 +20,22 @@ const inter = localFont({
 
 export default function RootLayout({
   children,
+    params
 }: Readonly<{
   children: React.ReactNode;
+  params: Record<string, unknown>;
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
         <SidebarProvider>
-            <AppSidebar />
+            <AppSidebar tenant={params.tenant} />
           <body
             className={`${inter.className} font-sans antialiased`}
           >
             <main className="w-full px-5">
               <Theme>
                   <main>
-                      <AppHeader>
+                      <AppHeader tenant={params.tenant}>
                           <SidebarTrigger />
                       </AppHeader>
 
