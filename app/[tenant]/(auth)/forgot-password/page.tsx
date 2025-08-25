@@ -1,6 +1,13 @@
 import {ForgotPasswordForm} from "@/components/auth/forgetPasswordForm";
 
-export default function ForgotPasswordPage() {
+
+type ForgotPasswordPageProps = {
+    params: Promise<{ tenant: string }>;
+};
+
+export default async function ForgotPasswordPage({ params}: ForgotPasswordPageProps) {
+    const { tenant } = await params;
+
     return (
         <div
             className="min-h-screen grid  justify-center
@@ -15,7 +22,7 @@ export default function ForgotPasswordPage() {
                         Enter your email address and we'll send you a link to reset your password.
                     </p>
                 </div>
-                <ForgotPasswordForm />
+                <ForgotPasswordForm tenant={tenant} />
             </div>
 
         </div>
