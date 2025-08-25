@@ -12,7 +12,7 @@ import Link from "next/link"
 import {requestPasswordResetEmail} from "@/components/auth/authActions/forgotPasswordAction";
 
 
-export function ForgotPasswordForm() {
+export function ForgotPasswordForm({ tenant }: { tenant: string }) {
     const [email, setEmail] = useState("")
     const [isLoading, setIsLoading] = useState(false)
     const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null)
@@ -24,7 +24,7 @@ export function ForgotPasswordForm() {
         setMessage(null)
 
         try {
-            const result = await requestPasswordResetEmail(email)
+            const result = await requestPasswordResetEmail(email, tenant)
 
             if (result.success) {
                 setIsSubmitted(true)
@@ -57,7 +57,7 @@ export function ForgotPasswordForm() {
                     </AlertDescription>
                 </Alert>
                 <div className="flex items-center justify-center">
-                    <Link href="/?magicLink=no" className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground">
+                    <Link href={`/${tenant}?magicLink=no`} className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground">
                         <ArrowLeft className="w-4 h-4 mr-1" />
                         Back to login
                     </Link>
@@ -79,6 +79,8 @@ export function ForgotPasswordForm() {
                     required
                     disabled={isLoading}
                 />
+                {/*Hidden*/}
+                <input type="hidden" name="tenant" value={tenant} />
             </div>
 
             {message && (
@@ -99,7 +101,7 @@ export function ForgotPasswordForm() {
             </Button>
 
             <div className="text-center">
-                <Link href="/?magicLink=no" className="text-sm text-muted-foreground hover:text-foreground">
+                <Link href={`/${tenant}?magicLink=no`} className="text-sm text-muted-foreground hover:text-foreground">
                     Remember your password? Sign in
                 </Link>
             </div>

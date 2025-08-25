@@ -29,7 +29,9 @@ const initialState: LoginState = {
 }
 
 interface LoginFormProps {
-    wantsPasswordLogin: boolean
+    wantsPasswordLogin: boolean;
+    tenant: string;
+    tenantName: string;
 }
 
 /**
@@ -40,7 +42,7 @@ interface LoginFormProps {
  * and mirrors any returned errors into local state so
  * we can trigger our shake animation and inline error messages.
  */
-const LoginForm = ({wantsPasswordLogin} : LoginFormProps) => {
+const LoginForm = ({wantsPasswordLogin, tenant, tenantName} : LoginFormProps) => {
 
     // ──────────────────────────────────────────────────────────────────────────
     // Controlled inputs
@@ -114,9 +116,7 @@ const LoginForm = ({wantsPasswordLogin} : LoginFormProps) => {
         }
     }
 
-    // ──────────────────────────────────────────────────────────────────────────
-    // Render
-    // ──────────────────────────────────────────────────────────────────────────
+    // render
 
     // @ts-ignore
     return (
@@ -126,7 +126,8 @@ const LoginForm = ({wantsPasswordLogin} : LoginFormProps) => {
               <div className="grid gap-2 text-center">
                 <h1 className="h2-bold lg:h1-bold">Welcome back 👋</h1>
                 <p className="lg:w-sm body-regular">
-                  Sign in to manage support tickets, collaborate with your team, and help customers faster.
+                    Sign in to <span className="text-secondary dark:text-primary font-black">{tenantName} </span>
+                    manage support tickets, collaborate with your team, and help customers faster.
                 </p>
               </div>
 
@@ -189,7 +190,7 @@ const LoginForm = ({wantsPasswordLogin} : LoginFormProps) => {
                       <div className="flex items-center">
                           <Label htmlFor="password">Password</Label>
                           <Link
-                              href="/forgot-password"
+                              href={`/${tenant}/forgot-password`}
                               className="ml-auto inline-block text-sm underline"
                           >
                               Forgot your password?
@@ -228,6 +229,9 @@ const LoginForm = ({wantsPasswordLogin} : LoginFormProps) => {
                       )}
                   </div>)}
 
+                  {/*Hidden field for tenant*/}
+                  <input type="hidden" name="tenant" value={tenant} />
+
                   {/** ─── SUBMIT BUTTON ─────────────────────────────────────── */}
                   <Button type="submit" disabled={isPending} className="w-full cursor-pointer h-9 lg:h-10">
                       {isPending ? "Signing in..." : wantsPasswordLogin ? "Sign in" : "Send Magic Link"}
@@ -237,14 +241,12 @@ const LoginForm = ({wantsPasswordLogin} : LoginFormProps) => {
                   {/* Toggle Password login or MagicLink*/}
                   <p className="body-regular underline hover:text-chart-2">
                       {wantsPasswordLogin ? (
-                          <Link href="/?magicLink=yes" className="flex items-center gap-1">
+                          <Link href={`/${tenant}?magicLink=yes`} className="flex items-center gap-1">
                               Use MagicLink Login
-                              <span>
-                                  <WandSparkles className="text-primary" fill="green" size={18} />
-                              </span>
+                              <WandSparkles className="text-primary" fill="green" size={18} />
                           </Link>
                       ) : (
-                          <Link href="/?magicLink=no">
+                          <Link href={`/${tenant}?magicLink=no`}>
                               Use Password Login
                           </Link>
                       )}
@@ -264,12 +266,12 @@ const LoginForm = ({wantsPasswordLogin} : LoginFormProps) => {
               </form>
 
                 {/** ─── SIGNUP LINK ───────────────────────────────────────── */}
-              <div className="mt-4 text-center text-sm">
-                Don&apos;t have an account?{" "}
-                <Link href="#" className="underline">
-                  Sign up
-                </Link>
-              </div>
+                <div className="mt-4 text-center text-sm">
+                    Don&apos;t have an account?{" "}
+                    <Link href={`/${tenant}/signup`} className="underline">
+                        Sign up
+                    </Link>
+                </div>
             </div>
       </div>
     )

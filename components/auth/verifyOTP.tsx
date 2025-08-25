@@ -26,7 +26,8 @@ const initialResendState: ResendOTPState = {
 }
 
 interface VerifyOTPProps {
-    email?: string
+    email?: string;
+    tenant?: string;
 }
 
 /**
@@ -37,7 +38,7 @@ interface VerifyOTPProps {
  * and mirrors any returned errors into local state so
  * we can trigger our shake animation and inline error messages.
  */
-const VerifyOTP = () => {
+const VerifyOTP = ({tenant}: VerifyOTPProps) => {
     const router = useRouter()
     const searchParams = useSearchParams()
 
@@ -48,7 +49,7 @@ const VerifyOTP = () => {
     // Redirect to login if no email provided
     useEffect(() => {
         if (!email) {
-            router.push("/?magicLink=yes")
+            router.push(`/${tenant}?magicLink=yes`)
         }
     }, [email, router])
 
@@ -95,7 +96,7 @@ const VerifyOTP = () => {
         if (verifyState.success) {
             // Show success message briefly before redirect
             const timer = setTimeout(() => {
-                router.push("/tickets")
+                router.push(`/${tenant}/tickets`)
             }, 1500)
             return () => clearTimeout(timer)
         }
@@ -243,6 +244,9 @@ const VerifyOTP = () => {
                         )}
                     </div>
 
+                    {/*Passing the tenant along*/}
+                    <input type="hidden" name="tenant" value={tenant} />
+
                     {/** ─── SUBMIT BUTTON ─────────────────────────────────────── */}
                     <Button type="submit" className="w-full cursor-pointer h-9 lg:h-10" disabled={
                         verifyPending || otp.length !== 6}>
@@ -273,7 +277,11 @@ const VerifyOTP = () => {
                     </div>
                     <div className="text-center text-sm mt-2">
                         Wrong email? {" "}
-                        <Link href="/?magicLink=yes" className='underline hover:'>Change email</Link>
+                        <Link
+                            href={`/${tenant}?magicLink=yes`} className="underline hover:underline"
+                        >
+                            Change email
+                        </Link>
                     </div>
                 </div>
             </div>

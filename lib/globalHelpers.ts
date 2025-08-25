@@ -1,4 +1,5 @@
 import {MissingEnvVarError} from "@/lib/errors";
+import {NextRequest} from "next/server";
 
 /**
  * Retrieve an environment variable, throwing a MissingEnvVarError if it’s not set.
@@ -53,4 +54,12 @@ export const formatAssigneeName = (name: string) => {
 export const truncateTitle = (title: string, maxLength = 50) => {
     if (title.length <= maxLength) return title
     return title.substring(0, maxLength) + "..."
+}
+
+export function urlPath(applicationPath: string, tenant: string | unknown) {
+    return `/${tenant}${applicationPath}`;
+}
+
+export function buildUrl(applicationPath: string, tenant: string, req: NextRequest) {
+    return new URL(urlPath(applicationPath, tenant), req.url);
 }

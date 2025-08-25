@@ -10,7 +10,10 @@ export type PasswordResetProp = {
     message: string;
 }
 
-export async function requestPasswordResetEmail(email: string): Promise<PasswordResetProp> {
+export async function requestPasswordResetEmail(
+    email: string,
+    tenant: string
+): Promise<PasswordResetProp> {
     const supabaseAdmin = sbAdminClient()
 
     try {
@@ -30,10 +33,11 @@ export async function requestPasswordResetEmail(email: string): Promise<Password
 
         const origin = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
         const resetHashedToken = data.properties?.hashed_token ?? "";
-        const resetPasswordLink = new URL(
-            `/reset-password?email=${encodeURIComponent(email)}&hashed_reset_token=${encodeURIComponent(resetHashedToken)}`,
-            origin
-        ).toString();
+
+        const url = new URL(`/${tenant}/reset-password`, origin);
+        url.searchParams.set("email", email);
+        url.searchParams.set("hashed_reset_token", resetHashedToken);
+        const resetPasswordLink = url.toString();
 
         const html = passwordResetEmailHtml(email, resetPasswordLink);
 

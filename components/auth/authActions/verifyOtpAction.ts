@@ -15,7 +15,8 @@ export async function verifyOTPAction(prevState: VerifyOTPState, formData: FormD
         email: formData.get("email") || prevState.email,
     }
 
-    let redirectTo: string | null = null;
+    const tenant = String(formData.get("tenant") ?? "");
+
 
     const supabaseSSR = await cookiesClient()
 

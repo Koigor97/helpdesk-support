@@ -17,6 +17,7 @@ export const loginAction = async (prevState: LoginState, formData: FormData): Pr
     // Extract form data
     const email =  formData.get("email")
     const password = formData.get("password")
+    const tenant = formData.get("tenant");
 
     // Determine if this is a magic link or password login
     const isMagicLink = !password
@@ -92,7 +93,7 @@ export const loginAction = async (prevState: LoginState, formData: FormData): Pr
             console.log("Email sent!")
 
             // redirect user to verify-otp page
-            redirectTo = `/verifyotp?email=${encodeURIComponent(validatedFields.data.email)}`
+            redirectTo = `/${tenant}/verifyotp?email=${encodeURIComponent(validatedFields.data.email)}`
 
         } else {
             const supabase = await cookiesClient()
@@ -144,7 +145,7 @@ export const loginAction = async (prevState: LoginState, formData: FormData): Pr
                 }
             }
 
-            redirectTo = "/tickets";
+            redirectTo = `/${tenant}/tickets`;
         }
     } catch (error) {
         console.error("Login action error:", error)
