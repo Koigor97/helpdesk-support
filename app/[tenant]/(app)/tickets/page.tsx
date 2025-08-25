@@ -1,8 +1,14 @@
 import { mockTickets } from "@/lib/mockData";
 import { TicketList } from "@/components/tickets/TicketList";
 
-export default function TicketListPage() {
+type TicketsProp = {
+  params: Promise<{ tenant: string }>;
+}
+
+export default async function TicketListPage({ params}: TicketsProp) {
+  const { tenant } = await params;
+
   return (
-      <TicketList tickets={mockTickets} />
+      <TicketList tickets={mockTickets} tenant={tenant}/>
   );
 }
