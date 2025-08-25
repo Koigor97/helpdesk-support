@@ -17,25 +17,26 @@ const inter = localFont({
     weight: "100, 200, 300, 400, 500, 600, 700, 800, 900",
 });
 
-
-export default function RootLayout({
+export default async function RootLayout({
   children,
     params
 }: Readonly<{
   children: React.ReactNode;
-  params: Record<string, unknown>;
+  params: Promise<{ tenant: string }>;
 }>) {
+    const { tenant } = await params;
+
   return (
     <html lang="en" suppressHydrationWarning>
         <SidebarProvider>
-            <AppSidebar tenant={params.tenant} />
+            <AppSidebar tenant={tenant} />
           <body
             className={`${inter.className} font-sans antialiased`}
           >
             <main className="w-full px-5">
               <Theme>
                   <main>
-                      <AppHeader tenant={params.tenant}>
+                      <AppHeader tenant={tenant}>
                           <SidebarTrigger />
                       </AppHeader>
 
