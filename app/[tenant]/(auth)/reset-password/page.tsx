@@ -13,10 +13,16 @@ function LoadingFallback() {
     )
 }
 
-export default function ResetPasswordPage() {
+type ResetPagePageProps = {
+    params: Promise<{ tenant: string }>;
+};
+
+export default async function ResetPasswordPage({params}: ResetPagePageProps) {
+    const {tenant} = await params;
+
     return (
         <div className="min-h-screen flex flex-col items-center bg-background p-4">
-            <div className="w-full max-w-m mb-14">
+            <div className="w-full max-w-md mb-14">
                 <div className="text-center flex flex-col gap-2">
                     <h1 className="h2-semibold">Set new password</h1>
                     <p>Enter your new password below to complete the reset process.</p>
@@ -24,7 +30,7 @@ export default function ResetPasswordPage() {
             </div>
             <div>
                 <Suspense fallback={<LoadingFallback />}>
-                    <ResetPasswordForm />
+                    <ResetPasswordForm tenant={tenant} />
                 </Suspense>
             </div>
         </div>
