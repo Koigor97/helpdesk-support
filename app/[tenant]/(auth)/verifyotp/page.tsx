@@ -1,8 +1,17 @@
 import VerifyOTP from "@/components/auth/verifyOTP";
 
-function VerifyOtpPage() {
+
+type VerifyOTPProps = {
+    params: Promise<{ tenant: string }>;
+    searchParams: { email?: string };
+}
+
+
+async function VerifyOtpPage({ params}: VerifyOTPProps) {
+    const { tenant } = await params;
+
     return (
-        <VerifyOTP />
+        <VerifyOTP tenant={tenant} />
     )
 }
 
