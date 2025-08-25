@@ -17,7 +17,7 @@ export async function middleware(req: NextRequest) {
     const appPath  = "/" + restOfUrlPath.join("/");
 
     if ( !/[a-z0-9-_]+/.test(tenant)){
-        return NextResponse.rewrite(new URL("/not-found", req.url));
+        return NextResponse.rewrite(new URL(`/not-found?tenant=${tenant}`, req.url));
     }
 
     if (appPath.startsWith("/tickets")){
