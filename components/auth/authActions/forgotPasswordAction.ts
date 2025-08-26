@@ -3,6 +3,7 @@
 import {sbAdminClient} from "@/lib/supabase-clients/adminClient";
 import {passwordResetEmailHtml} from "@/templates/passwordResetEmail";
 import nodemailer from "nodemailer";
+import {headers} from "next/headers";
 
 
 export type PasswordResetProp = {
@@ -31,10 +32,14 @@ export async function requestPasswordResetEmail(
             };
         }
 
-        const origin = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
-        const resetHashedToken = data.properties?.hashed_token ?? "";
+        const header = await headers();
+        const host  = header.get("host") ?? "localhost:3000";
+        const proto = header.get("x-forwarded-proto") ?? "http";
+        const origin = `${proto}://${host}`;
 
-        const url = new URL(`/${tenant}/reset-password`, origin);
+        const url = new URL(`/reset-password`, origin);
+
+        const resetHashedToken = data.properties?.hashed_token ?? "";
         url.searchParams.set("email", email);
         url.searchParams.set("hashed_reset_token", resetHashedToken);
         const resetPasswordLink = url.toString();
