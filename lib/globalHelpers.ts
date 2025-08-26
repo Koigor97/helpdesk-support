@@ -57,9 +57,28 @@ export const truncateTitle = (title: string, maxLength = 50) => {
 }
 
 export function urlPath(applicationPath: string, tenant: string | unknown) {
-    return `/${tenant}${applicationPath}`;
+    return applicationPath;
 }
 
 export function buildUrl(applicationPath: string, tenant: string, req: NextRequest) {
-    return new URL(urlPath(applicationPath, tenant), req.url);
+    const [hostname, port] = getHostnameAndPort(req);
+    const portSuffix = port && port != "443" ? `:${port}` : "";
+    const { protocol } = req.nextUrl;
+    const tenantUrl = `${protocol}//${hostname}${portSuffix}/`;
+    return new URL(urlPath(applicationPath, tenant), tenantUrl);
+}
+
+export function getHostnameAndPort(req: NextRequest) {
+    const hostnameWithPort = req.headers.get("host")!;
+    const [prodHostname, port] = hostnameWithPort.split(":");
+
+    let hostname: string;
+
+    if (process.env.OVERIDE_TENANT_DOMAIN) {
+        hostname = process.env.OVERIDE_TENANT_DOMAIN;
+    } else {
+        hostname = prodHostname
+    }
+
+    return [hostname, port];
 }
