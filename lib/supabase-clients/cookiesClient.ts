@@ -1,10 +1,11 @@
+import {cookies} from "next/headers";
+
 import {createServerClient} from "@supabase/ssr";
 import {type SupabaseClient} from "@supabase/supabase-js";
-import {cookies} from "next/headers";
+import type {Database} from "@/utils/supabase-db-types";
 
 import {assertEnvVar} from "@/lib/globalHelpers";
 import { ExternalServiceError } from "@/lib/errors";
-
 
 
 /**
@@ -14,7 +15,7 @@ import { ExternalServiceError } from "@/lib/errors";
  * @throws MissingEnvVarError if URL or key is unset
  * @throws ExternalServiceError on cookie write failures
  *  */
-export async function cookiesClient(): Promise<SupabaseClient> {
+export async function cookiesClient(): Promise<SupabaseClient<Database>> {
     // Validate required environment variables
     const sb_url = assertEnvVar(process.env.NEXT_PUBLIC_SUPABASE_URL!);
     const sb_key = assertEnvVar(process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!);
@@ -23,7 +24,7 @@ export async function cookiesClient(): Promise<SupabaseClient> {
     const cookieStore = await cookies();
 
     // Return a Supabase client wired to Next.js cookies I/O
-    return createServerClient(
+    return createServerClient<Database>(
         sb_url,
         sb_key,
         {
