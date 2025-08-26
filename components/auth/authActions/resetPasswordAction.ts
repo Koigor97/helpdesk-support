@@ -30,12 +30,12 @@ export async function resetPasswordAction(prevState: ResetPasswordState, formDat
     // A valid recovery session must already exist (set by verifyResetTokenAction)
     const { error } = await supabase.auth.updateUser({ password: newPassword });
 
-    if (error) {
-        return { error: error.name, success: false, message: error.message };
+    if (!error) {
+        await supabase.auth.signOut()
+        return { success: true, message: "Password updated successfully." };
     }
 
     // I can optionally redirect here instead of returning success.
     // redirect("/?magicLink=no")  // If you do, place it outside try/catch in your own structure.
-
-    return { success: true, message: "Password updated successfully." };
+    return { error: error.name, success: false, message: error.message };
 }
