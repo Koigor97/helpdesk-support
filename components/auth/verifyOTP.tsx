@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import React, {useActionState, useState, useEffect} from "react";
+import React, {useActionState, useState, useEffect, useCallback, useRef} from "react";
 import {useRouter, useSearchParams} from "next/navigation";
 import {motion} from "framer-motion";
 
@@ -13,6 +13,7 @@ import {RiErrorWarningFill} from "@remixicon/react";
 // Commenting for UI creation
 import {verifyOTPAction, resendOTPAction} from "@/components/auth/authActions/verifyOtpAction";
 import {type VerifyOTPState, type ResendOTPState} from "@/components/auth/authType/authTypes";
+import {urlPath} from "@/lib/globalHelpers";
 
 
 const initialVerifyState: VerifyOTPState = {
@@ -41,6 +42,7 @@ interface VerifyOTPProps {
 const VerifyOTP = ({tenant}: VerifyOTPProps) => {
     const router = useRouter()
     const searchParams = useSearchParams()
+    const formRef = useRef<HTMLFormElement>(null);
 
     // Get email from props, search params, or default
     const email = searchParams.get("email") || ""
@@ -48,16 +50,14 @@ const VerifyOTP = ({tenant}: VerifyOTPProps) => {
 
     // Redirect to login if no email provided
     useEffect(() => {
-        if (!email) {
-            router.push(`/${tenant}?magicLink=yes`)
-        }
-    }, [email, router])
+        if (!email) router.push(urlPath(`/?magicLink=yes`, tenant));
+    }, [email, tenant, router]);
 
 
     // Controlled inputs
     const [otp, setOtp] = useState("")
-    const [resendCooldown, setResendCooldown] = useState(0)
-    const [canResend, setCanResend] = useState(true)
+    const [resendCooldown, setResendCooldown] = useState(0);
+
 
     // Local error state
     const [fieldErrors, setFieldErrors] = useState<{
@@ -70,15 +70,13 @@ const VerifyOTP = ({tenant}: VerifyOTPProps) => {
 
 
     // Server action states
-    // @ts-ignore
-    const [verifyState, verifyAction, verifyPending] = useActionState<VerifyOTPState>(verifyOTPAction, {
-        ...initialVerifyState,
-        email,
-    })
+    const [verifyState, verifyAction, verifyPending] =
+        useActionState<VerifyOTPState, FormData>(verifyOTPAction, initialVerifyState);
 
-    // @ts-ignore
-    const [resendState, resendAction, resendPending] = useActionState<ResendOTPState>(resendOTPAction, initialResendState)
+    const [resendState, resendAction, resendPending] =
+        useActionState<ResendOTPState, FormData>(resendOTPAction, initialResendState);
 
+    const canResend = resendCooldown === 0 && !resendPending;
 
     // Sync server ↔ local error state for verify action
     useEffect(() => {
@@ -93,36 +91,23 @@ const VerifyOTP = ({tenant}: VerifyOTPProps) => {
 
     // Handle successful verification
     useEffect(() => {
-        if (verifyState.success) {
-            // Show success message briefly before redirect
-            const timer = setTimeout(() => {
-                router.push(`/${tenant}/tickets`)
-            }, 1500)
-            return () => clearTimeout(timer)
-        }
-    }, [verifyState.success, router])
+        if (!verifyState.success) return;
+        const t = setTimeout(() => router.push(urlPath(`/tickets`, tenant)), 1500);
+        return () => clearTimeout(t);
+    }, [verifyState.success, tenant, router]);
 
 
     // Enhanced resend cooldown with proper timer management
     useEffect(() => {
-        if (resendState.success) {
-            setResendCooldown(60) // 60 second cooldown
-            setCanResend(false)
+        if (!resendState.success) return;
+        setResendCooldown(60);
 
-            const timer = setInterval(() => {
-                setResendCooldown((prev) => {
-                    if (prev <= 1) {
-                        clearInterval(timer)
-                        setCanResend(true)
-                        return 0
-                    }
-                    return prev - 1
-                })
-            }, 1000)
+        const id = setInterval(() => {
+            setResendCooldown((s) => (s <= 1 ? 0 : s - 1));
+        }, 1000);
 
-            return () => clearInterval(timer)
-        }
-    }, [resendState.success])
+        return () => clearInterval(id);
+    }, [resendState.success]);
 
 
     // Clear field errors on input change
@@ -131,17 +116,20 @@ const VerifyOTP = ({tenant}: VerifyOTPProps) => {
         if (fieldErrors.otpCode.length) {
             setFieldErrors((fe) => ({ ...fe, otpCode: [] }))
         }
+        if (value.length === 6 && !verifyPending) formRef.current?.requestSubmit();
     }
 
     // Handle resend with proper form data
-    const handleResend = () => {
-        if (!canResend || resendPending) return
+    const handleResend = useCallback(() => {
+        if (!email || resendPending || resendCooldown > 0) return;
 
-        const formData = new FormData()
-        formData.append("email", email)
-        // @ts-ignore
-        resendAction(formData)
-    }
+        const fd = new FormData();
+        fd.append("email", email);
+
+        if (tenant) fd.append("tenant", tenant);
+        resendAction(fd);
+
+    }, [email, tenant, resendPending, resendCooldown, resendAction]);
 
 
     // Format countdown display
@@ -200,6 +188,7 @@ const VerifyOTP = ({tenant}: VerifyOTPProps) => {
                 <form
                     action={verifyAction}
                     className="grid gap-4 justify-center px-2 lg:px-0"
+                    ref={formRef}
                 >
 
                     {/*Hidden email field*/}
@@ -219,9 +208,10 @@ const VerifyOTP = ({tenant}: VerifyOTPProps) => {
                                 onChange={handleOtpChange}
                                 maxLength={6}
                                 disabled={verifyPending}
-                                aria-describedby="one-time-password-code"
+                                aria-describedby={fieldErrors.otpCode.length ? "otpHelp" : undefined}
                                 aria-invalid={fieldErrors.otpCode.length > 0}
                                 className="h-9 lg:h-10 font-bold"
+                                autoFocus
                             >
                                 <InputOTPGroup className="font-bold">
                                     <InputOTPSlot index={0} />
@@ -238,9 +228,9 @@ const VerifyOTP = ({tenant}: VerifyOTPProps) => {
                         </motion.div>
 
                         {fieldErrors.otpCode.length > 0 && (
-                            <p id="otpHelp" className="text-sm text-red-500 text-center">
+                            <Alert variant="destructive" role="alert" aria-live="polite">
                                 {fieldErrors.otpCode.join(", ")}
-                            </p>
+                            </Alert>
                         )}
                     </div>
 
@@ -261,24 +251,19 @@ const VerifyOTP = ({tenant}: VerifyOTPProps) => {
                         <Button
                             variant="link"
                             className={`text-chart-2 dark:text-primary p-0 h-auto font-normal underline ${
-                                !canResend || resendPending ? "opacity-50 cursor-not-allowed" : "hover:text-secondary"
+                                !canResend ? "opacity-50 cursor-not-allowed" : "hover:text-secondary"
                             }`}
                             onClick={handleResend}
-                            disabled={!canResend || resendPending}
+                            disabled={!canResend}
                         >
-                            {resendPending ? (
-                                "Sending..."
-                            ) : resendCooldown > 0 ? (
-                                <>Resend code ({formatCountdown(resendCooldown)})</>
-                            ) : (
-                                "Resend code"
-                            )}
+                            {resendPending ? "Sending..." : resendCooldown > 0 ?
+                                `Resend code (${formatCountdown(resendCooldown)})` : "Resend code"}
                         </Button>
                     </div>
                     <div className="text-center text-sm mt-2">
                         Wrong email? {" "}
                         <Link
-                            href={`/${tenant}?magicLink=yes`} className="underline hover:underline"
+                            href={urlPath(`/?magicLink=yes`, tenant)} className="underline hover:underline"
                         >
                             Change email
                         </Link>
