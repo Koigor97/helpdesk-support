@@ -1,5 +1,6 @@
 import { createServerClient} from '@supabase/ssr';
 import {type SupabaseClient} from '@supabase/supabase-js';
+import type {Database} from "@/utils/supabase-db-types";
 import { NextResponse, type NextRequest } from 'next/server';
 
 import {assertEnvVar} from "@/lib/globalHelpers";
@@ -47,7 +48,7 @@ export async function middlewareClient(request: NextRequest) {
   const sb_url = assertEnvVar(process.env.NEXT_PUBLIC_SUPABASE_URL!);
   const sb_key = assertEnvVar(process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!);
 
-  const supabase: SupabaseClient = createServerClient(
+  const supabase: SupabaseClient<Database> = createServerClient<Database>(
       sb_url,
       sb_key,
       {
