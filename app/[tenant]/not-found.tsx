@@ -9,41 +9,43 @@ import Link from "next/link";
 import {Button} from "@/components/ui/button";
 import {Input} from "@/components/ui/input";
 import {Card, CardContent} from "@/components/ui/card";
+import {Theme} from "@/components/theme";
 // Keep the page as a Server Component that renders a small Client bit
 export default function NotFound() {
     return (
-        <main className="min-h-screen grid place-items-center px-4">
-            <Card className="w-full max-w-md border-none shadow-none">
-                <CardContent className="pt-0">
-                    <div className="flex flex-col items-center text-center gap-3">
-                        <div className="size-12 rounded-full bg-muted grid place-items-center">
-                            <span className="text-2xl">😕</span>
+        <Theme>
+            <main className="min-h-screen grid place-items-center px-4">
+                <Card className="w-full max-w-md border-none shadow-none">
+                    <CardContent className="pt-0">
+                        <div className="flex flex-col items-center text-center gap-3">
+                            <div className="size-12 rounded-full bg-muted grid place-items-center">
+                                <span className="text-2xl">😕</span>
+                            </div>
+
+                            {/* Headline */}
+                            <h1 className="text-xl font-semibold">Tenant not found</h1>
+
+                            <TenantDetail />
+
+                            <p className="text-sm text-muted-foreground">
+                                The tenant you’re trying to access doesn’t exist, or the URL is misspelled.
+                            </p>
+
+                            {/* Actions */}
+                            <div className="mt-2 grid gap-2 w-full">
+                                <Link href="/" className="w-full">
+                                    <Button className="w-full cursor-pointer">Go to homepage</Button>
+                                </Link>
+
+                                {/* quick jumper to another tenant */}
+                                <QuickTenantJump />
+                            </div>
                         </div>
+                    </CardContent>
+                </Card>
+            </main>
+        </Theme>
 
-                        {/* Headline */}
-                        <h1 className="text-xl font-semibold">Tenant not found</h1>
-
-                        {/* Optional detail from query (?tenant=slug).
-                If you don't pass it, this line will just not render. */}
-                        <TenantDetail />
-
-                        <p className="text-sm text-muted-foreground">
-                            The tenant you’re trying to access doesn’t exist, or the URL is misspelled.
-                        </p>
-
-                        {/* Actions */}
-                        <div className="mt-2 grid gap-2 w-full">
-                            <Link href="/" className="w-full">
-                                <Button className="w-full cursor-pointer">Go to homepage</Button>
-                            </Link>
-
-                            {/* Optional: quick jumper to another tenant */}
-                            <QuickTenantJump />
-                        </div>
-                    </div>
-                </CardContent>
-            </Card>
-        </main>
     );
 }
 
@@ -56,7 +58,7 @@ function TenantDetail() {
     if (!isTenant) return null;
     return (
         <p className="text-sm text-muted-foreground">
-            Attempted: <span className="font-mono text-foreground">/{isTenant}</span>
+            Attempted: <span className="font-mono text-foreground font-black">/{isTenant}</span>
         </p>
     );
 }
