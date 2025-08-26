@@ -17,14 +17,17 @@ import {
 
 import { LogOut } from "lucide-react";
 import {supabaseBrowserClient} from "@/lib/supabase-clients/browserClient";
+import type {Tables} from "@/utils/supabase-db-types";
 import {useEffect} from "react";
-import {formatAssigneeName} from "@/lib/globalHelpers";
+import {formatAssigneeName, urlPath} from "@/lib/globalHelpers";
 import {useRouter} from "next/navigation";
 
 interface AppHeaderProps {
     children?: React.ReactNode;
-    tenant: string | unknown;
+    tenant: string ;
 }
+
+type TenantRow = Tables<"tenants">
 
 /**
  * Top header with mobile menu and user avatar.
@@ -32,6 +35,7 @@ interface AppHeaderProps {
 export function AppHeader({children, tenant} : AppHeaderProps) {
 
     const [userName, setUserName] = React.useState<string>("");
+    const [tenantName, setTenantName] = React.useState<string>("");
     const router = useRouter();
 
     const supabase = supabaseBrowserClient();
@@ -40,29 +44,54 @@ export function AppHeader({children, tenant} : AppHeaderProps) {
         await supabase.auth.signOut();
     };
 
-
     useEffect(() => {
-        const { data: {subscription} } = supabase.auth.onAuthStateChange((event, session) => {
-            if (event === "SIGNED_OUT") {
-                router.push(`/${tenant}`);
+        // prevent state update after component unmount
+        let cancelled = false;
+
+        // Load username + tenant name in parallel
+        (async () => {
+            try {
+                const [{ data: sessionData }, { data: tenantData, error: tenantErr }] = await Promise.all([
+                    supabase.auth.getSession(),
+                    supabase
+                        .from("tenants")
+                        .select("name")
+                        .eq("id", tenant)
+                        .single()
+                        .overrideTypes<Pick<TenantRow, "name"> | null>()
+                ])
+
+                if (cancelled) return;
+
+                // get username from session email
+                const email = sessionData?.session?.user?.email ?? "";
+                setUserName(formatAssigneeName(email));
+
+                // get tenant name from DB (fallback to the slug-ish uppercase if missing
+                if (!tenantErr && tenantData?.name) {
+                    setTenantName(tenantData.name)
+                } else {
+                    setTenantName(tenant.toUpperCase());
+                }
+
+            } catch {
+                if (!cancelled) setTenantName(tenant.toUpperCase());
             }
-        })
+        })();
 
-        return () => subscription.unsubscribe();
-    }, []);
+        // auth state listener: redirect to /{tenant} on sign-out
+        const { data: { subscription } } = supabase.auth.onAuthStateChange((event) => {
+            if (event === "SIGNED_OUT") {
+                router.push(urlPath(`/`, tenant));
+            }
+        });
 
 
-    useEffect(() => {
-        const getUserName = async () => {
-            const { data } = await supabase.auth.getSession()
-            if(!data) return;
-
-            const formatedName = formatAssigneeName(data.session?.user.email!)
-            setUserName(formatedName);
-        }
-
-        getUserName().then();
-    }, [])
+        return () => {
+            cancelled = true;
+            subscription.unsubscribe();
+        };
+    }, [supabase, tenant, router])
 
 
     return (
@@ -72,8 +101,10 @@ export function AppHeader({children, tenant} : AppHeaderProps) {
         >
             <div>{children}</div>
 
-          <div className="flex-1" />
-          <Separator orientation="vertical" className="hidden md:block h-6" />
+            <div className="flex-1">
+                <span>{tenantName}</span>
+            </div>
+            <Separator orientation="vertical" className="hidden md:block h-6" />
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                     <Button
