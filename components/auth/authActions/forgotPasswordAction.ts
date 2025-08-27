@@ -3,7 +3,8 @@
 import {sbAdminClient} from "@/lib/supabase-clients/adminClient";
 import {passwordResetEmailHtml} from "@/templates/passwordResetEmail";
 import nodemailer from "nodemailer";
-import {headers} from "next/headers";
+import {generateLink} from "@/lib/email/generateLink";
+import {sendEmail} from "@/lib/email/mailer";
 
 
 export type PasswordResetProp = {
@@ -32,34 +33,17 @@ export async function requestPasswordResetEmail(
             };
         }
 
-        const header = await headers();
-        const host  = header.get("host") ?? "localhost:3000";
-        const proto = header.get("x-forwarded-proto") ?? "http";
-        const origin = `${proto}://${host}`;
-
-        const url = new URL(`/reset-password`, origin);
-
         const resetHashedToken = data.properties?.hashed_token ?? "";
-        url.searchParams.set("email", email);
-        url.searchParams.set("hashed_reset_token", resetHashedToken);
-        const resetPasswordLink = url.toString();
-
-        const html = passwordResetEmailHtml(email, resetPasswordLink);
-
-        const transporter = nodemailer.createTransport({
-            host: "127.0.0.1",
-            port: 54325,
-            secure: false,
-            tls: { rejectUnauthorized: false },
-            connectionTimeout: 5000,
-        });
-
-        await transporter.sendMail({
-            from: "WetinHapin <no-reply@wetinhapin.local>",
+        const resetLink = await generateLink("/reset-password", {
+            email,
+            hashed_reset_token: resetHashedToken,
+        })
+        const html = passwordResetEmailHtml(email, resetLink);
+        await sendEmail({
             to: email,
             subject: "Reset Your Password",
-            html,
-        });
+            html
+        })
 
         return {
             success: true,
