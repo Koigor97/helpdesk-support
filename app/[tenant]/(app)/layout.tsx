@@ -7,8 +7,6 @@ import {Toaster} from "@/components/ui/sonner";
 
 import {SidebarProvider, SidebarTrigger} from "@/components/ui/sidebar";
 import {AppSidebar} from "@/components/layout/AppSidebar";
-import {Button} from "@/components/ui/button";
-import {AlignRight} from "lucide-react";
 import {AppHeader} from "@/components/layout/AppHeader";
 
 const inter = localFont({

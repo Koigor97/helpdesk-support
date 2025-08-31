@@ -5,10 +5,12 @@ import { TicketComments } from "@/components/tickets/TicketComments";
 import { formatDateTime } from "@/lib/utils";
 import { mockTickets, mockComments } from "@/lib/mockData";
 
-interface PageProps { params: { id: string } }
+interface PageProps { params: Promise<{ id: string }> }
 
-export default function TicketDetailsPage({ params }: PageProps) {
-  const ticket = mockTickets.find((t) => t.id === params.id);
+export default async function TicketDetailsPage({ params }: PageProps) {
+  const {id: theID} = await params
+  const ticket = mockTickets.find((t) => t.id === theID);
+
   if (!ticket) return notFound();
 
   const comments = mockComments[ticket.id] ?? [];

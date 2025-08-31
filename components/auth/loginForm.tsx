@@ -15,6 +15,9 @@ import {Alert, AlertDescription, AlertTitle} from "@/components/ui/alert";
 
 import {OAuthIconProvider} from "@/components/common/oauthIcons";
 import {RiErrorWarningFill, RiEyeFill, RiEyeOffFill} from "@remixicon/react";
+import {supabaseBrowserClient} from "@/lib/supabase-clients/browserClient";
+import {notFound, useRouter} from "next/navigation";
+import {urlPath} from "@/lib/globalHelpers";
 
 
 /**
@@ -52,6 +55,9 @@ const LoginForm = ({wantsPasswordLogin, tenant, tenantName} : LoginFormProps) =>
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
 
+    const supabase  = supabaseBrowserClient()
+    const router = useRouter()
+
     // ──────────────────────────────────────────────────────────────────────────
     // Local mirror of server errors for instant UX feedback + shake
     // ──────────────────────────────────────────────────────────────────────────
@@ -81,14 +87,36 @@ const LoginForm = ({wantsPasswordLogin, tenant, tenantName} : LoginFormProps) =>
     // ──────────────────────────────────────────────────────────────────────────
 
     useEffect(() => {
-        if (state.errors) {
-            setFieldErrors({
-                email: state.errors.email || [],
-                password: state.errors.password || [],
-                _form: state.errors._form || []
-            })
-        }
-    }, [state.errors]);
+        const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+            if (event === "SIGNED_IN") {
+                const canAccess = Array.isArray(session?.user?.app_metadata?.tenants)
+                    && session!.user!.app_metadata!.tenants!.includes(tenant);
+
+                if (canAccess) {
+                    router.push(urlPath(`/tickets`, tenant));
+                } else {
+                    // sign out + send to not-found
+                    supabase.auth.signOut().finally(() =>
+                        router.replace(urlPath(`/not-found?tenant=${tenant}`, tenant)));
+                }
+            }
+        });
+        return () => subscription.unsubscribe();
+        // deps: create once for this tenant
+    }, [supabase, router, tenant]);
+
+
+    useEffect(() => {
+        const denied =
+            state.errors?._form?.some(err => err.toLowerCase()
+                .includes("permission denied."));
+
+        if (!denied) return;
+
+        const timer = setTimeout(() =>
+            router.push(urlPath(`/not-found?tenant=${tenant}`, tenant)), 1500);
+        return () => clearTimeout(timer);
+    }, [state.errors, router, tenant]);
 
     // ──────────────────────────────────────────────────────────────────────────
     // clear a single field’s error on change
@@ -127,7 +155,7 @@ const LoginForm = ({wantsPasswordLogin, tenant, tenantName} : LoginFormProps) =>
                 <h1 className="h2-bold lg:h1-bold">Welcome back 👋</h1>
                 <p className="lg:w-sm body-regular">
                     Sign in to <span className="text-secondary dark:text-primary font-black">{tenantName} </span>
-                    manage support tickets, collaborate with your team, and help customers faster.
+                    to manage support tickets, collaborate with your team, and help customers faster.
                 </p>
               </div>
 
@@ -190,7 +218,7 @@ const LoginForm = ({wantsPasswordLogin, tenant, tenantName} : LoginFormProps) =>
                       <div className="flex items-center">
                           <Label htmlFor="password">Password</Label>
                           <Link
-                              href={`/${tenant}/forgot-password`}
+                              href={urlPath(`/forgot-password`, tenant)}
                               className="ml-auto inline-block text-sm underline"
                           >
                               Forgot your password?
@@ -241,12 +269,12 @@ const LoginForm = ({wantsPasswordLogin, tenant, tenantName} : LoginFormProps) =>
                   {/* Toggle Password login or MagicLink*/}
                   <p className="body-regular underline hover:text-chart-2">
                       {wantsPasswordLogin ? (
-                          <Link href={`/${tenant}?magicLink=yes`} className="flex items-center gap-1">
+                          <Link href={urlPath(`/?magicLink=yes`, tenant)} className="flex items-center gap-1">
                               Use MagicLink Login
                               <WandSparkles className="text-primary" fill="green" size={18} />
                           </Link>
                       ) : (
-                          <Link href={`/${tenant}?magicLink=no`}>
+                          <Link href={`/?magicLink=no`}>
                               Use Password Login
                           </Link>
                       )}
@@ -268,7 +296,7 @@ const LoginForm = ({wantsPasswordLogin, tenant, tenantName} : LoginFormProps) =>
                 {/** ─── SIGNUP LINK ───────────────────────────────────────── */}
                 <div className="mt-4 text-center text-sm">
                     Don&apos;t have an account?{" "}
-                    <Link href={`/${tenant}/signup`} className="underline">
+                    <Link href={urlPath(`/signup`, tenant)} className="underline">
                         Sign up
                     </Link>
                 </div>

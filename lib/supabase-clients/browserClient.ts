@@ -2,6 +2,7 @@ import {createBrowserClient} from '@supabase/ssr';
 import {SupabaseClient} from "@supabase/supabase-js";
 
 import {assertEnvVar} from "@/lib/globalHelpers";
+import type {Database} from "@/utils/supabase-db-types";
 
 
 /**
@@ -15,7 +16,7 @@ import {assertEnvVar} from "@/lib/globalHelpers";
  * @throws {Error} if NEXT_PUBLIC_SUPABASE_URL or
  *   NEXT_PUBLIC_SUPABASE_ANON_KEY is not defined.
  */
-export function supabaseBrowserClient(): SupabaseClient {
+export function supabaseBrowserClient(): SupabaseClient<Database> {
 
     // Read the Supabase URL from environment variables,
     // Read the Supabase URL from environment variables,
@@ -24,5 +25,5 @@ export function supabaseBrowserClient(): SupabaseClient {
     const key = assertEnvVar(process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!);
 
     // Create and return the client with the URL and anon key.
-    return createBrowserClient(url, key);
+    return createBrowserClient<Database>(url, key);
 }

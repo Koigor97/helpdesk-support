@@ -15,9 +15,9 @@ export const loginAction = async (prevState: LoginState, formData: FormData): Pr
     let redirectTo: string | null = null;
 
     // Extract form data
-    const email =  formData.get("email")
-    const password = formData.get("password")
-    const tenant = formData.get("tenant");
+    const email =  String(formData.get("email") ?? "")
+    const password = String(formData.get("password") ?? "")
+    const tenant = String(formData.get("tenant") ?? "");
 
     // Determine if this is a magic link or password login
     const isMagicLink = !password
@@ -59,6 +59,15 @@ export const loginAction = async (prevState: LoginState, formData: FormData): Pr
                 return { errors: { _form: [error.message] }, message: "Failed to send magic link", success: false };
             }
 
+            const tenants = linkData.user.app_metadata?.tenants as string[] | undefined;
+            if (!Array.isArray(tenants) || !tenants.includes(tenant)) {
+                return {
+                    errors: { _form: ["Permission denied."] },
+                    message: `This user does not have access to ${tenant}.`,
+                    success: false,
+                };
+            }
+
             const {email_otp: otp, verification_type} = linkData?.properties
 
             if (!otp) return {errors: {_form: ["OTP not generated. Please try again"]}, success: false};
@@ -93,7 +102,7 @@ export const loginAction = async (prevState: LoginState, formData: FormData): Pr
             console.log("Email sent!")
 
             // redirect user to verify-otp page
-            redirectTo = `/${tenant}/verifyotp?email=${encodeURIComponent(validatedFields.data.email)}`
+            redirectTo = `/verifyotp?email=${encodeURIComponent(validatedFields.data.email)}`
 
         } else {
             const supabase = await cookiesClient()
@@ -145,7 +154,17 @@ export const loginAction = async (prevState: LoginState, formData: FormData): Pr
                 }
             }
 
-            redirectTo = `/${tenant}/tickets`;
+            const tenants = data.user.app_metadata?.tenants as string[] | undefined;
+            if (!Array.isArray(tenants) || !tenants.includes(tenant)) {
+                await supabase.auth.signOut();
+                return {
+                    errors: { _form: ["Permission denied."] },
+                    message: `This user does not have access to ${tenant}.`,
+                    success: false,
+                };
+            }
+
+            redirectTo = `/tickets`;
         }
     } catch (error) {
         console.error("Login action error:", error)

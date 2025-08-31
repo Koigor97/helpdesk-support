@@ -11,7 +11,7 @@ async function VerifyOtpPage({ params}: VerifyOTPProps) {
     const { tenant } = await params;
 
     return (
-        <VerifyOTP tenant={tenant} />
+        <VerifyOTP tenant={ tenant} />
     )
 }
 

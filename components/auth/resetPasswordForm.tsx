@@ -14,6 +14,7 @@ import {Input} from "@/components/ui/input";
 import {Label} from "@/components/ui/label";
 import {Alert, AlertDescription} from "@/components/ui/alert";
 import {RiCheckboxCircleLine, RiCloseCircleLine} from "@remixicon/react";
+import {urlPath} from "@/lib/globalHelpers";
 
 
 
@@ -102,10 +103,10 @@ export default function ResetPasswordForm(
                 </Alert>
                 <div className="space-y-2">
                     <Button asChild className="w-full">
-                        <Link href={`/${tenant}/forgot-password`}>Request new reset link</Link>
+                        <Link href={urlPath(`/forgot-password`, tenant)}>Request new reset link</Link>
                     </Button>
                     <div className="text-center">
-                        <Link href={`/${tenant}?magicLink=no`} className="text-sm text-muted-foreground hover:text-foreground">
+                        <Link href={urlPath(`/?magicLink=no`,tenant)} className="text-sm text-muted-foreground hover:text-foreground">
                             Back to login
                         </Link>
                     </div>
@@ -127,7 +128,7 @@ export default function ResetPasswordForm(
                     </p>
                 </div>
                 <Button asChild className="w-full">
-                    <Link href={`/${tenant}?magicLink=no`}>Continue to login</Link>
+                    <Link href={urlPath(`/?magicLink=no`,tenant)}>Continue to login</Link>
                 </Button>
             </div>
         )
@@ -139,7 +140,6 @@ export default function ResetPasswordForm(
             </Alert>
         )
     }
-
 
 
     // Password reset form
@@ -232,7 +232,7 @@ export default function ResetPasswordForm(
             </Button>
 
             <div className="text-center">
-                <Link href={`/${tenant}?magicLink=no`} className="text-sm text-muted-foreground hover:text-foreground">
+                <Link href={urlPath(`/?magicLink=no`,tenant)} className="text-sm text-muted-foreground hover:text-foreground">
                     Back to login
                 </Link>
             </div>

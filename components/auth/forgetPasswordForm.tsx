@@ -10,6 +10,7 @@ import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Loader2, Mail, ArrowLeft } from "lucide-react"
 import Link from "next/link"
 import {requestPasswordResetEmail} from "@/components/auth/authActions/forgotPasswordAction";
+import {urlPath} from "@/lib/globalHelpers";
 
 
 export function ForgotPasswordForm({ tenant }: { tenant: string }) {
@@ -57,7 +58,7 @@ export function ForgotPasswordForm({ tenant }: { tenant: string }) {
                     </AlertDescription>
                 </Alert>
                 <div className="flex items-center justify-center">
-                    <Link href={`/${tenant}?magicLink=no`} className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground">
+                    <Link href={urlPath(`/?magicLink=no`, tenant)} className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground">
                         <ArrowLeft className="w-4 h-4 mr-1" />
                         Back to login
                     </Link>
@@ -101,7 +102,7 @@ export function ForgotPasswordForm({ tenant }: { tenant: string }) {
             </Button>
 
             <div className="text-center">
-                <Link href={`/${tenant}?magicLink=no`} className="text-sm text-muted-foreground hover:text-foreground">
+                <Link href={urlPath(`/?magicLink=no`, tenant)} className="text-sm text-muted-foreground hover:text-foreground">
                     Remember your password? Sign in
                 </Link>
             </div>
