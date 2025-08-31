@@ -6,7 +6,7 @@ import {type VerifyOTPState, type ResendOTPState} from "@/components/auth/authTy
 import {cookiesClient} from "@/lib/supabase-clients/cookiesClient";
 import {sbAdminClient} from "@/lib/supabase-clients/adminClient";
 import {buildOtpEmailHTML} from "@/templates/buildOtpEmailHtml";
-import nodemailer from "nodemailer";
+import {sendEmail} from "@/lib/email/mailer";
 
 export async function verifyOTPAction(prevState: VerifyOTPState, formData: FormData): Promise<VerifyOTPState> {
     // Extract form data
@@ -40,9 +40,7 @@ export async function verifyOTPAction(prevState: VerifyOTPState, formData: FormD
 
         if (!email) {
             return {
-                errors: {
-                    _form: ["Email is required for verification."],
-                },
+                errors: {_form: ["Email is required for verification."],},
                 message: "Verification failed.",
             }
         }
@@ -58,9 +56,7 @@ export async function verifyOTPAction(prevState: VerifyOTPState, formData: FormD
             // Handle specific OTP errors
             if (error.message.includes("Token has expired")) {
                 return {
-                    errors: {
-                        otpCode: ["Verification code has expired. Please request a new one."],
-                    },
+                    errors: {otpCode: ["Verification code has expired. Please request a new one."],},
                     message: "Code expired.",
                     email,
                 }
@@ -68,18 +64,14 @@ export async function verifyOTPAction(prevState: VerifyOTPState, formData: FormD
 
             if (error.message.includes("Invalid token")) {
                 return {
-                    errors: {
-                        otpCode: ["Invalid verification code. Please check and try again."],
-                    },
+                    errors: {otpCode: ["Invalid verification code. Please check and try again."],},
                     message: "Invalid code.",
                     email,
                 }
             }
 
             return {
-                errors: {
-                    _form: [error.message],
-                },
+                errors: {_form: [error.message],},
                 message: "Verification failed.",
                 email,
             }
@@ -87,9 +79,7 @@ export async function verifyOTPAction(prevState: VerifyOTPState, formData: FormD
 
         if (!data.user) {
             return {
-                errors: {
-                    _form: ["Verification failed. Please try again."],
-                },
+                errors: {_form: ["Verification failed. Please try again."],},
                 message: "Verification failed.",
                 email,
             }
@@ -117,9 +107,7 @@ export async function verifyOTPAction(prevState: VerifyOTPState, formData: FormD
     } catch (error) {
         console.error("OTP verification error:", error)
         return {
-            errors: {
-                _form: ["An unexpected error occurred. Please try again."],
-            },
+            errors: {_form: ["An unexpected error occurred. Please try again."],},
             message: "Verification failed.",
             email: prevState.email,
         }
@@ -186,18 +174,11 @@ export async function resendOTPAction(prevState: ResendOTPState, formData: FormD
             logoUrl: "http://127.0.0.1/web-app-manifest-192x192.png"
         })
 
-        const transporter = nodemailer.createTransport({
-            host: "127.0.0.1",
-            port: 54325,
-            secure: false,
-        })
-
-        console.log("Sending email......")
-        await transporter.sendMail({
-            from: "WetinHapin <no-reply@wetinhapin.local>",
+        await sendEmail({
+            from: `WetinHapin <no-reply@wetinhapin.local>`,
             to: validatedFields.data.email,
             subject: "Magic Link Verification Code",
-            html: html,
+            html
         })
 
         return {
@@ -207,9 +188,7 @@ export async function resendOTPAction(prevState: ResendOTPState, formData: FormD
     } catch (error) {
         console.error("Resend OTP error:", error)
         return {
-            errors: {
-                _form: ["An unexpected error occurred. Please try again."],
-            },
+            errors: {_form: ["An unexpected error occurred. Please try again."],},
             message: "Failed to resend code.",
         }
     }

@@ -274,7 +274,7 @@ const LoginForm = ({wantsPasswordLogin, tenant, tenantName} : LoginFormProps) =>
                               <WandSparkles className="text-primary" fill="green" size={18} />
                           </Link>
                       ) : (
-                          <Link href={`/?magicLink=no`}>
+                          <Link href={urlPath(`/?magicLink=no`, tenant)}>
                               Use Password Login
                           </Link>
                       )}
@@ -296,7 +296,7 @@ const LoginForm = ({wantsPasswordLogin, tenant, tenantName} : LoginFormProps) =>
                 {/** ─── SIGNUP LINK ───────────────────────────────────────── */}
                 <div className="mt-4 text-center text-sm">
                     Don&apos;t have an account?{" "}
-                    <Link href={urlPath(`/signup`, tenant)} className="underline">
+                    <Link href={urlPath(`/register`, tenant)} className="underline">
                         Sign up
                     </Link>
                 </div>
