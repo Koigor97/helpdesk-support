@@ -22,13 +22,14 @@ import {formatAssigneeName} from "@/lib/globalHelpers";
 import {useRouter} from "next/navigation";
 
 interface AppHeaderProps {
-    children?: React.ReactNode; // for sidebar trigger or any other element
+    children?: React.ReactNode;
+    tenant: string | unknown;
 }
 
 /**
  * Top header with mobile menu and user avatar.
  */
-export function AppHeader({children} : AppHeaderProps) {
+export function AppHeader({children, tenant} : AppHeaderProps) {
 
     const [userName, setUserName] = React.useState<string>("");
     const router = useRouter();
@@ -43,7 +44,7 @@ export function AppHeader({children} : AppHeaderProps) {
     useEffect(() => {
         const { data: {subscription} } = supabase.auth.onAuthStateChange((event, session) => {
             if (event === "SIGNED_OUT") {
-                router.push("/");
+                router.push(`/${tenant}`);
             }
         })
 

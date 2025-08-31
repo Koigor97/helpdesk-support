@@ -22,6 +22,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import {urlPath} from "@/lib/globalHelpers";
 
 
 /** Maps status to a badge variant/label */
@@ -35,7 +36,7 @@ function StatusBadge({ status }: { status: Ticket["status"] }) {
 /**
  * Renders a table of tickets. Title links to details page.
  */
-export function TicketList({ tickets }: { tickets: Ticket[] }) {
+export function TicketList({ tickets, tenant }: { tickets: Ticket[]; tenant: string }) {
   return (
       <Card className="border-0 shadow-none">
         <CardHeader>
@@ -60,7 +61,10 @@ export function TicketList({ tickets }: { tickets: Ticket[] }) {
                   <TableRow key={t.id}>
                     <TableCell className="font-mono text-xs hidden md:table-cell">#{t.id}</TableCell>
                     <TableCell>
-                      <Link href={`/tickets/details/${t.id}`} className="font-medium hover:underline">
+                      <Link
+                          href={urlPath(`/tickets/details/${t.id}`, tenant)}
+                          className="font-medium hover:underline"
+                      >
                         {t.title}
                       </Link>
                     </TableCell>

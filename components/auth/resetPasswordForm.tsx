@@ -20,7 +20,9 @@ import {RiCheckboxCircleLine, RiCloseCircleLine} from "@remixicon/react";
 const initialState: ResetPasswordState = {}
 
 
-export default function ResetPasswordForm() {
+export default function ResetPasswordForm(
+    { tenant }: { tenant: string }
+) {
 
     const email = useSearchParams()?.get("email") || ""
     const resetHashToken = useSearchParams()?.get("hashed_reset_token") || ""
@@ -100,10 +102,10 @@ export default function ResetPasswordForm() {
                 </Alert>
                 <div className="space-y-2">
                     <Button asChild className="w-full">
-                        <Link href="/forgot-password">Request new reset link</Link>
+                        <Link href={`/${tenant}/forgot-password`}>Request new reset link</Link>
                     </Button>
                     <div className="text-center">
-                        <Link href="/?magicLink=no" className="text-sm text-muted-foreground hover:text-foreground">
+                        <Link href={`/${tenant}?magicLink=no`} className="text-sm text-muted-foreground hover:text-foreground">
                             Back to login
                         </Link>
                     </div>
@@ -125,7 +127,7 @@ export default function ResetPasswordForm() {
                     </p>
                 </div>
                 <Button asChild className="w-full">
-                    <Link href="/?magicLink=no">Continue to login</Link>
+                    <Link href={`/${tenant}?magicLink=no`}>Continue to login</Link>
                 </Button>
             </div>
         )
@@ -230,7 +232,7 @@ export default function ResetPasswordForm() {
             </Button>
 
             <div className="text-center">
-                <Link href="/?magicLink=no" className="text-sm text-muted-foreground hover:text-foreground">
+                <Link href={`/${tenant}?magicLink=no`} className="text-sm text-muted-foreground hover:text-foreground">
                     Back to login
                 </Link>
             </div>
