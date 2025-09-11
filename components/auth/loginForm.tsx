@@ -261,7 +261,11 @@ const LoginForm = ({wantsPasswordLogin, tenant, tenantName} : LoginFormProps) =>
                   <input type="hidden" name="tenant" value={tenant} />
 
                   {/** ─── SUBMIT BUTTON ─────────────────────────────────────── */}
-                  <Button type="submit" disabled={isPending} className="w-full cursor-pointer h-9 lg:h-10">
+                  <Button
+                      type="submit"
+                      disabled={isPending}
+                      className="w-full cursor-pointer h-9 lg:h-10 gradient-radial-subtle"
+                  >
                       {isPending ? "Signing in..." : wantsPasswordLogin ? "Sign in" : "Send Magic Link"}
                   </Button>
 
@@ -286,7 +290,7 @@ const LoginForm = ({wantsPasswordLogin, tenant, tenantName} : LoginFormProps) =>
 
                   {/** ─── SOCIAL BUTTONS ───────────────────────────────────── */}
                 <div className=' '>
-                    <Button variant={'outline'} size={'lg'} className='border-gray-500 border-1 flex-1 cursor-pointer hover:bg-accent hover:text-accent-foreground w-full h-9 lg:h-10'>
+                    <Button variant={'outline'} size={'lg'} className='border-gray-500 border-1 flex-1 cursor-pointer hover:bg-accent hover:text-accent-foreground w-full h-9 lg:h-10 dark:hover:text-primary'>
                         <OAuthIconProvider type='google'/>
                         <span className=''>Google</span>
                     </Button>
