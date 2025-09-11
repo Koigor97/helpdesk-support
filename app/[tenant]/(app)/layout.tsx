@@ -29,7 +29,7 @@ export default async function RootLayout({
         <SidebarProvider>
             <AppSidebar tenant={tenant} />
           <body
-            className={`${inter.className} font-sans antialiased`}
+            className={`${inter.className} font-sans antialiased glass-page-bg`}
           >
             <main className="w-full px-5">
               <Theme>
