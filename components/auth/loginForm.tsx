@@ -202,7 +202,7 @@ const LoginForm = ({wantsPasswordLogin, tenant, tenantName} : LoginFormProps) =>
                             disabled={isPending}
                             aria-describedby="emailHelp"
                             aria-invalid={fieldErrors.email.length > 0}
-                            className="h-9 lg:h-10"
+                            className="h-9 lg:h-10 border-secondary"
                         />
                     </motion.div>
 
@@ -239,7 +239,7 @@ const LoginForm = ({wantsPasswordLogin, tenant, tenantName} : LoginFormProps) =>
                               disabled={isPending}
                               aria-describedby="passwordHelp"
                               aria-invalid={fieldErrors.password.length > 0}
-                              className="h-9 pr-10 lg:h-10"
+                              className="h-9 pr-10 lg:h-10 border-secondary"
                           />
                           <button
                               type="button"
@@ -264,7 +264,7 @@ const LoginForm = ({wantsPasswordLogin, tenant, tenantName} : LoginFormProps) =>
                   <Button
                       type="submit"
                       disabled={isPending}
-                      className="w-full cursor-pointer h-9 lg:h-10 gradient-radial-subtle"
+                      className="w-full cursor-pointer h-9 lg:h-10 gradient-radial-subtle font-bold hover:gradient-linear-alt"
                   >
                       {isPending ? "Signing in..." : wantsPasswordLogin ? "Sign in" : "Send Magic Link"}
                   </Button>
@@ -290,7 +290,11 @@ const LoginForm = ({wantsPasswordLogin, tenant, tenantName} : LoginFormProps) =>
 
                   {/** ─── SOCIAL BUTTONS ───────────────────────────────────── */}
                 <div className=' '>
-                    <Button variant={'outline'} size={'lg'} className='border-gray-500 border-1 flex-1 cursor-pointer hover:bg-accent hover:text-accent-foreground w-full h-9 lg:h-10 dark:hover:text-primary'>
+                    <Button
+                        variant={'outline'}
+                        size={'lg'}
+                        className='border-gray-500 border-1 flex-1 cursor-pointer hover:bg-accent hover:text-accent-foreground w-full h-9 lg:h-10 dark:hover:text-primary'
+                    >
                         <OAuthIconProvider type='google'/>
                         <span className=''>Google</span>
                     </Button>
