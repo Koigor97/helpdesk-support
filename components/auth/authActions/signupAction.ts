@@ -133,11 +133,14 @@ export async function signupAction(prevState: SignupState, formData: FormData): 
         }
 
         const activationHashedToken = activationLinkData.properties?.hashed_token ?? "";
+
         const activationLink = await generateLink("/tickets", {
             email,
             hashed_reset_token: activationHashedToken,
         })
+
         const html = accountActivationEmailHtml(email, activationLink);
+
         await sendEmail({
             to: email,
             subject: "Welcome to Your Account",
