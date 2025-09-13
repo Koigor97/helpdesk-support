@@ -333,7 +333,13 @@ body {
   }
 
   .glass-page-bg {
-    @apply min-h-screen bg-gradient-to-br from-primary via-secondary to-accent
+    @apply min-h-screen bg-gradient-to-br from-accent to-primary
+    dark:from-[#0f172a] dark:via-[#1e293b] dark:to-[#0f172a]
+    bg-no-repeat bg-cover overflow-hidden flex items-center justify-center;
+  }
+
+  .glass-page-bg2 {
+    @apply min-h-screen bg-gradient-to-br from-primary to-accent
     dark:from-[#0f172a] dark:via-[#1e293b] dark:to-[#0f172a]
     bg-no-repeat bg-cover overflow-hidden flex items-center justify-center;
   }
