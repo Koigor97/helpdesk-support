@@ -144,7 +144,16 @@ const LoginForm = ({wantsPasswordLogin, tenant, tenantName} : LoginFormProps) =>
         }
     }
 
-    // render
+    // Google OAuth signing function
+    const signInWithGoogle = async () => {
+        await supabase.auth.signInWithOAuth({
+            provider: "google",
+            options: {
+                redirectTo: window.location.origin + "/auth/verify-oauth",
+                queryParams: {access_type: "offline", prompt: "consent"}
+            }
+        });
+    }
 
     // @ts-ignore
     return (
@@ -284,28 +293,29 @@ const LoginForm = ({wantsPasswordLogin, tenant, tenantName} : LoginFormProps) =>
                       )}
                   </p>
 
-                <div className=" grid justify-center text-xs">
-                    <span>or login with</span>
-                </div>
+                {/*<div className=" grid justify-center text-xs">*/}
+                {/*    <span>or login with</span>*/}
+                {/*</div>*/}
 
-                  {/** ─── SOCIAL BUTTONS ───────────────────────────────────── */}
-                <div className=' '>
-                    <Button
-                        variant={'outline'}
-                        size={'lg'}
-                        className='border-gray-500 border-1 flex-1 cursor-pointer hover:bg-accent hover:text-accent-foreground w-full h-9 lg:h-10 dark:hover:text-primary'
-                    >
-                        <OAuthIconProvider type='google'/>
-                        <span className=''>Google</span>
-                    </Button>
-                </div>
+                {/*  /!** ─── SOCIAL BUTTONS ───────────────────────────────────── *!/*/}
+                {/*<div className=' '>*/}
+                {/*    <Button*/}
+                {/*        variant={'outline'}*/}
+                {/*        size={'lg'}*/}
+                {/*        onClick={signInWithGoogle}*/}
+                {/*        className='border-gray-500 border-1 flex-1 cursor-pointer hover:bg-accent hover:text-accent-foreground w-full h-9 lg:h-10 dark:hover:text-primary'*/}
+                {/*    >*/}
+                {/*        <OAuthIconProvider type='google'/>*/}
+                {/*        <span className=''>Google</span>*/}
+                {/*    </Button>*/}
+                {/*</div>*/}
               </form>
 
                 {/** ─── SIGNUP LINK ───────────────────────────────────────── */}
                 <div className="mt-4 text-center text-sm">
                     Don&apos;t have an account?{" "}
-                    <Link href={urlPath(`/register`, tenant)} className="underline">
-                        Sign up
+                    <Link href="mailto:koigorfogbawa@gmail.com" className="underline">
+                        Contact your admin to create account
                     </Link>
                 </div>
             </div>
