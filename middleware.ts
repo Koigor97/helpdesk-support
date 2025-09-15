@@ -40,12 +40,11 @@ export async function middleware(req: NextRequest) {
         // In case: No session yet, let the frontend handle the login redirect
         if (!sessionUser?.user){
             return NextResponse.next()
-
         }
 
         // In case: User logged in but tenant is mismatch
         if (!sessionUser?.user.app_metadata?.tenants.includes(tenant)){
-            return NextResponse.rewrite(new URL(`/not-found?tenant=${tenant}`, req.url));
+            return NextResponse.redirect(new URL(`/not-found?tenant=${tenant}`, req.url));
         }
 
     } else if (appPath === "/") {
