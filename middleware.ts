@@ -63,7 +63,7 @@ export async function middleware(req: NextRequest) {
 
     const cookiesToSet = response.value.cookies.getAll();
     cookiesToSet.forEach(({ name, value }) => {
-        rewrittenResponse.cookies.set(name, value, options)
+        rewrittenResponse.cookies.set(name, value)
     })
 
     return rewrittenResponse;
