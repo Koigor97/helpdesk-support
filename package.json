@@ -13,7 +13,9 @@
     "test:jest-coverage": "jest --coverage",
     "test:playwright-e2e": " exec playwright test",
     "test:playwright-e2e:headed": "exec playwright test --headed --debug",
-    "gen:types": "npx supabase gen types typescript --schema public --local > utils/supabase-db-types.ts"
+    "gen:types": "npx supabase gen types typescript --schema public --local > utils/supabase-db-types.ts",
+    "db:dump": "npx supabase db dump --local --data-only --file=supabase/seed.sql",
+    "db:migration": "npx supabase db diff --local -f my_initial_structure"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.1.1",
