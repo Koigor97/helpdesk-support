@@ -13,10 +13,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {Alert, AlertDescription, AlertTitle} from "@/components/ui/alert";
 
-import {OAuthIconProvider} from "@/components/common/oauthIcons";
 import {RiErrorWarningFill, RiEyeFill, RiEyeOffFill} from "@remixicon/react";
 import {supabaseBrowserClient} from "@/lib/supabase-clients/browserClient";
-import {notFound, useRouter} from "next/navigation";
+import {useRouter} from "next/navigation";
 import {urlPath} from "@/lib/globalHelpers";
 
 
@@ -145,15 +144,15 @@ const LoginForm = ({wantsPasswordLogin, tenant, tenantName} : LoginFormProps) =>
     }
 
     // Google OAuth signing function
-    const signInWithGoogle = async () => {
-        await supabase.auth.signInWithOAuth({
-            provider: "google",
-            options: {
-                redirectTo: window.location.origin + "/auth/verify-oauth",
-                queryParams: {access_type: "offline", prompt: "consent"}
-            }
-        });
-    }
+    // const signInWithGoogle = async () => {
+    //     await supabase.auth.signInWithOAuth({
+    //         provider: "google",
+    //         options: {
+    //             redirectTo: window.location.origin + "/auth/verify-oauth",
+    //             queryParams: {access_type: "offline", prompt: "consent"}
+    //         }
+    //     });
+    // }
 
     // @ts-ignore
     return (
