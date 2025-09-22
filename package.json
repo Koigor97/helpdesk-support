@@ -7,12 +7,15 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "ssl": "concurrently --kill-others 'npx next dev -p 3001' 'npx local-ssl-proxy --source 3000 --target 3001'",
     "test:jest": "jest",
     "test:jest-watch": "jest --watch",
     "test:jest-coverage": "jest --coverage",
     "test:playwright-e2e": " exec playwright test",
     "test:playwright-e2e:headed": "exec playwright test --headed --debug",
-    "gen:types": "npx supabase gen types typescript --schema public --local > utils/supabase-db-types.ts"
+    "gen:types": "npx supabase gen types typescript --schema public --local > utils/supabase-db-types.ts",
+    "db:dump": "npx supabase db dump --local --data-only --file=supabase/seed.sql",
+    "db:migration": "npx supabase db diff --local -f my_initial_structure"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.1.1",
@@ -34,6 +37,7 @@
     "@tailwindcss/typography": "^0.5.16",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "concurrently": "^9.2.1",
     "framer-motion": "^12.18.1",
     "input-otp": "^1.4.2",
     "lucide-react": "^0.522.0",

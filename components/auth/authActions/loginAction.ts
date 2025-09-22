@@ -6,7 +6,7 @@ import {cookiesClient} from "@/lib/supabase-clients/cookiesClient";
 import {redirect} from "next/navigation";
 import {sbAdminClient} from "@/lib/supabase-clients/adminClient";
 import {buildOtpEmailHTML} from "@/templates/buildOtpEmailHtml";
-import nodemailer from "nodemailer";
+import {sendEmail} from "@/lib/email/mailer";
 
 
 // @ts-ignore
@@ -71,6 +71,7 @@ export const loginAction = async (prevState: LoginState, formData: FormData): Pr
             const {email_otp: otp, verification_type} = linkData?.properties
 
             if (!otp) return {errors: {_form: ["OTP not generated. Please try again"]}, success: false};
+
             if (verification_type === "signup") {
                 await supabaseAdmin.auth.admin.deleteUser(linkData.user?.id)
                 // @ts-ignore
@@ -85,18 +86,13 @@ export const loginAction = async (prevState: LoginState, formData: FormData): Pr
                 logoUrl: "http://127.0.0.1/web-app-manifest-192x192.png"
             })
 
-            const transporter = nodemailer.createTransport({
-                host: "127.0.0.1",
-                port: 54325,
-                secure: false,
-            })
 
             console.log("Sending email......")
-            await transporter.sendMail({
+            await sendEmail({
                 from: "WetinHapin <no-reply@wetinhapin.local>",
                 to: validatedFields.data.email,
                 subject: "Magic Link Verification Code",
-                html: html,
+                html,
             })
 
             console.log("Email sent!")

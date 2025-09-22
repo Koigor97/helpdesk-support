@@ -310,4 +310,80 @@ body {
     justify-content: space-between;
   }
 
+  /*Glassmorphsim effect*/
+  .glass-header {
+    @apply bg-gradient-to-r from-primary/70 via-secondary/60 to-accent/50
+    dark:from-primary/50 dark:via-secondary/40 dark:to-accent/30
+    backdrop-blur-md border-b border-white/20 dark:border-white/10
+    text-muted-foreground shadow-md sticky top-0 z-50 w-full;
+  }
+
+  .glass-card {
+    @apply bg-white/30 dark:bg-white/10
+    backdrop-blur-md border border-white/20 dark:border-white/10
+    rounded-xl shadow-md text-black dark:text-white p-6;
+  }
+
+  .glass-overlay {
+    @apply absolute inset-0 bg-white/30 dark:bg-white/10 backdrop-blur-xl z-10;
+  }
+
+  .glass-container {
+    @apply relative z-20;
+  }
+
+  .glass-page-bg {
+    @apply min-h-screen bg-gradient-to-br from-accent to-primary
+    dark:from-[#0f172a] dark:via-[#1e293b] dark:to-[#0f172a]
+    bg-no-repeat bg-cover overflow-hidden flex items-center justify-center;
+  }
+
+  .glass-page-bg2 {
+    @apply min-h-screen bg-gradient-to-br from-primary to-accent
+    dark:from-[#0f172a] dark:via-[#1e293b] dark:to-[#0f172a]
+    bg-no-repeat bg-cover overflow-hidden flex items-center justify-center;
+  }
+
+  /*Linear gradient effect*/
+  .gradient-linear {
+    @apply bg-gradient-to-br from-primary via-accent to-secondary;
+  }
+
+  .gradient-linear-alt {
+    @apply bg-gradient-to-r from-secondary via-primary to-accent;
+  }
+
+  .gradient-subtle {
+    @apply bg-gradient-to-b from-primary/80 to-accent/20;
+  }
+
+/*  Radial gradient*/
+  .gradient-radial {
+    background-image: radial-gradient(
+            circle at center,
+            var(--color-primary),
+            var(--color-accent),
+            var(--color-secondary)
+    );
+  }
+
+  .gradient-radial-subtle {
+    background-image: radial-gradient(
+            circle at center,
+            var(--color-primary) 0%,
+            var(--color-primary) 30%,
+            var(--color-secondary) 100%
+    );
+  }
+
+/*  Conic gradient effect*/
+  .gradient-conic {
+    background-image: conic-gradient(
+            from 180deg at center,
+            var(--color-primary),
+            var(--color-accent),
+            var(--color-secondary),
+            var(--color-primary),
+    );
+  }
 }

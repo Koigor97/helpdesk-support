@@ -10,7 +10,7 @@ export default async function ForgotPasswordPage({ params}: ForgotPasswordPagePr
 
     return (
         <div
-            className="min-h-screen grid  justify-center
+            className=" grid  justify-center
             p-4"
         >
             <div className="w-full max-w-md flex flex-col gap-10 text-center">

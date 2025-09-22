@@ -28,11 +28,11 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${montserrat.className} font-sans antialiased h-screen`}
+        className={`${montserrat.className} font-sans antialiased h-screen glass-page-bg`}
       >
-        <main className="w-full grid min-h-screen px-3">
+        <main className="w-full grid min-h-screen md:place-content-center-safe px-3">
           <Theme>
-            <div className="mt-20 md:mt-25">
+            <div className="mt-20 md:mt-0">
               <Logo className="justify-center mb-6 mt-4 lg:mt-0" />
               {children}
             </div>

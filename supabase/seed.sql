@@ -4,8 +4,10 @@ SET session_replication_role = replica;
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 17.4
--- Dumped by pg_dump version 17.4
+\restrict TocRtwGgto5UInh3J07lIc85N5Y4dyD0i5NmVlRZdWdZtdjLKcypRl7lOC7GSEE
+
+-- Dumped from database version 17.6
+-- Dumped by pg_dump version 17.6
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -141,7 +143,54 @@ INSERT INTO "auth"."audit_log_entries" ("instance_id", "id", "payload", "created
 	('00000000-0000-0000-0000-000000000000', '144df44f-92b3-4a63-9a90-663975a1bc16', '{"action":"logout","actor_id":"f754b683-f399-4257-86f5-7a16d86c716b","actor_username":"koigor@moctisl.local","actor_via_sso":false,"log_type":"account"}', '2025-08-26 16:37:23.879202+00', ''),
 	('00000000-0000-0000-0000-000000000000', '7289a496-7ff8-41ba-bbf5-ab6be607362f', '{"action":"user_recovery_requested","actor_id":"f754b683-f399-4257-86f5-7a16d86c716b","actor_username":"koigor@moctisl.local","actor_via_sso":false,"log_type":"user"}', '2025-08-26 16:38:20.074059+00', ''),
 	('00000000-0000-0000-0000-000000000000', 'eb9587c5-f2a2-481f-a954-aecc4068c2e2', '{"action":"login","actor_id":"f754b683-f399-4257-86f5-7a16d86c716b","actor_username":"koigor@moctisl.local","actor_via_sso":false,"log_type":"account"}', '2025-08-26 16:43:36.233803+00', ''),
-	('00000000-0000-0000-0000-000000000000', 'c172e13d-16da-4fce-a0cc-98486abaca60', '{"action":"logout","actor_id":"f754b683-f399-4257-86f5-7a16d86c716b","actor_username":"koigor@moctisl.local","actor_via_sso":false,"log_type":"account"}', '2025-08-26 16:54:42.511144+00', '');
+	('00000000-0000-0000-0000-000000000000', 'c172e13d-16da-4fce-a0cc-98486abaca60', '{"action":"logout","actor_id":"f754b683-f399-4257-86f5-7a16d86c716b","actor_username":"koigor@moctisl.local","actor_via_sso":false,"log_type":"account"}', '2025-08-26 16:54:42.511144+00', ''),
+	('00000000-0000-0000-0000-000000000000', '7e23ee51-d998-41e8-8bdc-42b7d3196b45', '{"action":"user_signedup","actor_id":"00000000-0000-0000-0000-000000000000","actor_username":"service_role","actor_via_sso":false,"log_type":"team","traits":{"provider":"email","user_email":"koi@mocti.gov.local","user_id":"4a75c130-7154-451f-82f9-c9c9679c4023","user_phone":""}}', '2025-08-26 22:26:57.868395+00', ''),
+	('00000000-0000-0000-0000-000000000000', '2dc61c2b-3d8d-4141-869a-9040caf343a8', '{"action":"user_deleted","actor_id":"00000000-0000-0000-0000-000000000000","actor_username":"service_role","actor_via_sso":false,"log_type":"team","traits":{"user_email":"koi@mocti.gov.local","user_id":"4a75c130-7154-451f-82f9-c9c9679c4023","user_phone":""}}', '2025-08-26 22:30:28.449106+00', ''),
+	('00000000-0000-0000-0000-000000000000', '6e344d74-a4ad-4a63-a231-7dcd573559d1', '{"action":"login","actor_id":"f754b683-f399-4257-86f5-7a16d86c716b","actor_username":"koigor@moctisl.local","actor_via_sso":false,"log_type":"account","traits":{"provider":"email"}}', '2025-09-11 20:23:00.388991+00', ''),
+	('00000000-0000-0000-0000-000000000000', 'a96a5a92-31cf-4e86-8f7f-5270bd09d48c', '{"action":"logout","actor_id":"f754b683-f399-4257-86f5-7a16d86c716b","actor_username":"koigor@moctisl.local","actor_via_sso":false,"log_type":"account"}', '2025-09-11 20:35:37.612292+00', ''),
+	('00000000-0000-0000-0000-000000000000', '00717c06-2463-48f6-8e5e-82de5616279f', '{"action":"user_recovery_requested","actor_id":"f754b683-f399-4257-86f5-7a16d86c716b","actor_username":"koigor@moctisl.local","actor_via_sso":false,"log_type":"user"}', '2025-09-11 21:14:00.062891+00', ''),
+	('00000000-0000-0000-0000-000000000000', '02ea403c-bdbc-4fea-b8af-9c533f15602f', '{"action":"login","actor_id":"f754b683-f399-4257-86f5-7a16d86c716b","actor_username":"koigor@moctisl.local","actor_via_sso":false,"log_type":"account"}', '2025-09-11 21:15:28.900591+00', ''),
+	('00000000-0000-0000-0000-000000000000', 'a232c6ef-b457-4503-9d69-a6bfa5525c31', '{"action":"logout","actor_id":"f754b683-f399-4257-86f5-7a16d86c716b","actor_username":"koigor@moctisl.local","actor_via_sso":false,"log_type":"account"}', '2025-09-11 21:31:36.663749+00', ''),
+	('00000000-0000-0000-0000-000000000000', '1ff8a028-de38-4e9e-927f-1d1b2be561c0', '{"action":"login","actor_id":"f754b683-f399-4257-86f5-7a16d86c716b","actor_username":"koigor@moctisl.local","actor_via_sso":false,"log_type":"account","traits":{"provider":"email"}}', '2025-09-12 16:04:03.583177+00', ''),
+	('00000000-0000-0000-0000-000000000000', 'e2868974-b805-4040-a47e-19d4f2876b2e', '{"action":"logout","actor_id":"f754b683-f399-4257-86f5-7a16d86c716b","actor_username":"koigor@moctisl.local","actor_via_sso":false,"log_type":"account"}', '2025-09-12 16:10:27.39985+00', ''),
+	('00000000-0000-0000-0000-000000000000', '9af4acbd-1d17-47d5-ae91-f8a167451513', '{"action":"login","actor_id":"f754b683-f399-4257-86f5-7a16d86c716b","actor_username":"koigor@moctisl.local","actor_via_sso":false,"log_type":"account","traits":{"provider":"email"}}', '2025-09-12 16:10:34.716912+00', ''),
+	('00000000-0000-0000-0000-000000000000', '3b188989-00a9-4791-ad27-30daa9c2a78f', '{"action":"logout","actor_id":"f754b683-f399-4257-86f5-7a16d86c716b","actor_username":"koigor@moctisl.local","actor_via_sso":false,"log_type":"account"}', '2025-09-12 16:11:04.217561+00', ''),
+	('00000000-0000-0000-0000-000000000000', '770ef7d2-e4f9-49c0-8fc5-826c2046a910', '{"action":"user_recovery_requested","actor_id":"173e7d79-5989-4a5d-8585-81991bd9a286","actor_username":"david@moctisl.local","actor_via_sso":false,"log_type":"user"}', '2025-09-12 17:46:50.991922+00', ''),
+	('00000000-0000-0000-0000-000000000000', '65772fec-e680-4d51-9ffc-2380052e606f', '{"action":"user_recovery_requested","actor_id":"173e7d79-5989-4a5d-8585-81991bd9a286","actor_username":"david@moctisl.local","actor_via_sso":false,"log_type":"user"}', '2025-09-12 17:49:15.798588+00', ''),
+	('00000000-0000-0000-0000-000000000000', '3e3656e0-705b-4c80-a9a3-de6055333205', '{"action":"user_recovery_requested","actor_id":"f754b683-f399-4257-86f5-7a16d86c716b","actor_username":"koigor@moctisl.local","actor_via_sso":false,"log_type":"user"}', '2025-09-12 17:51:46.586157+00', ''),
+	('00000000-0000-0000-0000-000000000000', '9e9906b2-4ae8-4733-8e29-563fe1dd35b2', '{"action":"login","actor_id":"f754b683-f399-4257-86f5-7a16d86c716b","actor_username":"koigor@moctisl.local","actor_via_sso":false,"log_type":"account"}', '2025-09-12 17:52:39.222698+00', ''),
+	('00000000-0000-0000-0000-000000000000', '409a49a5-4648-42e3-9e37-232fc3d1c724', '{"action":"logout","actor_id":"f754b683-f399-4257-86f5-7a16d86c716b","actor_username":"koigor@moctisl.local","actor_via_sso":false,"log_type":"account"}', '2025-09-12 18:07:36.104456+00', ''),
+	('00000000-0000-0000-0000-000000000000', '45338098-da9c-485e-a3d1-fb08eda65c4c', '{"action":"user_recovery_requested","actor_id":"f754b683-f399-4257-86f5-7a16d86c716b","actor_username":"koigor@moctisl.local","actor_via_sso":false,"log_type":"user"}', '2025-09-12 18:17:29.624239+00', ''),
+	('00000000-0000-0000-0000-000000000000', '2eaf79f1-4014-4b4a-a8f2-405f816a0e3f', '{"action":"login","actor_id":"f754b683-f399-4257-86f5-7a16d86c716b","actor_username":"koigor@moctisl.local","actor_via_sso":false,"log_type":"account"}', '2025-09-12 18:18:06.815755+00', ''),
+	('00000000-0000-0000-0000-000000000000', '520b34a2-0685-47cf-babe-df4fe41e9128', '{"action":"logout","actor_id":"f754b683-f399-4257-86f5-7a16d86c716b","actor_username":"koigor@moctisl.local","actor_via_sso":false,"log_type":"account"}', '2025-09-12 19:05:13.879738+00', ''),
+	('00000000-0000-0000-0000-000000000000', '01b1b3a4-689e-4683-8c94-cfb4165bdea9', '{"action":"user_recovery_requested","actor_id":"f754b683-f399-4257-86f5-7a16d86c716b","actor_username":"koigor@moctisl.local","actor_via_sso":false,"log_type":"user"}', '2025-09-12 19:08:49.419737+00', ''),
+	('00000000-0000-0000-0000-000000000000', '8ead1d49-2f29-4036-bad0-591afd03009d', '{"action":"login","actor_id":"f754b683-f399-4257-86f5-7a16d86c716b","actor_username":"koigor@moctisl.local","actor_via_sso":false,"log_type":"account"}', '2025-09-12 19:09:22.916957+00', ''),
+	('00000000-0000-0000-0000-000000000000', '8b697a1c-09ce-4b04-a133-ac68802c88b8', '{"action":"logout","actor_id":"f754b683-f399-4257-86f5-7a16d86c716b","actor_username":"koigor@moctisl.local","actor_via_sso":false,"log_type":"account"}', '2025-09-12 19:10:20.469647+00', ''),
+	('00000000-0000-0000-0000-000000000000', '4831dfe1-fb02-4300-bf1b-9f27b28cd315', '{"action":"login","actor_id":"f754b683-f399-4257-86f5-7a16d86c716b","actor_username":"koigor@moctisl.local","actor_via_sso":false,"log_type":"account","traits":{"provider":"email"}}', '2025-09-12 19:10:30.996473+00', ''),
+	('00000000-0000-0000-0000-000000000000', '8ef6bbfb-cc90-439c-992a-e6561b11e247', '{"action":"logout","actor_id":"f754b683-f399-4257-86f5-7a16d86c716b","actor_username":"koigor@moctisl.local","actor_via_sso":false,"log_type":"account"}', '2025-09-12 19:10:52.978118+00', ''),
+	('00000000-0000-0000-0000-000000000000', '30173d21-8241-4888-bdde-64f467f86b33', '{"action":"login","actor_id":"f754b683-f399-4257-86f5-7a16d86c716b","actor_username":"koigor@moctisl.local","actor_via_sso":false,"log_type":"account","traits":{"provider":"email"}}', '2025-09-15 08:45:06.098424+00', ''),
+	('00000000-0000-0000-0000-000000000000', '8eeeedf9-bdad-4ae2-8009-718461afde3e', '{"action":"logout","actor_id":"f754b683-f399-4257-86f5-7a16d86c716b","actor_username":"koigor@moctisl.local","actor_via_sso":false,"log_type":"account"}', '2025-09-15 08:54:00.15464+00', ''),
+	('00000000-0000-0000-0000-000000000000', '0520a7eb-3c6b-41ce-b8dd-085ade3c4137', '{"action":"login","actor_id":"f754b683-f399-4257-86f5-7a16d86c716b","actor_username":"koigor@moctisl.local","actor_via_sso":false,"log_type":"account","traits":{"provider":"email"}}', '2025-09-15 08:56:08.700708+00', ''),
+	('00000000-0000-0000-0000-000000000000', '41a19100-cfa1-4ea7-ac86-c7d90b67cd95', '{"action":"token_refreshed","actor_id":"f754b683-f399-4257-86f5-7a16d86c716b","actor_username":"koigor@moctisl.local","actor_via_sso":false,"log_type":"token"}', '2025-09-15 10:25:06.331359+00', ''),
+	('00000000-0000-0000-0000-000000000000', '06d40615-e2c7-4891-81d0-31ce331851b1', '{"action":"token_revoked","actor_id":"f754b683-f399-4257-86f5-7a16d86c716b","actor_username":"koigor@moctisl.local","actor_via_sso":false,"log_type":"token"}', '2025-09-15 10:25:06.333092+00', ''),
+	('00000000-0000-0000-0000-000000000000', '4da0e44b-3551-4f19-8085-9ac9153b4efd', '{"action":"logout","actor_id":"f754b683-f399-4257-86f5-7a16d86c716b","actor_username":"koigor@moctisl.local","actor_via_sso":false,"log_type":"account"}', '2025-09-15 10:25:13.690033+00', ''),
+	('00000000-0000-0000-0000-000000000000', '1824215b-8266-4c28-be60-164e53f29d5c', '{"action":"login","actor_id":"f754b683-f399-4257-86f5-7a16d86c716b","actor_username":"koigor@moctisl.local","actor_via_sso":false,"log_type":"account","traits":{"provider":"email"}}', '2025-09-15 18:51:09.923393+00', ''),
+	('00000000-0000-0000-0000-000000000000', '23119e21-a479-4a14-ad71-f169e453faac', '{"action":"token_refreshed","actor_id":"f754b683-f399-4257-86f5-7a16d86c716b","actor_username":"koigor@moctisl.local","actor_via_sso":false,"log_type":"token"}', '2025-09-16 02:46:49.540396+00', ''),
+	('00000000-0000-0000-0000-000000000000', '90e1d39a-1612-47ab-b9d1-4a23f5877da1', '{"action":"token_revoked","actor_id":"f754b683-f399-4257-86f5-7a16d86c716b","actor_username":"koigor@moctisl.local","actor_via_sso":false,"log_type":"token"}', '2025-09-16 02:46:49.543027+00', ''),
+	('00000000-0000-0000-0000-000000000000', 'b8ed1acd-8a74-4137-a7df-46bba14765f5', '{"action":"token_refreshed","actor_id":"f754b683-f399-4257-86f5-7a16d86c716b","actor_username":"koigor@moctisl.local","actor_via_sso":false,"log_type":"token"}', '2025-09-16 03:44:50.496493+00', ''),
+	('00000000-0000-0000-0000-000000000000', '974da4cd-2059-479c-9f9a-ffdfb3a0fa0a', '{"action":"token_revoked","actor_id":"f754b683-f399-4257-86f5-7a16d86c716b","actor_username":"koigor@moctisl.local","actor_via_sso":false,"log_type":"token"}', '2025-09-16 03:44:50.497948+00', ''),
+	('00000000-0000-0000-0000-000000000000', 'd790a114-8907-4111-947d-8632b4dbdd24', '{"action":"token_refreshed","actor_id":"f754b683-f399-4257-86f5-7a16d86c716b","actor_username":"koigor@moctisl.local","actor_via_sso":false,"log_type":"token"}', '2025-09-16 23:15:01.157511+00', ''),
+	('00000000-0000-0000-0000-000000000000', 'bf7204ea-c270-473c-a56e-ff9fb3a30603', '{"action":"token_revoked","actor_id":"f754b683-f399-4257-86f5-7a16d86c716b","actor_username":"koigor@moctisl.local","actor_via_sso":false,"log_type":"token"}', '2025-09-16 23:15:01.159972+00', ''),
+	('00000000-0000-0000-0000-000000000000', 'a520c198-b92f-49c2-b443-fa1a66039aa5', '{"action":"token_refreshed","actor_id":"f754b683-f399-4257-86f5-7a16d86c716b","actor_username":"koigor@moctisl.local","actor_via_sso":false,"log_type":"token"}', '2025-09-16 23:15:01.252679+00', ''),
+	('00000000-0000-0000-0000-000000000000', '988ede7d-cb36-4eb3-9f4a-47e59f3bab68', '{"action":"token_refreshed","actor_id":"f754b683-f399-4257-86f5-7a16d86c716b","actor_username":"koigor@moctisl.local","actor_via_sso":false,"log_type":"token"}', '2025-09-16 23:15:03.206137+00', ''),
+	('00000000-0000-0000-0000-000000000000', '00ab8255-bd2b-4ee0-bca2-7c3e95a66391', '{"action":"token_refreshed","actor_id":"f754b683-f399-4257-86f5-7a16d86c716b","actor_username":"koigor@moctisl.local","actor_via_sso":false,"log_type":"token"}', '2025-09-17 02:04:02.587144+00', ''),
+	('00000000-0000-0000-0000-000000000000', '484d59fb-f611-44b0-b264-faeddd5c8962', '{"action":"token_revoked","actor_id":"f754b683-f399-4257-86f5-7a16d86c716b","actor_username":"koigor@moctisl.local","actor_via_sso":false,"log_type":"token"}', '2025-09-17 02:04:02.58963+00', ''),
+	('00000000-0000-0000-0000-000000000000', 'a0a13091-6f07-469d-889f-5dbe2a8b1ded', '{"action":"logout","actor_id":"f754b683-f399-4257-86f5-7a16d86c716b","actor_username":"koigor@moctisl.local","actor_via_sso":false,"log_type":"account"}', '2025-09-17 02:04:05.786181+00', ''),
+	('00000000-0000-0000-0000-000000000000', '929aacee-da8f-45c7-a98c-6906e206e093', '{"action":"user_signedup","actor_id":"00000000-0000-0000-0000-000000000000","actor_username":"service_role","actor_via_sso":false,"log_type":"team","traits":{"provider":"email","user_email":"abigailm@dsti.gov.local","user_id":"89b5af53-2233-48da-8f03-fd72bd15774d","user_phone":""}}', '2025-09-17 02:19:34.201607+00', ''),
+	('00000000-0000-0000-0000-000000000000', 'ee3df7c6-715b-4d25-ae5e-5dc7ad55b5da', '{"action":"user_signedup","actor_id":"00000000-0000-0000-0000-000000000000","actor_username":"service_role","actor_via_sso":false,"log_type":"team","traits":{"provider":"email","user_email":"samuelk@dsti.gov.local","user_id":"0691cb88-66e5-4f75-b87c-7b8cc4d811ae","user_phone":""}}', '2025-09-17 02:26:26.646067+00', ''),
+	('00000000-0000-0000-0000-000000000000', '910f4538-5c3a-4365-9b38-a52ff0e46726', '{"action":"user_signedup","actor_id":"00000000-0000-0000-0000-000000000000","actor_username":"service_role","actor_via_sso":false,"log_type":"team","traits":{"provider":"email","user_email":"ibrahimb@dsti.gov.local","user_id":"08ecea4e-56b8-43ae-a19f-16b63663047f","user_phone":""}}', '2025-09-17 02:28:06.864045+00', ''),
+	('00000000-0000-0000-0000-000000000000', '0e1ade1f-7661-452e-8887-df0bc324378b', '{"action":"user_signedup","actor_id":"00000000-0000-0000-0000-000000000000","actor_username":"service_role","actor_via_sso":false,"log_type":"team","traits":{"provider":"email","user_email":"hajak@dsti.gov.local","user_id":"1a936e74-4919-4fbc-b01f-8f417fc12d16","user_phone":""}}', '2025-09-17 02:28:40.398073+00', ''),
+	('00000000-0000-0000-0000-000000000000', '7f08b182-e4a2-4bcd-a688-a483c238d71e', '{"action":"user_signedup","actor_id":"00000000-0000-0000-0000-000000000000","actor_username":"service_role","actor_via_sso":false,"log_type":"team","traits":{"provider":"email","user_email":"danielb@dsti.gov.local","user_id":"2424ebde-09a7-469b-8531-9bda47222f7c","user_phone":""}}', '2025-09-17 02:30:21.572635+00', '');
 
 
 --
@@ -155,7 +204,9 @@ INSERT INTO "auth"."flow_state" ("id", "user_id", "auth_code", "code_challenge_m
 	('92072304-7b16-4fea-8e4f-bf0842eda292', 'f754b683-f399-4257-86f5-7a16d86c716b', '47495675-13d2-497a-9471-dbb073ab2b37', 's256', '17LPeCzoiunjWFq3p1MUU2cula7rc9-wyJ30Lw7ngvw', 'magiclink', '', '', '2025-08-15 09:22:31.090365+00', '2025-08-15 09:22:31.090365+00', 'magiclink', NULL),
 	('b7ccf8ca-7a6f-4008-843b-5a77486f9d9b', '173e7d79-5989-4a5d-8585-81991bd9a286', '53b4c0b7-9ee5-46d2-ab20-e8f634346574', 's256', 'ost6PkabqHiaqyrVWW_oVrFVquzmtwg3HM1VTk9xaJM', 'magiclink', '', '', '2025-08-15 09:23:18.887936+00', '2025-08-15 09:23:18.887936+00', 'magiclink', NULL),
 	('538cd65e-b9e5-40f6-b388-66fe525511d6', '173e7d79-5989-4a5d-8585-81991bd9a286', 'ea303289-eab6-499e-aa1d-6257e69dd3db', 's256', 'zupC-v7uIcEvHaUybKHF8UhkkU_Kytg_cYD6ZAIWqCo', 'magiclink', '', '', '2025-08-15 09:27:05.466758+00', '2025-08-15 09:27:05.466758+00', 'magiclink', NULL),
-	('ed263e52-23e1-49f7-9126-46ec4cf7111a', '173e7d79-5989-4a5d-8585-81991bd9a286', '5a56b738-0359-4723-9ded-d294dc38afb6', 's256', 'zHAW83_ymVmGpk9q7hsjO3oGfrj2-KNDxRGkB7UT0Go', 'magiclink', '', '', '2025-08-15 15:14:42.264631+00', '2025-08-15 15:14:42.264631+00', 'magiclink', NULL);
+	('ed263e52-23e1-49f7-9126-46ec4cf7111a', '173e7d79-5989-4a5d-8585-81991bd9a286', '5a56b738-0359-4723-9ded-d294dc38afb6', 's256', 'zHAW83_ymVmGpk9q7hsjO3oGfrj2-KNDxRGkB7UT0Go', 'magiclink', '', '', '2025-08-15 15:14:42.264631+00', '2025-08-15 15:14:42.264631+00', 'magiclink', NULL),
+	('cff9486c-1bc4-4da0-9039-6fa5c73ca3a4', NULL, '6d6f41f8-b0ed-4acb-8cf6-885c4b74afd0', 'plain', '8fe1f29a055deb9cf068ecca950a6c713fc30e4e3449403ecc3ee9cd77bfb746cca53485f1c952bbf736484a269073d44a8e9f9254d5d8ef', 'google', '', '', '2025-09-15 10:38:24.659261+00', '2025-09-15 10:38:24.659261+00', 'oauth', NULL),
+	('01ada6bd-00cb-44b9-9a0f-42f003a1896d', NULL, '5a347ea1-619f-4103-a91e-fd731403ea2c', 's256', 'MP6IR6VtG7IqtfXEnWAP8kuAzpLuB7P4oHLTnhpBRpg', 'google', '', '', '2025-09-15 10:52:48.664794+00', '2025-09-15 10:52:48.664794+00', 'oauth', NULL);
 
 
 --
@@ -164,8 +215,13 @@ INSERT INTO "auth"."flow_state" ("id", "user_id", "auth_code", "code_challenge_m
 
 INSERT INTO "auth"."users" ("instance_id", "id", "aud", "role", "email", "encrypted_password", "email_confirmed_at", "invited_at", "confirmation_token", "confirmation_sent_at", "recovery_token", "recovery_sent_at", "email_change_token_new", "email_change", "email_change_sent_at", "last_sign_in_at", "raw_app_meta_data", "raw_user_meta_data", "is_super_admin", "created_at", "updated_at", "phone", "phone_confirmed_at", "phone_change", "phone_change_token", "phone_change_sent_at", "email_change_token_current", "email_change_confirm_status", "banned_until", "reauthentication_token", "reauthentication_sent_at", "is_sso_user", "deleted_at", "is_anonymous") VALUES
 	('00000000-0000-0000-0000-000000000000', 'cbedba49-04b1-4a5c-aac8-540b51831c66', 'authenticated', 'authenticated', 'peter@vontech.local', '$2a$10$Qpg2yuc0Gl6rgYQv4HqFlugjzpQpbQ5x/MTWBkYF5hki/FpeX5Smy', '2025-08-14 08:47:31.243907+00', NULL, '', NULL, '', NULL, '', '', NULL, NULL, '{"provider": "email", "providers": ["email"]}', '{"email_verified": true}', NULL, '2025-08-14 08:47:31.238876+00', '2025-08-14 08:47:31.244366+00', NULL, NULL, '', '', NULL, '', 0, NULL, '', NULL, false, NULL, false),
-	('00000000-0000-0000-0000-000000000000', '173e7d79-5989-4a5d-8585-81991bd9a286', 'authenticated', 'authenticated', 'david@moctisl.local', '$2a$10$t9BkzK.hx2IVw.izVGnZdOK7vjSvgdPoDIgiPq86xaEZIGZdIfE2q', '2025-08-14 08:45:21.911582+00', NULL, '', NULL, '', NULL, '', '', NULL, '2025-08-25 10:59:52.850544+00', '{"provider": "email", "providers": ["email"]}', '{"email_verified": true}', NULL, '2025-08-14 08:45:21.907917+00', '2025-08-26 00:49:23.638221+00', NULL, NULL, '', '', NULL, '', 0, NULL, '', NULL, false, NULL, false),
-	('00000000-0000-0000-0000-000000000000', 'f754b683-f399-4257-86f5-7a16d86c716b', 'authenticated', 'authenticated', 'koigor@moctisl.local', '$2a$10$.J6XQAs8ET3Jn9klag1sn.dj5t/g0lvHzvym.JF22apSPR4ln4Qk2', '2025-08-14 08:44:20.53461+00', NULL, '', NULL, '', '2025-08-26 16:38:20.070607+00', '', '', NULL, '2025-08-26 16:43:36.23801+00', '{"tenants": ["dsti", "mocti"], "provider": "email", "providers": ["email"]}', '{"email_verified": true}', NULL, '2025-08-14 08:44:20.529435+00', '2025-08-26 16:43:36.25019+00', NULL, NULL, '', '', NULL, '', 0, NULL, '', NULL, false, NULL, false);
+	('00000000-0000-0000-0000-000000000000', '173e7d79-5989-4a5d-8585-81991bd9a286', 'authenticated', 'authenticated', 'david@moctisl.local', '$2a$10$t9BkzK.hx2IVw.izVGnZdOK7vjSvgdPoDIgiPq86xaEZIGZdIfE2q', '2025-08-14 08:45:21.911582+00', NULL, '', NULL, 'b599cbe91969320e1d0e6217f43348663700693e5e067e8b7c7fb29f', '2025-09-12 17:49:15.798017+00', '', '', NULL, '2025-08-25 10:59:52.850544+00', '{"provider": "email", "providers": ["email"]}', '{"email_verified": true}', NULL, '2025-08-14 08:45:21.907917+00', '2025-09-12 17:49:15.799764+00', NULL, NULL, '', '', NULL, '', 0, NULL, '', NULL, false, NULL, false),
+	('00000000-0000-0000-0000-000000000000', '1a936e74-4919-4fbc-b01f-8f417fc12d16', 'authenticated', 'authenticated', 'hajak@dsti.gov.local', '$2a$10$5wwNAfNpa.dL0VvYSm6TMe4jx4fGr92GLW4WmVQsfo70n5wM72X.e', '2025-09-17 02:28:40.398913+00', NULL, '', NULL, '', NULL, '', '', NULL, NULL, '{"provider": "email", "providers": ["email"]}', '{"email_verified": true}', NULL, '2025-09-17 02:28:40.394066+00', '2025-09-17 02:28:40.3993+00', NULL, NULL, '', '', NULL, '', 0, NULL, '', NULL, false, NULL, false),
+	('00000000-0000-0000-0000-000000000000', 'f754b683-f399-4257-86f5-7a16d86c716b', 'authenticated', 'authenticated', 'koigor@moctisl.local', '$2a$10$.J6XQAs8ET3Jn9klag1sn.dj5t/g0lvHzvym.JF22apSPR4ln4Qk2', '2025-08-14 08:44:20.53461+00', NULL, '', NULL, '', '2025-09-12 19:08:49.419381+00', '', '', NULL, '2025-09-15 18:51:09.931135+00', '{"tenants": ["dsti", "mocti"], "provider": "email", "providers": ["email"]}', '{"email_verified": true}', NULL, '2025-08-14 08:44:20.529435+00', '2025-09-17 02:04:02.593679+00', NULL, NULL, '', '', NULL, '', 0, NULL, '', NULL, false, NULL, false),
+	('00000000-0000-0000-0000-000000000000', '2424ebde-09a7-469b-8531-9bda47222f7c', 'authenticated', 'authenticated', 'danielb@dsti.gov.local', '$2a$10$Dzc3ErGpUYeBj7C7YyeBO.sq89H1QK7ePxtlF3IqKq2MJL6mlCCoW', '2025-09-17 02:30:21.573444+00', NULL, '', NULL, '', NULL, '', '', NULL, NULL, '{"provider": "email", "providers": ["email"]}', '{"email_verified": true}', NULL, '2025-09-17 02:30:21.570474+00', '2025-09-17 02:30:21.573882+00', NULL, NULL, '', '', NULL, '', 0, NULL, '', NULL, false, NULL, false),
+	('00000000-0000-0000-0000-000000000000', '89b5af53-2233-48da-8f03-fd72bd15774d', 'authenticated', 'authenticated', 'abigailm@dsti.gov.local', '$2a$10$2PWCryqcfyX7CwX4.rkG1uHkZDGJ5pkfOEYJfFkUVl.jSq1klQvOu', '2025-09-17 02:19:34.202705+00', NULL, '', NULL, '', NULL, '', '', NULL, NULL, '{"provider": "email", "providers": ["email"]}', '{"email_verified": true}', NULL, '2025-09-17 02:19:34.196274+00', '2025-09-17 02:19:34.203119+00', NULL, NULL, '', '', NULL, '', 0, NULL, '', NULL, false, NULL, false),
+	('00000000-0000-0000-0000-000000000000', '0691cb88-66e5-4f75-b87c-7b8cc4d811ae', 'authenticated', 'authenticated', 'samuelk@dsti.gov.local', '$2a$10$qXtP5wpB3ETGpmv8pj8Xw.nxwjglReOF9oY5pmgsRbRMdSW.PclaK', '2025-09-17 02:26:26.647686+00', NULL, '', NULL, '', NULL, '', '', NULL, NULL, '{"provider": "email", "providers": ["email"]}', '{"email_verified": true}', NULL, '2025-09-17 02:26:26.643947+00', '2025-09-17 02:26:26.648057+00', NULL, NULL, '', '', NULL, '', 0, NULL, '', NULL, false, NULL, false),
+	('00000000-0000-0000-0000-000000000000', '08ecea4e-56b8-43ae-a19f-16b63663047f', 'authenticated', 'authenticated', 'ibrahimb@dsti.gov.local', '$2a$10$l9.IwSFbf8bB.lVoex4Th.hLByx8yyc7aSnIOcO46qkzYrEVNx3V.', '2025-09-17 02:28:06.865206+00', NULL, '', NULL, '', NULL, '', '', NULL, NULL, '{"provider": "email", "providers": ["email"]}', '{"email_verified": true}', NULL, '2025-09-17 02:28:06.862192+00', '2025-09-17 02:28:06.866368+00', NULL, NULL, '', '', NULL, '', 0, NULL, '', NULL, false, NULL, false);
 
 
 --
@@ -175,7 +231,12 @@ INSERT INTO "auth"."users" ("instance_id", "id", "aud", "role", "email", "encryp
 INSERT INTO "auth"."identities" ("provider_id", "user_id", "identity_data", "provider", "last_sign_in_at", "created_at", "updated_at", "id") VALUES
 	('f754b683-f399-4257-86f5-7a16d86c716b', 'f754b683-f399-4257-86f5-7a16d86c716b', '{"sub": "f754b683-f399-4257-86f5-7a16d86c716b", "email": "koigor@moctisl.local", "email_verified": false, "phone_verified": false}', 'email', '2025-08-14 08:44:20.532473+00', '2025-08-14 08:44:20.532496+00', '2025-08-14 08:44:20.532496+00', 'dec92c07-ceef-442a-afe0-b3dd1787ffbf'),
 	('173e7d79-5989-4a5d-8585-81991bd9a286', '173e7d79-5989-4a5d-8585-81991bd9a286', '{"sub": "173e7d79-5989-4a5d-8585-81991bd9a286", "email": "david@moctisl.local", "email_verified": false, "phone_verified": false}', 'email', '2025-08-14 08:45:21.909014+00', '2025-08-14 08:45:21.909045+00', '2025-08-14 08:45:21.909045+00', '4b797ff2-0cbe-4b29-819a-243e3716fbbd'),
-	('cbedba49-04b1-4a5c-aac8-540b51831c66', 'cbedba49-04b1-4a5c-aac8-540b51831c66', '{"sub": "cbedba49-04b1-4a5c-aac8-540b51831c66", "email": "peter@vontech.local", "email_verified": false, "phone_verified": false}', 'email', '2025-08-14 08:47:31.242454+00', '2025-08-14 08:47:31.242482+00', '2025-08-14 08:47:31.242482+00', '12a03afc-1dd7-4f55-b86d-f26edf6705ed');
+	('cbedba49-04b1-4a5c-aac8-540b51831c66', 'cbedba49-04b1-4a5c-aac8-540b51831c66', '{"sub": "cbedba49-04b1-4a5c-aac8-540b51831c66", "email": "peter@vontech.local", "email_verified": false, "phone_verified": false}', 'email', '2025-08-14 08:47:31.242454+00', '2025-08-14 08:47:31.242482+00', '2025-08-14 08:47:31.242482+00', '12a03afc-1dd7-4f55-b86d-f26edf6705ed'),
+	('89b5af53-2233-48da-8f03-fd72bd15774d', '89b5af53-2233-48da-8f03-fd72bd15774d', '{"sub": "89b5af53-2233-48da-8f03-fd72bd15774d", "email": "abigailm@dsti.gov.local", "email_verified": false, "phone_verified": false}', 'email', '2025-09-17 02:19:34.200688+00', '2025-09-17 02:19:34.200711+00', '2025-09-17 02:19:34.200711+00', '35fd0394-5daa-47d2-89e9-0c3b549f6b7f'),
+	('0691cb88-66e5-4f75-b87c-7b8cc4d811ae', '0691cb88-66e5-4f75-b87c-7b8cc4d811ae', '{"sub": "0691cb88-66e5-4f75-b87c-7b8cc4d811ae", "email": "samuelk@dsti.gov.local", "email_verified": false, "phone_verified": false}', 'email', '2025-09-17 02:26:26.645389+00', '2025-09-17 02:26:26.645415+00', '2025-09-17 02:26:26.645415+00', '20f34d15-4dbd-4c0c-9ff9-a68e3828b951'),
+	('08ecea4e-56b8-43ae-a19f-16b63663047f', '08ecea4e-56b8-43ae-a19f-16b63663047f', '{"sub": "08ecea4e-56b8-43ae-a19f-16b63663047f", "email": "ibrahimb@dsti.gov.local", "email_verified": false, "phone_verified": false}', 'email', '2025-09-17 02:28:06.863315+00', '2025-09-17 02:28:06.863335+00', '2025-09-17 02:28:06.863335+00', '0f172e41-75bf-4a3f-9355-d2cf682dffc6'),
+	('1a936e74-4919-4fbc-b01f-8f417fc12d16', '1a936e74-4919-4fbc-b01f-8f417fc12d16', '{"sub": "1a936e74-4919-4fbc-b01f-8f417fc12d16", "email": "hajak@dsti.gov.local", "email_verified": false, "phone_verified": false}', 'email', '2025-09-17 02:28:40.39699+00', '2025-09-17 02:28:40.397031+00', '2025-09-17 02:28:40.397031+00', '474308cb-785d-4158-9bb3-e4dc15abcb54'),
+	('2424ebde-09a7-469b-8531-9bda47222f7c', '2424ebde-09a7-469b-8531-9bda47222f7c', '{"sub": "2424ebde-09a7-469b-8531-9bda47222f7c", "email": "danielb@dsti.gov.local", "email_verified": false, "phone_verified": false}', 'email', '2025-09-17 02:30:21.571669+00', '2025-09-17 02:30:21.571691+00', '2025-09-17 02:30:21.571691+00', '8e2d20c8-f6f9-4759-b9ad-b5beb6995c2a');
 
 
 --
@@ -209,9 +270,17 @@ INSERT INTO "auth"."identities" ("provider_id", "user_id", "identity_data", "pro
 
 
 --
+-- Data for Name: oauth_clients; Type: TABLE DATA; Schema: auth; Owner: supabase_auth_admin
+--
+
+
+
+--
 -- Data for Name: one_time_tokens; Type: TABLE DATA; Schema: auth; Owner: supabase_auth_admin
 --
 
+INSERT INTO "auth"."one_time_tokens" ("id", "user_id", "token_type", "token_hash", "relates_to", "created_at", "updated_at") VALUES
+	('5edaf6ff-2633-4893-ac3d-33a17cc73ad6', '173e7d79-5989-4a5d-8585-81991bd9a286', 'recovery_token', 'b599cbe91969320e1d0e6217f43348663700693e5e067e8b7c7fb29f', 'david@moctisl.local', '2025-09-12 17:49:15.801003', '2025-09-12 17:49:15.801003');
 
 
 --
@@ -248,31 +317,54 @@ INSERT INTO "auth"."identities" ("provider_id", "user_id", "identity_data", "pro
 -- Data for Name: tenants; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO "public"."tenants" ("id", "created_at", "name", "domain") VALUES
-	('vontech', '2025-08-19 10:21:16.658782+00', 'Vontech AWS', 'vontech.io'),
-	('dsti', '2025-08-19 10:20:11.23436+00', 'DIrectorate of Science, Technology and Innovation', 'dsti.gov.local'),
-	('mocti', '2025-08-19 10:22:00.008391+00', 'Ministry of Communication, Technology and Innovation', 'mocti.gov.local');
+INSERT INTO "public"."tenants" ("id", "created_at", "name", "domain", "logo", "website", "industry", "num_of_employees") VALUES
+	('dsti', '2025-08-19 10:20:11.23436+00', 'DIrectorate of Science, Technology and Innovation', 'dsti.gov.local', NULL, 'https://www.dsti.gov.sl/', 'Technology', 6),
+	('mocti', '2025-08-19 10:22:00.008391+00', 'Ministry of Communication, Technology and Innovation', 'mocti.gov.local', NULL, 'https://mocti.gov.sl/', 'Technology', 6),
+	('vontech', '2025-08-19 10:21:16.658782+00', 'Vontech AWS', 'vontech.io', NULL, 'https://vontechgroup.com/', 'Technology, Consulting', 6);
+
+
+--
+-- Data for Name: sla_policies; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
 
 
 --
 -- Data for Name: user_profiles; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO "public"."user_profiles" ("id", "created_at", "full_name", "supabase_user") VALUES
-	(1, '2025-08-19 10:36:53.427093+00', 'David Conteh', '173e7d79-5989-4a5d-8585-81991bd9a286'),
-	(2, '2025-08-19 10:37:15.880781+00', 'Koigor Fogbawa', 'f754b683-f399-4257-86f5-7a16d86c716b'),
-	(3, '2025-08-19 10:45:45.158888+00', 'Peter Ebuka', 'cbedba49-04b1-4a5c-aac8-540b51831c66');
+INSERT INTO "public"."user_profiles" ("id", "created_at", "full_name", "supabase_user", "avatar", "bio", "socials", "phone", "job_title", "is_online", "dob") VALUES
+	(1, '2025-08-19 10:36:53.427093+00', 'David Conteh', '173e7d79-5989-4a5d-8585-81991bd9a286', NULL, 'Passionate about building scalable backend systems and clean frontend interfaces. With a strong foundation in TypeScript and PostgreSQL, I thrive on solving real-world problems with elegant code. When I’m not coding, I’m mentoring junior devs or exploring system design patterns.', NULL, '+232-75-982000', 'Software Engineer', true, '2000-06-23'),
+	(2, '2025-08-19 10:37:15.880781+00', 'Koigor Fogbawa', 'f754b683-f399-4257-86f5-7a16d86c716b', NULL, 'Versatile developer with a deep love for solving critical issues and optimizing existing codebases. Tier 3 means I live at the edge of bugs and breakthroughs. Always learning, always shipping. Lover of functional design, efficient algorithms, and African-built software.', NULL, '+232-77-625133', 'Software Developer tier 3', true, '1997-01-25'),
+	(3, '2025-08-19 10:45:45.158888+00', 'Peter Ebuka', 'cbedba49-04b1-4a5c-aac8-540b51831c66', NULL, 'Cloud-native enthusiast with a strong focus on distributed systems, microservices, and serverless infrastructure. I design resilient systems on AWS that scale and perform. Advocate for DevOps culture, IaC, and clean architecture. Let’s build smarter, not harder.', NULL, '+234-89-344-5678', 'AWS Solution Architect', true, '1995-07-20'),
+	(4, '2025-09-17 02:25:07.155273+00', 'Abigail Mansaray', '89b5af53-2233-48da-8f03-fd72bd15774d', NULL, 'Crafting intuitive user interfaces that feel as good as they look. Lover of Tailwind, Shadcn, and pixel-perfect designs.', '{"github": "https://github.com/abigail-ui", "twitter": "https://twitter.com/abigail_ui"}', '+232-75-112233', 'Frontend Developer', true, '1997-04-12'),
+	(5, '2025-09-17 02:32:52.016512+00', 'Samuel Kallon', '0691cb88-66e5-4f75-b87c-7b8cc4d811ae', NULL, 'Pipelines, uptime, and infrastructure as code. I automate what others fear to deploy.', '{"linkedin": "https://linkedin.com/in/samuelkallon"}', '+232-76-334455', 'DevOps Engineer', false, '1990-11-22'),
+	(6, '2025-09-17 02:35:53.650224+00', 'Ibrahim Bah', '08ecea4e-56b8-43ae-a19f-16b63663047f', NULL, 'Nothing ships until I say it’s clean. I break things so users don’t have to.', NULL, '+232-78-445566', 'QA Analyst', true, '1992-08-19'),
+	(7, '2025-09-17 02:37:48.77238+00', 'Haja Koroma', '1a936e74-4919-4fbc-b01f-8f417fc12d16', NULL, 'Clear docs, happy devs. I turn complex systems into human-readable knowledge.', '{"medium": "https://medium.com/@hajakoroma"}', '+232-79-556677', 'Technical Writer', true, '1994-02-15'),
+	(8, '2025-09-17 02:40:12.822946+00', 'Daniel Bangura', '2424ebde-09a7-469b-8531-9bda47222f7c', NULL, 'Designing with empathy. I make sure users don’t need a manual to use your product.', '{"dribbble": "https://dribbble.com/danbangura"}', '+232-80-667788', 'UX Designer', false, '1996-06-30');
+
+
+--
+-- Data for Name: tickets; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- Data for Name: comments; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
 
 
 --
 -- Data for Name: tenant_permissions; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO "public"."tenant_permissions" ("id", "created_at", "user_profile", "tenant") VALUES
-	(3, '2025-08-19 10:46:04.109876+00', 3, 'vontech'),
-	(4, '2025-08-19 10:47:17.717234+00', 2, 'dsti'),
-	(2, '2025-08-19 10:44:34.740933+00', 2, 'mocti'),
-	(1, '2025-08-19 10:44:19.685006+00', 1, 'mocti');
+INSERT INTO "public"."tenant_permissions" ("id", "created_at", "user_profile", "tenant", "user_role") VALUES
+	(3, '2025-08-19 10:46:04.109876+00', 3, 'vontech', 'agent'),
+	(4, '2025-08-19 10:47:17.717234+00', 2, 'dsti', 'agent'),
+	(1, '2025-08-19 10:44:19.685006+00', 1, 'mocti', 'agent'),
+	(2, '2025-08-19 10:44:34.740933+00', 2, 'mocti', 'admin');
 
 
 --
@@ -333,14 +425,28 @@ INSERT INTO "public"."tenant_permissions" ("id", "created_at", "user_profile", "
 -- Name: refresh_tokens_id_seq; Type: SEQUENCE SET; Schema: auth; Owner: supabase_auth_admin
 --
 
-SELECT pg_catalog.setval('"auth"."refresh_tokens_id_seq"', 74, true);
+SELECT pg_catalog.setval('"auth"."refresh_tokens_id_seq"', 122, true);
+
+
+--
+-- Name: comments_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('"public"."comments_id_seq"', 1, false);
 
 
 --
 -- Name: profiles_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('"public"."profiles_id_seq"', 3, true);
+SELECT pg_catalog.setval('"public"."profiles_id_seq"', 8, true);
+
+
+--
+-- Name: sla_policies_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('"public"."sla_policies_id_seq"', 1, false);
 
 
 --
@@ -348,6 +454,13 @@ SELECT pg_catalog.setval('"public"."profiles_id_seq"', 3, true);
 --
 
 SELECT pg_catalog.setval('"public"."tenant_permissions_id_seq"', 4, true);
+
+
+--
+-- Name: tickets_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('"public"."tickets_id_seq"', 1, false);
 
 
 --
@@ -360,5 +473,7 @@ SELECT pg_catalog.setval('"supabase_functions"."hooks_id_seq"', 1, false);
 --
 -- PostgreSQL database dump complete
 --
+
+\unrestrict TocRtwGgto5UInh3J07lIc85N5Y4dyD0i5NmVlRZdWdZtdjLKcypRl7lOC7GSEE
 
 RESET ALL;
