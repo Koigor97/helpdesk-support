@@ -4,7 +4,7 @@ SET session_replication_role = replica;
 -- PostgreSQL database dump
 --
 
-\restrict TocRtwGgto5UInh3J07lIc85N5Y4dyD0i5NmVlRZdWdZtdjLKcypRl7lOC7GSEE
+\restrict Ausfd8Tr0zShbhZjqU8H2ofRb17aaAc723L3gmh9L9oQGfbpozhFhvz1sJSUms9
 
 -- Dumped from database version 17.6
 -- Dumped by pg_dump version 17.6
@@ -190,7 +190,14 @@ INSERT INTO "auth"."audit_log_entries" ("instance_id", "id", "payload", "created
 	('00000000-0000-0000-0000-000000000000', 'ee3df7c6-715b-4d25-ae5e-5dc7ad55b5da', '{"action":"user_signedup","actor_id":"00000000-0000-0000-0000-000000000000","actor_username":"service_role","actor_via_sso":false,"log_type":"team","traits":{"provider":"email","user_email":"samuelk@dsti.gov.local","user_id":"0691cb88-66e5-4f75-b87c-7b8cc4d811ae","user_phone":""}}', '2025-09-17 02:26:26.646067+00', ''),
 	('00000000-0000-0000-0000-000000000000', '910f4538-5c3a-4365-9b38-a52ff0e46726', '{"action":"user_signedup","actor_id":"00000000-0000-0000-0000-000000000000","actor_username":"service_role","actor_via_sso":false,"log_type":"team","traits":{"provider":"email","user_email":"ibrahimb@dsti.gov.local","user_id":"08ecea4e-56b8-43ae-a19f-16b63663047f","user_phone":""}}', '2025-09-17 02:28:06.864045+00', ''),
 	('00000000-0000-0000-0000-000000000000', '0e1ade1f-7661-452e-8887-df0bc324378b', '{"action":"user_signedup","actor_id":"00000000-0000-0000-0000-000000000000","actor_username":"service_role","actor_via_sso":false,"log_type":"team","traits":{"provider":"email","user_email":"hajak@dsti.gov.local","user_id":"1a936e74-4919-4fbc-b01f-8f417fc12d16","user_phone":""}}', '2025-09-17 02:28:40.398073+00', ''),
-	('00000000-0000-0000-0000-000000000000', '7f08b182-e4a2-4bcd-a688-a483c238d71e', '{"action":"user_signedup","actor_id":"00000000-0000-0000-0000-000000000000","actor_username":"service_role","actor_via_sso":false,"log_type":"team","traits":{"provider":"email","user_email":"danielb@dsti.gov.local","user_id":"2424ebde-09a7-469b-8531-9bda47222f7c","user_phone":""}}', '2025-09-17 02:30:21.572635+00', '');
+	('00000000-0000-0000-0000-000000000000', '7f08b182-e4a2-4bcd-a688-a483c238d71e', '{"action":"user_signedup","actor_id":"00000000-0000-0000-0000-000000000000","actor_username":"service_role","actor_via_sso":false,"log_type":"team","traits":{"provider":"email","user_email":"danielb@dsti.gov.local","user_id":"2424ebde-09a7-469b-8531-9bda47222f7c","user_phone":""}}', '2025-09-17 02:30:21.572635+00', ''),
+	('00000000-0000-0000-0000-000000000000', '64171859-c574-48f1-9fb9-019400ec98a9', '{"action":"login","actor_id":"f754b683-f399-4257-86f5-7a16d86c716b","actor_username":"koigor@moctisl.local","actor_via_sso":false,"log_type":"account","traits":{"provider":"email"}}', '2025-09-17 16:28:57.694726+00', ''),
+	('00000000-0000-0000-0000-000000000000', '49fdd0a7-5a28-4976-a8e3-e60576ed6e50', '{"action":"logout","actor_id":"f754b683-f399-4257-86f5-7a16d86c716b","actor_username":"koigor@moctisl.local","actor_via_sso":false,"log_type":"account"}', '2025-09-17 16:29:22.28594+00', ''),
+	('00000000-0000-0000-0000-000000000000', '8bb6cdd6-75cc-4bf5-8bb2-45ea1be8afb4', '{"action":"user_signedup","actor_id":"00000000-0000-0000-0000-000000000000","actor_username":"service_role","actor_via_sso":false,"log_type":"team","traits":{"provider":"email","user_email":"zainabj@mocti.gov.local","user_id":"8cb57ea2-72b7-47f4-a581-a94b1898992c","user_phone":""}}', '2025-09-19 06:24:40.701615+00', ''),
+	('00000000-0000-0000-0000-000000000000', '106ae233-676f-4498-a131-89ec749ac651', '{"action":"user_signedup","actor_id":"00000000-0000-0000-0000-000000000000","actor_username":"service_role","actor_via_sso":false,"log_type":"team","traits":{"provider":"email","user_email":"mohameds@mocti.gov.local","user_id":"1057ab5d-b534-4a2c-bc8d-36773bec1497","user_phone":""}}', '2025-09-19 06:25:26.038255+00', ''),
+	('00000000-0000-0000-0000-000000000000', '9b746a7b-6664-4bcc-8fe9-2003c41d5307', '{"action":"user_signedup","actor_id":"00000000-0000-0000-0000-000000000000","actor_username":"service_role","actor_via_sso":false,"log_type":"team","traits":{"provider":"email","user_email":"eunicec@mocti.gov.local","user_id":"ae9231b0-f31f-42e4-a200-153b72d1bab0","user_phone":""}}', '2025-09-19 06:26:04.120808+00', ''),
+	('00000000-0000-0000-0000-000000000000', '9fe6bcce-a806-4dc1-b656-62dd3a9f1ae7', '{"action":"user_signedup","actor_id":"00000000-0000-0000-0000-000000000000","actor_username":"service_role","actor_via_sso":false,"log_type":"team","traits":{"provider":"email","user_email":"edwardk@mocti.gov.local","user_id":"91f6acca-7ece-4860-a3f9-945a5bd71a9c","user_phone":""}}', '2025-09-19 06:27:42.275473+00', ''),
+	('00000000-0000-0000-0000-000000000000', '5bea60ea-eedb-4375-999e-015d455a6540', '{"action":"user_signedup","actor_id":"00000000-0000-0000-0000-000000000000","actor_username":"service_role","actor_via_sso":false,"log_type":"team","traits":{"provider":"email","user_email":"fatmatab@mocti.gov.local","user_id":"4bf08f48-45c7-4b1b-8037-f3cb30d5ad0b","user_phone":""}}', '2025-09-19 06:28:30.003296+00', '');
 
 
 --
@@ -217,11 +224,16 @@ INSERT INTO "auth"."users" ("instance_id", "id", "aud", "role", "email", "encryp
 	('00000000-0000-0000-0000-000000000000', 'cbedba49-04b1-4a5c-aac8-540b51831c66', 'authenticated', 'authenticated', 'peter@vontech.local', '$2a$10$Qpg2yuc0Gl6rgYQv4HqFlugjzpQpbQ5x/MTWBkYF5hki/FpeX5Smy', '2025-08-14 08:47:31.243907+00', NULL, '', NULL, '', NULL, '', '', NULL, NULL, '{"provider": "email", "providers": ["email"]}', '{"email_verified": true}', NULL, '2025-08-14 08:47:31.238876+00', '2025-08-14 08:47:31.244366+00', NULL, NULL, '', '', NULL, '', 0, NULL, '', NULL, false, NULL, false),
 	('00000000-0000-0000-0000-000000000000', '173e7d79-5989-4a5d-8585-81991bd9a286', 'authenticated', 'authenticated', 'david@moctisl.local', '$2a$10$t9BkzK.hx2IVw.izVGnZdOK7vjSvgdPoDIgiPq86xaEZIGZdIfE2q', '2025-08-14 08:45:21.911582+00', NULL, '', NULL, 'b599cbe91969320e1d0e6217f43348663700693e5e067e8b7c7fb29f', '2025-09-12 17:49:15.798017+00', '', '', NULL, '2025-08-25 10:59:52.850544+00', '{"provider": "email", "providers": ["email"]}', '{"email_verified": true}', NULL, '2025-08-14 08:45:21.907917+00', '2025-09-12 17:49:15.799764+00', NULL, NULL, '', '', NULL, '', 0, NULL, '', NULL, false, NULL, false),
 	('00000000-0000-0000-0000-000000000000', '1a936e74-4919-4fbc-b01f-8f417fc12d16', 'authenticated', 'authenticated', 'hajak@dsti.gov.local', '$2a$10$5wwNAfNpa.dL0VvYSm6TMe4jx4fGr92GLW4WmVQsfo70n5wM72X.e', '2025-09-17 02:28:40.398913+00', NULL, '', NULL, '', NULL, '', '', NULL, NULL, '{"provider": "email", "providers": ["email"]}', '{"email_verified": true}', NULL, '2025-09-17 02:28:40.394066+00', '2025-09-17 02:28:40.3993+00', NULL, NULL, '', '', NULL, '', 0, NULL, '', NULL, false, NULL, false),
-	('00000000-0000-0000-0000-000000000000', 'f754b683-f399-4257-86f5-7a16d86c716b', 'authenticated', 'authenticated', 'koigor@moctisl.local', '$2a$10$.J6XQAs8ET3Jn9klag1sn.dj5t/g0lvHzvym.JF22apSPR4ln4Qk2', '2025-08-14 08:44:20.53461+00', NULL, '', NULL, '', '2025-09-12 19:08:49.419381+00', '', '', NULL, '2025-09-15 18:51:09.931135+00', '{"tenants": ["dsti", "mocti"], "provider": "email", "providers": ["email"]}', '{"email_verified": true}', NULL, '2025-08-14 08:44:20.529435+00', '2025-09-17 02:04:02.593679+00', NULL, NULL, '', '', NULL, '', 0, NULL, '', NULL, false, NULL, false),
+	('00000000-0000-0000-0000-000000000000', 'ae9231b0-f31f-42e4-a200-153b72d1bab0', 'authenticated', 'authenticated', 'eunicec@mocti.gov.local', '$2a$10$RwD6p0B679X5cLkhJOM99u5jGz8FFE4NOvMKdQ80VxfaOTmxjG2S6', '2025-09-19 06:26:04.121614+00', NULL, '', NULL, '', NULL, '', '', NULL, NULL, '{"provider": "email", "providers": ["email"]}', '{"email_verified": true}', NULL, '2025-09-19 06:26:04.119015+00', '2025-09-19 06:26:04.121951+00', NULL, NULL, '', '', NULL, '', 0, NULL, '', NULL, false, NULL, false),
 	('00000000-0000-0000-0000-000000000000', '2424ebde-09a7-469b-8531-9bda47222f7c', 'authenticated', 'authenticated', 'danielb@dsti.gov.local', '$2a$10$Dzc3ErGpUYeBj7C7YyeBO.sq89H1QK7ePxtlF3IqKq2MJL6mlCCoW', '2025-09-17 02:30:21.573444+00', NULL, '', NULL, '', NULL, '', '', NULL, NULL, '{"provider": "email", "providers": ["email"]}', '{"email_verified": true}', NULL, '2025-09-17 02:30:21.570474+00', '2025-09-17 02:30:21.573882+00', NULL, NULL, '', '', NULL, '', 0, NULL, '', NULL, false, NULL, false),
+	('00000000-0000-0000-0000-000000000000', 'f754b683-f399-4257-86f5-7a16d86c716b', 'authenticated', 'authenticated', 'koigor@moctisl.local', '$2a$10$.J6XQAs8ET3Jn9klag1sn.dj5t/g0lvHzvym.JF22apSPR4ln4Qk2', '2025-08-14 08:44:20.53461+00', NULL, '', NULL, '', '2025-09-12 19:08:49.419381+00', '', '', NULL, '2025-09-17 16:28:57.70705+00', '{"tenants": ["dsti", "mocti"], "provider": "email", "providers": ["email"]}', '{"email_verified": true}', NULL, '2025-08-14 08:44:20.529435+00', '2025-09-17 16:28:57.721986+00', NULL, NULL, '', '', NULL, '', 0, NULL, '', NULL, false, NULL, false),
 	('00000000-0000-0000-0000-000000000000', '89b5af53-2233-48da-8f03-fd72bd15774d', 'authenticated', 'authenticated', 'abigailm@dsti.gov.local', '$2a$10$2PWCryqcfyX7CwX4.rkG1uHkZDGJ5pkfOEYJfFkUVl.jSq1klQvOu', '2025-09-17 02:19:34.202705+00', NULL, '', NULL, '', NULL, '', '', NULL, NULL, '{"provider": "email", "providers": ["email"]}', '{"email_verified": true}', NULL, '2025-09-17 02:19:34.196274+00', '2025-09-17 02:19:34.203119+00', NULL, NULL, '', '', NULL, '', 0, NULL, '', NULL, false, NULL, false),
 	('00000000-0000-0000-0000-000000000000', '0691cb88-66e5-4f75-b87c-7b8cc4d811ae', 'authenticated', 'authenticated', 'samuelk@dsti.gov.local', '$2a$10$qXtP5wpB3ETGpmv8pj8Xw.nxwjglReOF9oY5pmgsRbRMdSW.PclaK', '2025-09-17 02:26:26.647686+00', NULL, '', NULL, '', NULL, '', '', NULL, NULL, '{"provider": "email", "providers": ["email"]}', '{"email_verified": true}', NULL, '2025-09-17 02:26:26.643947+00', '2025-09-17 02:26:26.648057+00', NULL, NULL, '', '', NULL, '', 0, NULL, '', NULL, false, NULL, false),
-	('00000000-0000-0000-0000-000000000000', '08ecea4e-56b8-43ae-a19f-16b63663047f', 'authenticated', 'authenticated', 'ibrahimb@dsti.gov.local', '$2a$10$l9.IwSFbf8bB.lVoex4Th.hLByx8yyc7aSnIOcO46qkzYrEVNx3V.', '2025-09-17 02:28:06.865206+00', NULL, '', NULL, '', NULL, '', '', NULL, NULL, '{"provider": "email", "providers": ["email"]}', '{"email_verified": true}', NULL, '2025-09-17 02:28:06.862192+00', '2025-09-17 02:28:06.866368+00', NULL, NULL, '', '', NULL, '', 0, NULL, '', NULL, false, NULL, false);
+	('00000000-0000-0000-0000-000000000000', '8cb57ea2-72b7-47f4-a581-a94b1898992c', 'authenticated', 'authenticated', 'zainabj@mocti.gov.local', '$2a$10$cDcPxOtm5UFLZeqBWMdWGOx2UwWgvdjQD9ZnxF8EFlsN7gOcbyru6', '2025-09-19 06:24:40.704705+00', NULL, '', NULL, '', NULL, '', '', NULL, NULL, '{"provider": "email", "providers": ["email"]}', '{"email_verified": true}', NULL, '2025-09-19 06:24:40.696999+00', '2025-09-19 06:24:40.7059+00', NULL, NULL, '', '', NULL, '', 0, NULL, '', NULL, false, NULL, false),
+	('00000000-0000-0000-0000-000000000000', '08ecea4e-56b8-43ae-a19f-16b63663047f', 'authenticated', 'authenticated', 'ibrahimb@dsti.gov.local', '$2a$10$l9.IwSFbf8bB.lVoex4Th.hLByx8yyc7aSnIOcO46qkzYrEVNx3V.', '2025-09-17 02:28:06.865206+00', NULL, '', NULL, '', NULL, '', '', NULL, NULL, '{"provider": "email", "providers": ["email"]}', '{"email_verified": true}', NULL, '2025-09-17 02:28:06.862192+00', '2025-09-17 02:28:06.866368+00', NULL, NULL, '', '', NULL, '', 0, NULL, '', NULL, false, NULL, false),
+	('00000000-0000-0000-0000-000000000000', '91f6acca-7ece-4860-a3f9-945a5bd71a9c', 'authenticated', 'authenticated', 'edwardk@mocti.gov.local', '$2a$10$2uuDi5jJcg8l4iFIbJSRqeHZFuyFsqcuO2ziwr1mExFQu9Lm1fiqS', '2025-09-19 06:27:42.276195+00', NULL, '', NULL, '', NULL, '', '', NULL, NULL, '{"provider": "email", "providers": ["email"]}', '{"email_verified": true}', NULL, '2025-09-19 06:27:42.273652+00', '2025-09-19 06:27:42.276639+00', NULL, NULL, '', '', NULL, '', 0, NULL, '', NULL, false, NULL, false),
+	('00000000-0000-0000-0000-000000000000', '1057ab5d-b534-4a2c-bc8d-36773bec1497', 'authenticated', 'authenticated', 'mohameds@mocti.gov.local', '$2a$10$HwkGQiv.Aovi.4mNC4EsfOnu2hUPh3QxFa9DmuWdJxp0tdOXe87WW', '2025-09-19 06:25:26.039303+00', NULL, '', NULL, '', NULL, '', '', NULL, NULL, '{"provider": "email", "providers": ["email"]}', '{"email_verified": true}', NULL, '2025-09-19 06:25:26.032756+00', '2025-09-19 06:25:26.039582+00', NULL, NULL, '', '', NULL, '', 0, NULL, '', NULL, false, NULL, false),
+	('00000000-0000-0000-0000-000000000000', '4bf08f48-45c7-4b1b-8037-f3cb30d5ad0b', 'authenticated', 'authenticated', 'fatmatab@mocti.gov.local', '$2a$10$NC4Z6enxXdiJlEwx5JPQ5ubZTsajtu4/913/SsQR1l4m9uCEnzcj2', '2025-09-19 06:28:30.004134+00', NULL, '', NULL, '', NULL, '', '', NULL, NULL, '{"provider": "email", "providers": ["email"]}', '{"email_verified": true}', NULL, '2025-09-19 06:28:30.001684+00', '2025-09-19 06:28:30.004481+00', NULL, NULL, '', '', NULL, '', 0, NULL, '', NULL, false, NULL, false);
 
 
 --
@@ -236,7 +248,12 @@ INSERT INTO "auth"."identities" ("provider_id", "user_id", "identity_data", "pro
 	('0691cb88-66e5-4f75-b87c-7b8cc4d811ae', '0691cb88-66e5-4f75-b87c-7b8cc4d811ae', '{"sub": "0691cb88-66e5-4f75-b87c-7b8cc4d811ae", "email": "samuelk@dsti.gov.local", "email_verified": false, "phone_verified": false}', 'email', '2025-09-17 02:26:26.645389+00', '2025-09-17 02:26:26.645415+00', '2025-09-17 02:26:26.645415+00', '20f34d15-4dbd-4c0c-9ff9-a68e3828b951'),
 	('08ecea4e-56b8-43ae-a19f-16b63663047f', '08ecea4e-56b8-43ae-a19f-16b63663047f', '{"sub": "08ecea4e-56b8-43ae-a19f-16b63663047f", "email": "ibrahimb@dsti.gov.local", "email_verified": false, "phone_verified": false}', 'email', '2025-09-17 02:28:06.863315+00', '2025-09-17 02:28:06.863335+00', '2025-09-17 02:28:06.863335+00', '0f172e41-75bf-4a3f-9355-d2cf682dffc6'),
 	('1a936e74-4919-4fbc-b01f-8f417fc12d16', '1a936e74-4919-4fbc-b01f-8f417fc12d16', '{"sub": "1a936e74-4919-4fbc-b01f-8f417fc12d16", "email": "hajak@dsti.gov.local", "email_verified": false, "phone_verified": false}', 'email', '2025-09-17 02:28:40.39699+00', '2025-09-17 02:28:40.397031+00', '2025-09-17 02:28:40.397031+00', '474308cb-785d-4158-9bb3-e4dc15abcb54'),
-	('2424ebde-09a7-469b-8531-9bda47222f7c', '2424ebde-09a7-469b-8531-9bda47222f7c', '{"sub": "2424ebde-09a7-469b-8531-9bda47222f7c", "email": "danielb@dsti.gov.local", "email_verified": false, "phone_verified": false}', 'email', '2025-09-17 02:30:21.571669+00', '2025-09-17 02:30:21.571691+00', '2025-09-17 02:30:21.571691+00', '8e2d20c8-f6f9-4759-b9ad-b5beb6995c2a');
+	('2424ebde-09a7-469b-8531-9bda47222f7c', '2424ebde-09a7-469b-8531-9bda47222f7c', '{"sub": "2424ebde-09a7-469b-8531-9bda47222f7c", "email": "danielb@dsti.gov.local", "email_verified": false, "phone_verified": false}', 'email', '2025-09-17 02:30:21.571669+00', '2025-09-17 02:30:21.571691+00', '2025-09-17 02:30:21.571691+00', '8e2d20c8-f6f9-4759-b9ad-b5beb6995c2a'),
+	('8cb57ea2-72b7-47f4-a581-a94b1898992c', '8cb57ea2-72b7-47f4-a581-a94b1898992c', '{"sub": "8cb57ea2-72b7-47f4-a581-a94b1898992c", "email": "zainabj@mocti.gov.local", "email_verified": false, "phone_verified": false}', 'email', '2025-09-19 06:24:40.700939+00', '2025-09-19 06:24:40.700979+00', '2025-09-19 06:24:40.700979+00', '53d99e4b-38a6-4ff1-804b-1d5d236e40f0'),
+	('1057ab5d-b534-4a2c-bc8d-36773bec1497', '1057ab5d-b534-4a2c-bc8d-36773bec1497', '{"sub": "1057ab5d-b534-4a2c-bc8d-36773bec1497", "email": "mohameds@mocti.gov.local", "email_verified": false, "phone_verified": false}', 'email', '2025-09-19 06:25:26.03743+00', '2025-09-19 06:25:26.03745+00', '2025-09-19 06:25:26.03745+00', 'f3fda6f2-11a3-4f37-a7c5-53b2ca8e94cc'),
+	('ae9231b0-f31f-42e4-a200-153b72d1bab0', 'ae9231b0-f31f-42e4-a200-153b72d1bab0', '{"sub": "ae9231b0-f31f-42e4-a200-153b72d1bab0", "email": "eunicec@mocti.gov.local", "email_verified": false, "phone_verified": false}', 'email', '2025-09-19 06:26:04.120094+00', '2025-09-19 06:26:04.120119+00', '2025-09-19 06:26:04.120119+00', '49647703-b9f2-43f3-96a7-3960e4734e57'),
+	('91f6acca-7ece-4860-a3f9-945a5bd71a9c', '91f6acca-7ece-4860-a3f9-945a5bd71a9c', '{"sub": "91f6acca-7ece-4860-a3f9-945a5bd71a9c", "email": "edwardk@mocti.gov.local", "email_verified": false, "phone_verified": false}', 'email', '2025-09-19 06:27:42.274756+00', '2025-09-19 06:27:42.274795+00', '2025-09-19 06:27:42.274795+00', 'a0d56589-e362-4589-bc7f-57b7683935b5'),
+	('4bf08f48-45c7-4b1b-8037-f3cb30d5ad0b', '4bf08f48-45c7-4b1b-8037-f3cb30d5ad0b', '{"sub": "4bf08f48-45c7-4b1b-8037-f3cb30d5ad0b", "email": "fatmatab@mocti.gov.local", "email_verified": false, "phone_verified": false}', 'email', '2025-09-19 06:28:30.002633+00', '2025-09-19 06:28:30.002656+00', '2025-09-19 06:28:30.002656+00', '6d469675-57a0-4710-8f7f-715a05f111af');
 
 
 --
@@ -327,6 +344,15 @@ INSERT INTO "public"."tenants" ("id", "created_at", "name", "domain", "logo", "w
 -- Data for Name: sla_policies; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
+INSERT INTO "public"."sla_policies" ("id", "created_at", "name", "is_default", "applies_to_priority", "first_response_mins", "resolve_mins", "active_from", "active_to", "tenant_id") VALUES
+	(1, '2025-09-19 07:08:37.490791+00', 'DSTI Low Priority SLA', false, 'low', 60, 480, '2025-09-19 07:08:30+00', '2025-09-21 07:07:47+00', 'dsti'),
+	(2, '2025-09-19 07:09:57.173066+00', 'DSTI Medium Priority SLA', false, 'medium', 30, 240, '2025-09-19 07:09:49+00', '2025-09-24 07:09:28+00', 'dsti'),
+	(3, '2025-09-19 07:11:32.116222+00', 'DSTI High Priority SLA', false, 'high', 15, 120, '2025-09-19 07:11:26+00', '2025-09-26 07:11:13+00', 'dsti'),
+	(4, '2025-09-19 07:12:41.641368+00', 'DSTI Urgent Priority SLA', true, 'urgent', 5, 60, '2025-09-19 07:12:36+00', '2025-09-22 07:12:16+00', 'dsti'),
+	(5, '2025-09-19 07:13:57.029237+00', 'MOCTI Low Priority SLA', false, 'low', 90, 720, '2025-09-20 07:13:51+00', '2025-09-30 07:13:33+00', 'mocti'),
+	(7, '2025-09-19 07:15:30.83689+00', 'MOCTI High Priority SLA', false, 'high', 20, 180, '2025-09-20 07:15:26+00', '2025-10-01 07:15:08+00', 'mocti'),
+	(6, '2025-09-19 07:14:38.466645+00', 'MOCTI Medium Priority SLA', false, 'medium', 45, 360, '2025-09-20 07:14:35+00', '2025-09-25 07:14:19+00', 'mocti'),
+	(8, '2025-09-19 07:16:31.820163+00', 'MOCTI Urgent Priority SLA', true, 'urgent', 10, 90, '2025-09-20 07:16:27+00', '2025-10-03 07:16:13+00', 'mocti');
 
 
 --
@@ -341,19 +367,103 @@ INSERT INTO "public"."user_profiles" ("id", "created_at", "full_name", "supabase
 	(5, '2025-09-17 02:32:52.016512+00', 'Samuel Kallon', '0691cb88-66e5-4f75-b87c-7b8cc4d811ae', NULL, 'Pipelines, uptime, and infrastructure as code. I automate what others fear to deploy.', '{"linkedin": "https://linkedin.com/in/samuelkallon"}', '+232-76-334455', 'DevOps Engineer', false, '1990-11-22'),
 	(6, '2025-09-17 02:35:53.650224+00', 'Ibrahim Bah', '08ecea4e-56b8-43ae-a19f-16b63663047f', NULL, 'Nothing ships until I say it’s clean. I break things so users don’t have to.', NULL, '+232-78-445566', 'QA Analyst', true, '1992-08-19'),
 	(7, '2025-09-17 02:37:48.77238+00', 'Haja Koroma', '1a936e74-4919-4fbc-b01f-8f417fc12d16', NULL, 'Clear docs, happy devs. I turn complex systems into human-readable knowledge.', '{"medium": "https://medium.com/@hajakoroma"}', '+232-79-556677', 'Technical Writer', true, '1994-02-15'),
-	(8, '2025-09-17 02:40:12.822946+00', 'Daniel Bangura', '2424ebde-09a7-469b-8531-9bda47222f7c', NULL, 'Designing with empathy. I make sure users don’t need a manual to use your product.', '{"dribbble": "https://dribbble.com/danbangura"}', '+232-80-667788', 'UX Designer', false, '1996-06-30');
+	(8, '2025-09-17 02:40:12.822946+00', 'Daniel Bangura', '2424ebde-09a7-469b-8531-9bda47222f7c', NULL, 'Designing with empathy. I make sure users don’t need a manual to use your product.', '{"dribbble": "https://dribbble.com/danbangura"}', '+232-80-667788', 'UX Designer', false, '1996-06-30'),
+	(9, '2025-09-19 06:31:28.72985+00', 'Zainab Jalloh', '8cb57ea2-72b7-47f4-a581-a94b1898992c', NULL, 'I speak fluent REST and GraphQL. PostgreSQL whisperer. Backend-first thinker.', '{"github": "https://github.com/zainabdev"}', '+232-81-223344', 'Backend Developer', true, '1991-03-18'),
+	(10, '2025-09-19 06:33:57.735771+00', 'Mohamed Sesay', '1057ab5d-b534-4a2c-bc8d-36773bec1497', NULL, 'I’m your firewall’s best friend and your pentester’s worst nightmare.', '{"linkedin": "https://linkedin.com/in/sesayinfosec"}', '+232-82-334455', 'Security Engineer', true, '1989-10-01'),
+	(11, '2025-09-19 06:35:43.637253+00', 'Eunice Conteh', 'ae9231b0-f31f-42e4-a200-153b72d1bab0', NULL, 'Agile is my playground. I align product vision with delivery timelines like clockwork.', '{"linkedin": "https://linkedin.com/in/eunicepm"}', '+232-83-445566', 'Project Manager', true, '1990-01-10'),
+	(12, '2025-09-19 06:37:14.84958+00', 'Edward Kamara', '91f6acca-7ece-4860-a3f9-945a5bd71a9c', NULL, 'From Supabase tables to responsive UIs, I deliver end-to-end. Love TypeScript, love caffeine.', '{"github": "https://github.com/edwardkamara"}', '+232-84-556677', 'Fullstack Engineer', true, '1993-07-14'),
+	(13, '2025-09-19 06:38:19.689854+00', 'Fatmata Kamara', '4bf08f48-45c7-4b1b-8037-f3cb30d5ad0b', NULL, 'Linux and uptime are my thing. I ensure servers live long and prosper.', NULL, '+232-85-667788', 'System Administrator', true, '1991-12-25');
 
 
 --
 -- Data for Name: tickets; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
+INSERT INTO "public"."tickets" ("id", "created_at", "title", "description", "status", "priority", "category", "first_response_at", "resolved_at", "created_by", "assigned_to", "tenant", "sla_policy") VALUES
+	(1, '2025-09-19 08:31:30.225261+00', 'GIS Platform Integration Delay', 'The integration of cross-sectoral Spatial Data Infrastructure (SDI) with state health and agriculture databases has encountered delays.  
+ Several APIs expected to harmonize environmental data are causing schema mismatch errors.  
+ Currently, when querying via the public endpoint, some geometry layers are missing, and metadata is inconsistent across districts.', 'in_progress', 'high', 'digital infrastructure', '2025-09-20 08:28:48+00', NULL, 5, 5, 'dsti', 3),
+	(2, '2025-09-19 08:34:58.853132+00', 'Digital Learning Hubs Material Access Slow', 'Some of the DSTI digital learning hubs are reporting slow access to the learning materials.  
+ Particularly in rural hubs during peak hours.  
+ Users report thumbnails take over 30 seconds to appear, PDFs fail to open, and video streaming buffers frequently.  
+ The hubs are provisioned with broadband links but suspect caching or CDN misconfiguration.', 'open', 'medium', 'digital learning', '2025-09-19 08:33:51+00', '2025-09-24 08:34:04+00', 2, 5, 'dsti', 2),
+	(7, '2025-09-19 09:12:30.580121+00', 'Content Filtering Standards Missing in Policy Docs', 'Our policy documentation for learning content fails to explicitly address filtering of sensitive content / copyrighted material.  
+ Some schools raised concerns that digital learning content includes third-party images without license attribution.  
+ Need to include sections for compliance with intellectual property and safe content in the learning hub’s content standards.', 'done', 'low', 'policy compliance', '2025-08-01 12:00:00+00', '2025-08-05 15:00:00+00', 4, 7, 'dsti', 1),
+	(8, '2025-09-19 09:12:56.73504+00', 'Data Visualization Dashboard Crashes on Mobile', 'The newly released data visualization dashboard for spatial data is crashing when accessed on mobile browsers, especially older Android devices.  
+ The graphs are not rendering, touch gestures fail, and error logs indicate WebGL context failures.  
+ Requesting fallback support or lighter versions of graphics for low-spec devices.', 'open', 'high', 'ux performance', '2025-09-07 12:30:00+00', NULL, 4, 2, 'dsti', 3),
+	(9, '2025-09-19 09:13:04.732448+00', 'Innovation Grant Application Rejection Appeals', 'Several applicants for the DSTI innovation grants have flagged rejections due to incomplete documentation, but the feedback loop is weak.  
+ Applicants are reporting that they did not get clarity on how to fix missing sections or proper formatting.  
+ Need to revamp grant documentation guidelines, feedback template, and possibly set up support chat for grant application queries.', 'open', 'medium', 'grants support', '2025-09-01 10:00:00+00', NULL, 4, 4, 'dsti', 2),
+	(10, '2025-09-19 09:13:11.266632+00', 'GIS Layer Access Permissions Bug', 'A permissions bug prevents certain users from accessing restricted GIS layers that are intended for analysis only by government personnel.  
+ Even though users are assigned the correct roles, the UI hides layers and returns 403 errors.  
+ After permissions fix and role mapping update, access was restored.', 'done', 'high', 'security privileges', '2025-07-01 14:30:00+00', '2025-07-05 09:45:00+00', 6, 5, 'dsti', 3),
+	(11, '2025-09-19 09:13:18.000988+00', 'School Connectivity Grants Application Issue', 'Some schools applying for connectivity grants have trouble uploading required documents (e.g. proof of ownership, connectivity test reports).  
+ File size limits and file type restrictions are causing confusion.  
+ The portal does not clearly inform file upload constraints, leading many to abandon applications mid-way.', 'open', 'medium', 'grants support', '2025-08-25 07:30:00+00', NULL, 4, 7, 'dsti', 2),
+	(12, '2025-09-19 09:13:23.794263+00', 'API Response Time Too High for Education Endpoint', 'The endpoint serving school data (attendance, performance) takes over 20 seconds to respond during peak times.  
+ Users accessing remote schools with weaker connectivity experience timeouts.  
+ Backend profiling shows database query chains with multiple joins and lack of indexing in performance-critical tables.', 'done', 'urgent', 'digital learning', '2025-07-02 06:30:00+00', '2025-07-03 08:15:00+00', 2, 2, 'dsti', 4),
+	(13, '2025-09-19 09:13:29.802897+00', 'Standards & Compliance Document Missing Version Control', 'The compliance document repository for standards (content, delivery, digital learning hub usage) lacks version control.  
+ Several schools are referencing outdated versions of policy, leading to mismatches in implementation.  
+ We need an audit of versions, version tagging, and clear communication of updates.', 'in_progress', 'low', 'policy compliance', '2025-08-10 14:20:00+00', NULL, 2, 5, 'dsti', 1),
+	(14, '2025-09-19 09:13:37.627426+00', 'Mobile Browser Layout Broken in Learning Hub Portal', 'Users accessing the learning hub portal via older mobile browsers report layout breakage: form fields overlap, navigation drawer misbehaves, icons missing.  
+ Affects content browsing and article reading. Suggest adding mobile-first design fixes, progressive enhancement for form elements.', 'done', 'medium', 'ux performance', '2025-06-25 12:00:00+00', '2025-06-30 09:30:00+00', 2, 6, 'dsti', 2),
+	(15, '2025-09-19 10:58:49.817428+00', 'Gov Email Domains Not Issued After Application', 'Several government departments applied for official gov.sl email domains via MoCTI portal.  
+ Despite approval emails, certificates and setup details have not been communicated.  
+ Departments are unable to send official communications, affecting notices, internal memos, and public services.', 'open', 'urgent', 'digital services', '2025-09-05 09:00:00+00', '2025-09-06 10:30:00+00', 2, 12, 'mocti', 8),
+	(16, '2025-09-19 11:03:08.43844+00', 'Cybersecurity Incident Report Delay', 'A reported potential cybersecurity breach in one of the MoCTI partner agencies showed delayed responses.  
+ Logs indicate unusual login attempts, but incident reports took 48 hours to generate.  
+ There are concerns about compliance with national cybersecurity guidelines and potential data exposure.', 'done', 'high', 'security incident', '2025-07-16 08:00:00+00', '2025-07-17 10:00:00+00', 1, 10, 'mocti', 7),
+	(17, '2025-09-19 11:08:53.907954+00', 'Universal Access Fund Application Glitch', 'The Universal Access Development Fund portal has a glitch where application forms lose data fields upon refresh.  
+ Applicants from remote districts are particularly affected because of intermittent connectivity.  
+ The issue seems related to front-end session persistence and form state management.', 'in_progress', 'medium', 'digital services', '2025-08-10 12:00:00+00', '2025-08-12 14:15:00+00', 2, 9, 'mocti', 6),
+	(19, '2025-09-19 11:15:50.01248+00', 'Smart City Fiber Backbone Delay in Rural Areas', 'The planned expansion of backbone fiber to rural sectors is being delayed due to procurement holdups and infrastructure issues.  
+ Several communities remain without reliable broadband and the lack of clear timelines is affecting local health centres and schools.', 'open', 'urgent', 'digital infrastructure', '2025-09-01 10:00:00+00', '2025-09-03 11:30:00+00', 13, 13, 'mocti', 8),
+	(20, '2025-09-19 11:16:38.28779+00', 'Policy Research Portal Submission Bug', 'Researchers attempting to submit policy research papers via MoCTI’s research portal are experiencing timeouts when uploading files larger than 10MB.  
+ Some papers get stuck at 99% upload, others fail silently.  
+ Administrator console logs show “payload too large” errors but the UI does not give meaningful feedback to users.', 'done', 'medium', 'policy research', '2025-07-21 08:30:00+00', '2025-07-22 09:15:00+00', 11, 12, 'mocti', 6),
+	(21, '2025-09-19 11:20:03.265039+00', 'Communications Directorate Email Response SLA Miss', 'Stakeholders have complained that email queries sent to MoCTI’s Communications Directorate take longer than the published SLA.  
+ The auto-reply indicates response within 48 hours, yet many tickets exceed this, especially from rural stakeholders.  
+ Need root cause analysis, possibly understaffing or overlapping responsibilities.', 'done', 'high', 'stakeholder engagement', '2025-07-03 12:00:00+00', '2025-07-05 13:45:00+00', 11, 9, 'mocti', 7),
+	(22, '2025-09-19 11:21:18.698021+00', 'Compliance Reporting Dashboard Missing Data Fields', 'The compliance dashboard under MoCTI shows several missing data fields for “policy compliance” module.  
+ For example, dataset for digital innovation does not show the number of registered innovators; funding allocations missing for certain districts.  
+ Users have flagged this inconsistency to both support and reporting teams.', 'open', 'low', 'reporting tools', '2025-08-25 06:00:00+00', '2025-08-26 07:15:00+00', 2, 13, 'mocti', 5);
 
 
 --
 -- Data for Name: comments; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
+INSERT INTO "public"."comments" ("id", "created_at", "comment_text", "author_lname", "is_internal", "ticket", "created_by", "tenant") VALUES
+	(1, '2025-09-19 09:31:52.633967+00', 'I checked the SDI schema, it seems field naming is inconsistent across tables.', 'Mansaray', true, 1, 4, 'dsti'),
+	(2, '2025-09-19 09:31:52.633967+00', 'We need to standardize the geometry types — some are MULTIPOLYGON, others POLYGON, which likely causes missing layers.', 'Kallon', true, 1, 5, 'dsti'),
+	(3, '2025-09-19 09:31:52.633967+00', 'Also saw missing metadata in district boundary files; I’ll pull the latest files from the repository and compare.', 'Fogbawa', true, 1, 2, 'dsti'),
+	(4, '2025-09-19 09:32:54.241432+00', 'Confirmed across 2 hubs; rural connectivity is fine but latency to content origin is high.', 'Fogbawa', true, 2, 2, 'dsti'),
+	(5, '2025-09-19 09:32:54.241432+00', 'We could try implementing a cache layer locally to alleviate origin delays.', 'Kallon', true, 2, 5, 'dsti'),
+	(12, '2025-09-19 09:42:59.139446+00', 'Added draft for content license section; ready for peer review.', 'Kamara', true, 7, 7, 'dsti'),
+	(13, '2025-09-19 09:42:59.139446+00', 'Peer reviewed, looks good; just need image source links cleaned.', 'Mansaray', true, 7, 4, 'dsti'),
+	(14, '2025-09-19 09:43:21.418165+00', 'I reviewed past appeal letters — many are missing budget breakdowns; suggest adding that as section.', 'Fogbawa', true, 9, 2, 'dsti'),
+	(15, '2025-09-19 09:43:21.418165+00', 'Will prepare a template with checklist and sample format; also organize virtual clinic to guide applicants.', 'Mansary', true, 9, 4, 'dsti'),
+	(16, '2025-09-19 09:47:14.223939+00', 'Checked role table; missing tenant flag in some policy entries.', 'Bah', true, 10, 6, 'dsti'),
+	(17, '2025-09-19 09:47:14.223939+00', 'Rolled out patch; verifying with affected users in Freetown and Kenema.', 'Kallon', true, 10, 5, 'dsti'),
+	(18, '2025-09-19 09:48:08.943864+00', 'Added indexes to slow queries; also applied caching on frequent endpoints.', 'Fogbawa', true, 12, 2, 'dsti'),
+	(19, '2025-09-19 09:48:08.943864+00', 'Verified improvements; response now under 5 seconds in my testing.', 'Mansaray', true, 12, 4, 'dsti'),
+	(20, '2025-09-19 09:48:52.668125+00', 'Initiated version tagging in v1.2; informing all field officers.', 'Fogbawa', true, 13, 2, 'dsti'),
+	(21, '2025-09-19 09:50:07.87265+00', 'CSS adjusted; overlapping fixed in mobile layout; icons fallback added.', 'Fogbawa', true, 14, 2, 'dsti'),
+	(22, '2025-09-19 09:50:07.87265+00', 'Agent Conteh: Verified fixes on Android 9 and iOS 12; all look correct.', 'Bah', true, 14, 6, 'dsti'),
+	(23, '2025-09-19 10:58:49.817428+00', 'I reached out to certificate authority to check status of CSR submission.', 'Kamara', true, 15, 12, 'mocti'),
+	(24, '2025-09-19 10:58:49.817428+00', 'I Will escalate to the Head of Communications to speed up process.', 'Fogbawa', true, 15, 2, 'mocti'),
+	(25, '2025-09-19 11:03:08.43844+00', 'I Compiled audit logs; unusual IPs confirmed in two agencies.', 'Sesay', true, 16, 10, 'mocti'),
+	(26, '2025-09-19 11:03:08.43844+00', 'Report draft is ready; security team reviewing classification.', 'Conteh', true, 16, 11, 'mocti'),
+	(27, '2025-09-19 11:08:53.907954+00', 'The Fullstack engineer confirmed session storage missing on some browsers.', 'Fogbawa', true, 17, 2, 'mocti'),
+	(28, '2025-09-19 11:08:53.907954+00', 'Testing patch locally; will deploy staging version by tomorrow.', 'Jalloh', true, 17, 9, 'mocti'),
+	(29, '2025-09-19 11:08:53.907954+00', 'Staging version deployed; asking remote users to test.', 'Fogbawa', true, 17, 2, 'mocti'),
+	(32, '2025-09-19 11:17:00.756148+00', 'Increased upload limit to 20MB on staging; users reported no longer stuck.', 'Kamara', true, 20, 12, 'mocti'),
+	(33, '2025-09-19 11:17:00.756148+00', 'Documented issue and communicated with front-end team to show upload progress bar.', 'Kamara', true, 20, 12, 'mocti'),
+	(34, '2025-09-19 11:20:07.228799+00', 'I Reviewed response logs; most delays come after weekends with no staff coverage.', 'Ebuka', true, 21, 11, 'mocti'),
+	(35, '2025-09-19 11:20:07.228799+00', 'Suggest rotating schedule for after-hours staffing.', 'Jalloh', true, 21, 9, 'mocti');
 
 
 --
@@ -364,7 +474,17 @@ INSERT INTO "public"."tenant_permissions" ("id", "created_at", "user_profile", "
 	(3, '2025-08-19 10:46:04.109876+00', 3, 'vontech', 'agent'),
 	(4, '2025-08-19 10:47:17.717234+00', 2, 'dsti', 'agent'),
 	(1, '2025-08-19 10:44:19.685006+00', 1, 'mocti', 'agent'),
-	(2, '2025-08-19 10:44:34.740933+00', 2, 'mocti', 'admin');
+	(2, '2025-08-19 10:44:34.740933+00', 2, 'mocti', 'admin'),
+	(5, '2025-09-19 06:39:51.003731+00', 9, 'mocti', 'agent'),
+	(6, '2025-09-19 06:40:12.778846+00', 10, 'mocti', 'agent'),
+	(7, '2025-09-19 06:40:37.530091+00', 11, 'mocti', 'agent'),
+	(8, '2025-09-19 06:40:58.464643+00', 12, 'mocti', 'agent'),
+	(9, '2025-09-19 06:41:18.441577+00', 13, 'mocti', 'agent'),
+	(10, '2025-09-19 06:41:58.424749+00', 4, 'dsti', 'admin'),
+	(11, '2025-09-19 06:42:16.939802+00', 5, 'dsti', 'agent'),
+	(12, '2025-09-19 06:45:32.86968+00', 6, 'dsti', 'agent'),
+	(13, '2025-09-19 06:45:59.3609+00', 7, 'dsti', 'agent'),
+	(14, '2025-09-19 06:46:16.369208+00', 8, 'dsti', 'agent');
 
 
 --
@@ -425,42 +545,42 @@ INSERT INTO "public"."tenant_permissions" ("id", "created_at", "user_profile", "
 -- Name: refresh_tokens_id_seq; Type: SEQUENCE SET; Schema: auth; Owner: supabase_auth_admin
 --
 
-SELECT pg_catalog.setval('"auth"."refresh_tokens_id_seq"', 122, true);
+SELECT pg_catalog.setval('"auth"."refresh_tokens_id_seq"', 123, true);
 
 
 --
 -- Name: comments_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('"public"."comments_id_seq"', 1, false);
+SELECT pg_catalog.setval('"public"."comments_id_seq"', 35, true);
 
 
 --
 -- Name: profiles_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('"public"."profiles_id_seq"', 8, true);
+SELECT pg_catalog.setval('"public"."profiles_id_seq"', 13, true);
 
 
 --
 -- Name: sla_policies_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('"public"."sla_policies_id_seq"', 1, false);
+SELECT pg_catalog.setval('"public"."sla_policies_id_seq"', 8, true);
 
 
 --
 -- Name: tenant_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('"public"."tenant_permissions_id_seq"', 4, true);
+SELECT pg_catalog.setval('"public"."tenant_permissions_id_seq"', 14, true);
 
 
 --
 -- Name: tickets_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('"public"."tickets_id_seq"', 1, false);
+SELECT pg_catalog.setval('"public"."tickets_id_seq"', 22, true);
 
 
 --
@@ -474,6 +594,6 @@ SELECT pg_catalog.setval('"supabase_functions"."hooks_id_seq"', 1, false);
 -- PostgreSQL database dump complete
 --
 
-\unrestrict TocRtwGgto5UInh3J07lIc85N5Y4dyD0i5NmVlRZdWdZtdjLKcypRl7lOC7GSEE
+\unrestrict Ausfd8Tr0zShbhZjqU8H2ofRb17aaAc723L3gmh9L9oQGfbpozhFhvz1sJSUms9
 
 RESET ALL;
