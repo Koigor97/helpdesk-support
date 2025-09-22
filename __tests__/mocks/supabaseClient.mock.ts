@@ -23,3 +23,17 @@ export const mockSupabaseAdminClient = {
         }
     }
 }
+
+export const mockSupabaseBrowserClient = {
+    auth: {
+        onAuthStateChange: jest.fn(() => ({
+            data: {
+                subscription: {
+                    unsubscribe: jest.fn(),
+                }
+            }
+        })),
+        signInWithPassword: jest.fn(),
+        signOut: jest.fn(),
+    }
+}
